@@ -1,0 +1,37 @@
+
+
+
+classe carta:
+Atributos:
+Número: int
+cor:int
+tipo: int
+Métodos:
+to_string: Converte em uma saída legível.
+set&get dos atributos;
+
+
+Jogador:
+Propriedades:
+Nome: string
+cartas: std::vector<Carta>
+Pontuação: int
+ranking: int
+Métodos:
+get&set...
+add_card: Adiciona uma carta na mão do jogador...
+remove_card: Remove a carta da mão do jogador.
+
+
+Mesa: (servidor)
+Propriedades:
+jogadores: std::vector<jogador>
+pilha_compras: vector<carta>
+cartas_jogadas: vector<carta>
+cartas_acumulacao: Acumula as cartas de ação, como +2 +4, e etc...
+Métodos:
+adicionar_jogador: Adiciona um jogador a mesa, Se o jogo já iniciou, apenas como expectador, ou nega a entrada.
+remover_jogador: Remove um jogador.
+gerar_baralho:  Cria todas as 108 cartas na pilha de compras.
+distribuir_cartas: Distribui as cartas pelos jogadores existentes na mesa...
+processar_entrada: Processa todos os comandos vindos da rede.
