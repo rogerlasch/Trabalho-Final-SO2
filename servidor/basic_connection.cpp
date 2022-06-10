@@ -5,6 +5,7 @@
 #include"basic_connection.h"
 
 using namespace std;
+using namespace dlb;
 
 basic_connection::basic_connection()
 {
@@ -21,7 +22,7 @@ basic_connection::~basic_connection()
 
 void basic_connection::print(const string& str)
 {
-//Pega direito de escrita já que algo vai ser modificado...
+//Pega direito de escrita jï¿½ que algo vai ser modificado...
 unique_lock<shared_mutex> lck(this->mtx_output);
 output_buffer.push_back(str);
 }
@@ -43,7 +44,7 @@ void basic_connection::append_string_input(const string& str)
 unique_lock<shared_mutex> lck(this->mtx_input);
 for(uint32 i=0; i<str.size(); i++)
 {
-if((str[i]=='\r')||(str[i]=='\n'))
+if((str[i]=='\0')||(str[i]=='\r')||(str[i]=='\n'))
 {
 if(cmd_line.size()>0)
 {
@@ -66,7 +67,7 @@ if(input_buffer.size()>0)
 while(input_buffer.size()>0)
 {
 //Despacha um evento para os workers darem um jeito...
-//a_sendevent(getSock(), a_event_received_string, input_buffer[0]);
+dlb_event_send(event_receive, getSock(), input_buffer[0]);
 input_buffer.erase(input_buffer.begin());
 }
 }

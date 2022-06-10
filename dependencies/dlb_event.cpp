@@ -29,6 +29,7 @@ dlb_event& dlb_event::operator=(const dlb_event& dev)
 this->id=dev.id;
 this->type=dev.type;
 this->timestamp=dev.timestamp;
+this->data=dev.data;
 return *this;
 }
 
@@ -42,16 +43,18 @@ this->id=0;
 this->type=dlb_event_default;
 this->timestamp=0;
 this->worker=NULL;
+this->data="";
 }
 
 
 //Functions
 
-void dlb_event_send(uint32 type, uint32 id)
+void dlb_event_send(uint32 type, uint32 id, const string& data)
 {
 dlb_event* ev=new dlb_event();
 ev->id=id;
 ev->type=type;
+ev->data=data;
 dlb_event_send(ev);
 }
 

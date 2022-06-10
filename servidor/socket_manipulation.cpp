@@ -19,13 +19,15 @@ using namespace dlb;
 static bool Sstarted=false;
 SOCKET mainsock=0;
 static std::unordered_map<uint32, shared_connection> connections;
+static std::shared_mutex mtx_sock;
 
-bool s_setup_server()
+bool s_setup_server(uint32 port)
 {
 if(server_is_running()==true)
 {
 return false;
 }
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 WSADATA wsadata;
 int32 res=WSAStartup(MAKEWORD(2,2), &wsadata);
 if(res!=0)
@@ -39,18 +41,18 @@ hints.ai_family = AF_INET;
 hints.ai_socktype = SOCK_STREAM;
 hints.ai_protocol = IPPROTO_TCP;
 hints.ai_flags = AI_PASSIVE;
-res=getaddrinfo(NULL, "4000", &hints, &result);
+res=getaddrinfo(NULL, std::to_string(port).c_str(), &hints, &result);
 if (res!=0)
 {
 _log("Getaddrinfo falhou! C�digo: {}", res);
-s_shutdown_server();
+//s_shutdown_server();
 return false;
 }
 mainsock=socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 if(mainsock==INVALID_SOCKET)
 {
 _log("Erro ao criar o socket. Erro: {}", WSAGetLastError());
-s_shutdown_server();
+//s_shutdown_server();
 freeaddrinfo(result);
 return false;
 }
@@ -59,14 +61,14 @@ if(res==SOCKET_ERROR)
 {
 _log("Bind falhou com o c�digo: {}", WSAGetLastError());
 freeaddrinfo(result);
-s_shutdown_server();
+//s_shutdown_server();
 return false;
     }
 freeaddrinfo(result);
 if(listen(mainsock, SOMAXCONN)==SOCKET_ERROR)
 {
 _log("Fun��o listen falhou com o c�digo: {}", WSAGetLastError());
-s_shutdown_server();
+//s_shutdown_server();
 return false;
 }
 u_long x=1;
@@ -74,7 +76,7 @@ res=ioctlsocket(mainsock, FIONBIO, &x);
 if(res!=0)
 {
 _log("Erro ao tornar o socket as�ncrono. C�digo: {}", WSAGetLastError());
-s_shutdown_server();
+//s_shutdown_server();
 return false;
 }
 Sstarted=true;
@@ -83,15 +85,28 @@ return true;
 
 void s_shutdown_server()
 {
+_log("Parando servidor...");
 if(!server_is_running())
 {
+_log("Erro... O servidor j� est� offline!!!");
 return;
 }
+//Feche o socket que recebe pedidos de conex�es...
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 if(mainsock!=0)
 {
 closesocket(mainsock);
 }
 mainsock=0;
+//Caso tenha algu�m desconectado, notifique a desconex�o e termine de enviar os dados pendentes.
+if(connections.size()>0)
+{
+for(auto it=connections.begin(); it!=connections.end(); ++it)
+{
+shutdown(it->first, SD_SEND);
+closesocket(it->first);
+}
+}
 WSACleanup();
 mainsock=0;
 Sstarted=false;
@@ -99,17 +114,21 @@ Sstarted=false;
 
 bool server_is_running()
 {
+std::shared_lock<std::shared_mutex> lck(mtx_sock);
 return Sstarted;
 }
 
 //Deve ser chamada continuamente para enviar e receber dados, bem como processar a entrada do usu�rio...
 void s_sock_loop()
 {
+static std::mutex mtx;
+std::unique_lock<std::mutex> lc(mtx);
 //Verificar se o servidor est� ativo e ouvindo...
 if((!server_is_running())||(mainsock==0)||(mainsock==SOCKET_ERROR))
 {
 return;
 }
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 //Declarar extruturas de sele��o e etc...
 FD_SET reads;
 FD_SET writes;
@@ -127,7 +146,7 @@ FD_SET(it->first, &writes);
 }
 struct timeval tv;
 tv.tv_sec=0;
-tv.tv_usec=(5000*1000);
+tv.tv_usec=5000;
 int32 res=select(0, &reads, &writes, NULL, &tv);
 if(res==SOCKET_ERROR)
 {
@@ -150,7 +169,7 @@ else
 u_long x=1;
 ioctlsocket(s, FIONBIO, &x);
 //Envia o socket por evento para que seja atribu�do um objeto de conex�o&player.
-dlb_event_send(s, event_connect);
+dlb_event_send(event_connect, s);
 }
 }
 //Agora que o pior j� foi, vamos iterar pela lista interna de sockets e verificar se algo deve ser feito...
@@ -168,13 +187,17 @@ res=recv(it->first, &s[0], s.size(), 0);
 if(res==SOCKET_ERROR)
 {
 closesocket(it->first);
+it->second->setSock(0);
+it->second->setConState(con_disconnected);
 //Envia um evento de desconex�o...
-dlb_event_send(it->first, event_disconnect);
+dlb_event_send(event_disconnect, it->first);
 continue;
 }
 else if(res==0)//A conex�o foi fechada...
 {
-dlb_event_send(it->first, event_disconnect);
+it->second->setSock(0);
+it->second->setConState(con_disconnected);
+dlb_event_send(event_disconnect, it->first);
 continue;
 }
 s.resize(res);
@@ -196,7 +219,9 @@ res=send(it->first, &line[0], line.size(), 0);
 if(res==SOCKET_ERROR)
 {
 closesocket(it->first);
-dlb_event_send(it->first, event_disconnect);
+it->second->setSock(0);
+it->second->setConState(con_disconnected);
+dlb_event_send(event_disconnect, it->first);
 continue;
 }
 }
@@ -207,6 +232,7 @@ continue;
 //Enfileira uma string para envio futuro pelo loop...
 bool s_send(int32 sock, const std::string& data)
 {
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 if((Sstarted==false)||(data.size()==0))
 {
 return false;
@@ -222,28 +248,41 @@ return true;
 
 void s_send_to_all(const std::string& data)
 {
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 for(auto it=connections.begin(); it!=connections.end(); ++it)
 {
 it->second->print(data);
 }
 }
 
-void s_disconnect(int32 sock)
+void s_disconnect_sock(uint32 sock)
 {
-if(connections.count(sock)==0)
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
+auto it=connections.find(sock);
+if(it==connections.end())
 {
 return;
 }
+if(it->second->getConState()==con_connected)
+{
 int32 res=shutdown(sock, SD_SEND);
 if(res==SOCKET_ERROR)
 {
     closesocket(sock);
 connections.at(sock)->setSock(0);
 }
+return;
+}
+if(it->second->getSock()!=0)
+{
+closesocket(it->first);
+}
+connections.erase(it);
 }
 
 bool s_insert_connection(const shared_connection& c)
 {
+std::unique_lock<std::shared_mutex> lck(mtx_sock);
 if(connections.count(c->getSock())>0)
 {
 return false;
@@ -254,6 +293,7 @@ return true;
 
 shared_connection s_find_connection(uint32 sock)
 {
+std::shared_lock<std::shared_mutex> lck(mtx_sock);
 auto it=connections.find(sock);
 return ((it==connections.end()) ? shared_connection() : it->second);
 }

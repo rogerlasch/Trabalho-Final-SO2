@@ -23,6 +23,7 @@ public:
 uint32 id;
 uint32 type;
 int64 timestamp;
+std::string data;
 dlb_worker* worker;//O worker que capturou este evento...
 dlb_event();
 dlb_event(const dlb_event& dev);
@@ -31,7 +32,7 @@ virtual ~dlb_event();
 void reset();
 };
 
-void dlb_event_send(uint32 type, uint32 id);
+void dlb_event_send(uint32 type, uint32 id, const std::string& data="");
 void dlb_event_send(dlb_event* ev);
 bool dlb_event_get(dlb_event** ev);
 uint32 dlb_event_count();
