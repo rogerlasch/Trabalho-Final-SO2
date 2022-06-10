@@ -1,0 +1,60 @@
+
+
+Esta pasta é apenas de dependências para o projeto do cliente e do servidor.
+
+A baixo listo as dependências que se encontram aqui:
+
+fmt:
+É uma biblioteca de formatação de strings, que visa modernizar este tipo de
+coisa no c++. Ela é compatível com c++ anteriores ao c++20. No c++20, toda ela
+se encontra disponível pelo header <format>.
+
+Exemplo de uso:
+
+cout<<format("Olá, meu nome é {}", "Roger")<<endl;
+//Saída:
+"Olá, meu nome é Roger."
+
+so2log:
+
+Apenas uma função para logar strings.
+void log_write(const std::string& s);
+Esta função grava a string para um arquivo de texto, e em seguida, imprime a
+mesma string usando cout.
+
+#define _log(str, ...) log_write(fmt::format(str, __VA_ARGS__))
+
+Esta é uma macro que suporta argumentos variáveis, formata e depois manda para a saída.
+Exemplo de uso:
+_log("Olá!");
+_log("Olá, meu nome é {}", "Roger");
+Este arquivo faz uso da biblioteca de formatação fmt.
+
+dlb_basic_flags.h
+
+Implementa uma classe threadsafe para lidar com bitwise.
+Sozinha, ela não tem muita utilidade, é mais útil em combinação com outras classes.
+Para um exemplo simples de como funciona, verifique:
+https://github.com/rogerlasch/dlb_basic_flags.git
+
+dlb_event:
+
+Implementa uma classe básica de eventos que pode ser estendida para mais funcionalidades.
+Também implementa, uma fila de eventos threadsafe que permite a entrada e saída de eventos.
+Você pode usar esta biblioteca sozinha, ou em conjunto com dlb_worker.
+
+dlb_worker:
+
+Esta biblioteca implementa um trabalhador para operar sobre a fila de eventos puxando e tratando eventos.
+Não use diretamente a classe dlb_worker. Ela foi projetada para ser manipulada pelas funções de pool a baixo da classe.
+O objetivo desta biblioteca é que você possa ter 1 ou mais threads(workers) trabalhando com a fila de eventos.
+Sempre que existirem eventos na fila que precisam ser processados, os workers
+entram em ação recuperando um evento, e despachando o mesmo para uma função
+personalizada do usuário.
+Um worker equivale a um thread. Quanto mais threads, teoricamente, a fila deve se esvaziar mais rapidamente.
+Estas duas classes ainda não estão no github, mas, estarão em breve.
+
+
+so2_includes.h
+
+Apenas uma maneira simples de incluir tudo o que está aqui no servidor  e no cliente. Apenas um arquivo de includes.
