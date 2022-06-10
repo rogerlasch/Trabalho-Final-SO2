@@ -1,5 +1,5 @@
 # Trabalho-Final-SO2
-Trabalho final da matéria SO2 do curso Ciências Da Computação do IFSUL
+Trabalho final da disciplina de SO2 do curso Ciências Da Computação do IFSUL - Campus Passo Fundo
 
 <hr>
 
