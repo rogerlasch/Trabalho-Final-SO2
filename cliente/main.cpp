@@ -1,41 +1,61 @@
 
 #pragma comment(lib, "../dependencies/libs/biblioteca.lib")
-#include<windows.h>
+#include<iostream>
+#include<thread>
+#include<future>
 #include"../dependencies/so2_includes.h"
 #include"basic_connection.h"
+#include"ClienteSocket.h"
 
 
 using namespace std;
 using namespace dlb;
-
-using namespace dlb;
-using namespace std;
 
 string ip_address="localhost";
 uint32 port=4000;
 static shared_connection con;
 void connection_loop();
-bool s_connect(const string& ip, uint32 port);
 int main()
 {
 setlocale(LC_ALL, "Portuguese");
-if(!s_connect(ip_address, port))
+con=s_connect(ip_address, port);
+if(con==NULL)
 {
 _log("Erro ao se conectar no servidor {} na porta {}.", ip_address, port);
-while(con->isConnected())
-{
-this_thread::sleep_for(chrono::milliseconds(5));
-}
 return 0;
 }
+thread th(connection_loop);
+while(con->getConState()==con_connected)
+{
+string line="";
+cin.clear();
+cin.sync();
+//cin.ignore();
+getline(cin, line);
+if(line.size()>0)
+{
+    con->print(line);
+}
+if(line=="quit")
+{
+s_disconnect(con);
+}
+}
+th.join();
 return 0;
 }
 
 void connection_loop()
 {
-}
-
-bool s_connect(const string& ip, uint32 port)
+FuncTimer ts(__FUNCTION__);
+    while(con->getConState()==con_connected)
+    {
+        this_thread::sleep_for(chrono::milliseconds(20));
+        string data=s_request(con);
+        s_send(con);
+if(data.size()>0)
 {
-return false;
+_log(data);
 }
+        }
+    }

@@ -87,7 +87,6 @@ s_setState(server_shuting_down);
 
 void processEvent(dlb_event* ev)
 {
-_log("Processando evento...");
 switch(ev->type)
 {
 case event_connect:
@@ -117,6 +116,7 @@ break;
 case event_receive:
 {
 shared_connection c=s_find_connection(ev->id);
+_log("Mensagem recebida de {}: \"{}\"", c->getSock(), ev->data);
 c->print(ev->data);
 if(ev->data=="quit")
 {
