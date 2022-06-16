@@ -1,0 +1,94 @@
+
+
+Alunos: Bruno E Róger
+
+Repositório Github:
+https://github.com/rogerlasch/Trabalho-Final-SO2.git
+
+
+/**
+*A classe Card representará uma carta do baralho.
+*Ela terá os seguintes atributos: Type, color e number.
+*Optamos por usar int no tipo e na cor pela facilidade de tratamento e também pela velocidade de processamento.
+*Para ser mostrada para os jogadores, o método to_string deve converter o tipo e a cor como strings ficando algo como isto:
+* 2 Azul, 9 Verde, +2 Amarelo, +4, e etc... Tudo depende dos atributos da carta.
+*Para garantir o acesso sincronizado aos atributos, optamos em criar geters e seters para cada atributo. Isto pode ser alcançado criando um mutex compartilhado na classe e adquirindo acesso de leitura ou de escrita nos métodos correspondentes.
+**/
+class Card
+{
+private:
+uint32 type;
+uint32 color;
+uint32 number;
+std::shared_mutex mtx;
+//Construtores...
+//Seters e geters...
+//Outros métodos:
+//Analisa os atributos internos e retorna uma string contendo o número, cor e tipo da carta, se aplicável.
+std::string to_string()const;
+};
+
+/**
+*A classe Jogador conterá atributos Como nome, score, ranking entre outros.
+*Ela herdará de basic_connection para lidar facilmente com a comunicação de rede.
+*Cada jogador terá sua lista de Cards que serão as cartas que está segurando durante a partida.
+*Cada jogador deve estar associado a uma mesa de jogo.
+*Ele também deve ter acesso sincronizado e métodos para manipular os atributos, como adicionar carta, remover carta, etc...
+*Dúvida quanto ao fluxo do programa. Por exemplo, servidor pergunta: "Qual seu nome?" Ele não pode ficar preso esperando a boa vontade do usuário responder. Ele precisa de uma forma de saber o que perguntou ao usuário e resolver quando a mensagem correta chegar...
+**/
+
+class Player : public basic_connection
+{
+private:
+//Id pode ser gerado pegando o timestamp da hora em que se conectou...
+uint32 id;
+std::string name;
+std::vector<shared_card> cards;
+shared_table table;
+//Construtores e etc...
+//Seters e geters...
+//Outros métodos...
+void add_card(const shared_card& c);
+//Remove uma carta usando como parâmetro a posição do vetor...
+shared_card remove_card(uint32 index);
+//Pega uma carta, mas não remove. Útil para a mesa analizar a carta e tentar validar a jogada.
+shared_card get_card(uint32 index);
+};
+
+
+/**
+*A mesa é onde o jogo acontecerá.
+*Ela deve conter a lista de jogadores, lista de cartas que podem ser compradas, e lista de cartas que foram jogadas.
+*Também deve analizar o comando que o jogador digitou e agir de acordo.
+*Também irá analizar a carta jogada e determinar se a jogada é válida. Basicamente, a mesa é o maestro do jogo.
+*Apenas o primeiro jogador que chegou na mesa é que pode iniciar um novo jogo.
+**/
+
+class Table
+{
+private:
+uint32 id;
+//Jogadores na mesa...
+std::vector<shared_player> players;
+//Pilha de cartas para comprar...
+std::vector<shared_card> deck;
+//Cartas que já foram jogadas....
+std::vector<shared_card> descarte;
+//Acumulador de efeitos, por exemplo, fulano joga +4, siclano joga outro +4, então o seguinte se não tiver nada, deve comprar +8 cartas.
+std::vector<shared_card> acumulator;
+//O jogador que está jogando no turno atual...
+shared_player current_player;
+//A última carta jogada, que deverá ser analizada para validar a jogada...
+shared_card current_card;
+//Construtor e etc...
+//Seters e geters...
+//outros métodos...
+//Gera todas as cartas do baralho...
+void gerar_cards();
+//Inicializa o jogo com os jogadores da mesa, embaralha as cartas, distribui, e vira a primeira carta.
+bool start_game();
+//Analiza o comando que o jogador enviou e encaminha para o lugar certo, se possível.
+void process_command(shared_player& ch, const std::string& str);
+void evaluate_card(const shared_card& c);
+
+};
