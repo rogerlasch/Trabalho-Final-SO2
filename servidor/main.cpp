@@ -1,9 +1,14 @@
 
 #pragma comment(lib, "../dependencies/libs/biblioteca.lib")
 #include <signal.h>
+#include<cassert>
+#include<map>
+#include<memory>
+#include<vector>
 #include"../dependencies/so2_includes.h"
 #include"basic_connection.h"
 #include"socket_manipulation.h"
+#include"Card.h"
 #include"main.h"
 
 
@@ -40,6 +45,11 @@ s_setState(server_running);
 _log("Servidor iniciado na porta {}", DefaultPort);
 _log("Para interromper, tecle CTRL+c");
 bool stop=false;
+shared_card c=make_shared<Card>();
+c->setType(plus_four);
+c->setColor(red);
+c->setNumber(5);
+_log("{}", c->toString());
 while(stop==false)
 {
 this_thread::sleep_for(chrono::milliseconds(5));

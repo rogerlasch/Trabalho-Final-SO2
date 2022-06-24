@@ -1,8 +1,4 @@
-Alguém com socket 356 se conectou...
+Alguém com socket 308 se conectou...
 
-testando o teste, carai!
-
-agooora foi, meu!
-
-tem que limpar essas paradas aqui
+teste
 
