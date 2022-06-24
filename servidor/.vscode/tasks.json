@@ -3,14 +3,9 @@
         {
             "type": "cppbuild",
             "label": "C/C++: cl.exe arquivo de build ativo",
-            "command": "cl.exe",
+            "command": "build.bat",
             "args": [
-                "/Zi",
-                "/EHsc",
-                "/nologo",
-                "/Fe:",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${workspaceFolder}/*.cpp"
+                
             ],
             "options": {
                 "cwd": "${fileDirname}"

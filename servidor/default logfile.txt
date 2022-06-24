@@ -1,8 +1,0 @@
-Inicializando servidor...
-Total de threads de apoio criados: 2
-Servidor iniciado na porta 4000
-Para interromper, tecle CTRL+c
-+4
-Parando servidor...
-Total de threads parados: 2
-Servidor finalizado!

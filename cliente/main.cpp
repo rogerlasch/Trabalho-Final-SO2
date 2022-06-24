@@ -1,5 +1,5 @@
 
-#pragma comment(lib, "../dependencies/libs/biblioteca.lib")
+#pragma comment(lib, "../../dependencies/libs/biblioteca.lib")
 #include<iostream>
 #include<thread>
 #include<future>

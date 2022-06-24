@@ -1,5 +1,5 @@
 
-#pragma comment(lib, "../dependencies/libs/biblioteca.lib")
+#pragma comment(lib, "..\\..\\dependencies\\libs\\biblioteca.lib")
 #include <signal.h>
 #include<cassert>
 #include<map>
