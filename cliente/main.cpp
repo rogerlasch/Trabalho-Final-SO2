@@ -18,6 +18,7 @@ void connection_loop();
 int main()
 {
 setlocale(LC_ALL, "Portuguese");
+system("chcp 1252");
 con=s_connect(ip_address, port);
 if(con==NULL)
 {

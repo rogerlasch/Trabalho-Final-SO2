@@ -3,33 +3,34 @@
 #include <signal.h>
 #include<cassert>
 #include<map>
+#include<functional>
 #include<memory>
 #include<vector>
 #include"../dependencies/so2_includes.h"
 #include"basic_connection.h"
 #include"socket_manipulation.h"
 #include"Card.h"
+#include"Player.h"
+#include"Table.h"
 #include"main.h"
 
-
-
-using namespace std;
-using namespace dlb;
-
 using namespace dlb;
 using namespace std;
-
 
 uint32 DefaultPort=4000;
-uint32 ServerState;
+uint32 ServerState=0;
 shared_mutex  mtx_server;
+typedef function<void(shared_player&, const string&)> command_function;
+map<string, command_function> cmd_table;
 void signal_shutdown(int32 x);
+void load_commands();
 void processEvent(dlb_event* ev);
 
 int main()
 {
 try {
 setlocale(LC_ALL, "Portuguese");
+system("chcp 1252");
 signal(SIGTERM, signal_shutdown);
 signal(SIGINT, signal_shutdown);
 signal(SIGABRT, signal_shutdown);
@@ -41,15 +42,11 @@ return 0;
 }
 uint32 res=dlb_worker_create(2, 0, processEvent);
 _log("Total de threads de apoio criados: {}", res);
+load_commands();
 s_setState(server_running);
 _log("Servidor iniciado na porta {}", DefaultPort);
 _log("Para interromper, tecle CTRL+c");
 bool stop=false;
-shared_card c=make_shared<Card>();
-c->setType(plus_four);
-c->setColor(red);
-c->setNumber(5);
-_log("{}", c->toString());
 while(stop==false)
 {
 this_thread::sleep_for(chrono::milliseconds(5));
@@ -77,6 +74,19 @@ _log("Exception! {}", e.what());
 return 0;
 }
 
+void load_commands()
+{
+cmd_table.clear();
+cmd_table={
+{"ajuda", do_help},
+{"comandos", do_commands},
+{"criar_partida", do_create_party},
+{"chat", do_chat},
+{"sair", do_quit},
+{"who", do_who},
+};
+}
+
 void s_setState(uint32 st)
 {
 unique_lock<shared_mutex> lck(mtx_server);
@@ -91,49 +101,169 @@ return ServerState;
 
 void signal_shutdown(int x)
 {
-s_send_to_all("Aviso... O servidor estï¿½ sendo parado...");
+s_send_to_all("Aviso... O servidor está sendo parado...");
 s_setState(server_shuting_down);
 }
 
 void processEvent(dlb_event* ev)
 {
+static StringUtils cs;
 switch(ev->type)
 {
 case event_connect:
 {
-shared_connection c=make_shared<basic_connection>();
-c->setSock(ev->id);
-c->setConState(con_connected);
-s_insert_connection(c);
-string str=fmt::format("Alguém com socket {} se conectou...", ev->id);
-s_send_to_all(str);
-_log(str);
+shared_player ch=make_shared<Player>();
+ch->setSock(ev->id);
+ch->setConState(con_connected);
+s_insert_connection(ch);
+ch->print("Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.");
 break;
 }
 case event_disconnect:
 {
-shared_connection c=s_find_connection(ev->id);
-if(c==NULL)
+shared_player ch=dynamic_pointer_cast<Player>(s_find_connection(ev->id));
+if(ch==NULL)
 {
 return;
 }
 s_disconnect_sock(ev->id);
-string str=fmt::format("Alguém com socket {} se desconectou...", ev->id);
-s_send_to_all(str);
-_log(str);
+if(ch->getName().size()>0)
+{
+_s_send_to_all("{} nos deixou!", ch->getName());
+}
 break;
 }
+//Dados chegaram do jogador...
 case event_receive:
 {
-shared_connection c=s_find_connection(ev->id);
-_log("Mensagem recebida de {}: \"{}\"", c->getSock(), ev->data);
-c->print(ev->data);
-if(ev->data=="quit")
+shared_player ch=dynamic_pointer_cast<Player>(s_find_connection(ev->id));
+_log("Mensagem recebida de {}: \"{}\"", ch->getSock(), ev->data);
+if(ev->data=="sair")
 {
-c->print("Tchau!");
-s_disconnect_sock(ev->id);
+do_quit(ch, "");
+return;
+}
+//Primeiro, determinar em que estágio o jogador está...
+if(ch->getName().size()==0)
+{
+if(ev->data.size()<4)
+{
+ch->print("Digite um nome com pelo menos 4 caracteres.");
+return;
+}
+ch->setName(ev->data);
+ch->print(fmt::format("Bem-vindo ao jogo, {}!", ch->getName()));
+ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
+_s_send_to_all("{} se conectou!", ch->getName());
+}
+//Está em uma mesa já? Isso pode significar que ele está jogando.
+else if(ch->getTable()!=NULL)
+{
+shared_table tl=ch->getTable();
+tl->process_command(ch, ev->data);
+}
+//Está só matando tempo, não sabe o que quer ainda...
+else
+{
+//Verifique se o jogador digitou algum comando, separa o comando dos argumentos...
+string cmd="", args="";
+cs.parse(ev->data, cmd, args);
+//Pesquisa na tabela de comandos para determinar se ele digitou algum comando válido.
+auto it=cmd_table.find(cmd);
+//Caso nenhum comando tenha sido encontrado...
+if(it==cmd_table.end())
+{
+ch->print("O que?");
+return;
+}
+//Chame o comando que o jogador digitou passando os argumentos...
+it->second(ch, args);
 }
 break;
 }
 }
+}
+
+//Comandos em geral que o jogador pode digitar...
+void do_help(shared_player& ch, const std::string& args)
+{
+ch->print("Você pode digitar o nome do comando seguido por \'?\' para obter mais informações sobre ele.");
+ch->print("Digite comandos para ver uma lista de todos os comandos disponíveis.");
+}
+
+void do_commands(shared_player& ch, const std::string& args)
+{
+stringstream ss;
+ss<<"Lista de comandos disponíveis:"<<endl;
+for(auto it=cmd_table.begin(); it!=cmd_table.end(); ++it)
+{
+ss<<it->first<<endl;
+}
+ss<<cmd_table.size()<<" comandos encontrados."<<endl;
+ss<<"Digite o comando seguido de \'?\' para mais detalhes."<<endl;
+ch->print(ss.str());
+}
+
+void do_create_party(shared_player& ch, const std::string& args)
+{
+ch->print("Comando não disponível, ainda.");
+}
+
+void do_chat(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("O comando chat lhe permite enviar umamensagem pública para todo mundo que estiver conectado, exceto quem estiver jogando.");
+ch->print("Uso: \'chat Menssagem\'");
+return;
+}
+string msg=fmt::format("{} disse \'{}\'", ch->getName(), args);
+connection_list ls=get_connections();
+for(auto it=ls.begin(); it!=ls.end(); ++it)
+{
+shared_player ch2=dynamic_pointer_cast<Player>(it->second);
+if((ch2!=NULL)&&(ch2->getName().size()>0))
+{
+ch2->print(msg);
+}
+}
+}
+
+void do_quit(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("O comando sair irá lhe desconectar do servidor.");
+return;
+}
+ch->print("Até mais!");
+s_disconnect_sock(ch->getSock());
+}
+
+void do_who(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("O comando who mostra todo mundo que está online no momento.");
+ch->print("Uso: \'who\'");
+return;
+}
+stringstream ss;
+ss<<"Pessoas online no momento:"<<endl;
+int32 x=0;
+connection_list ls=get_connections();
+for(auto it=ls.begin(); it!=ls.end(); ++it)
+{
+shared_player ch2=dynamic_pointer_cast<Player>(it->second);
+if((ch2!=NULL)&&(ch2->getName().size()>0))
+{
+ss<<ch2->getName()<<endl;
+x++;
+}
+}
+if(x>0)
+{
+ss<<x<<" pessoas encontradas."<<endl;
+}
+ch->print(ss.str());
 }

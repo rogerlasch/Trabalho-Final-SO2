@@ -5,15 +5,19 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#ifndef TABLE_H
+class Table;
+typedef std::shared_ptr<Table> shared_table;
+#endif
 
 class Player : public basic_connection
 {
-private;
+private:
 int id;
 std::string name;
 Deck cards;
 shared_table table;
-std::shared_mutex mtx;
+mutable std::shared_mutex mtx;
 public:
 Player();
 Player(const Player& p)=delete;
@@ -28,9 +32,10 @@ Deck getDeck()const;
 void setTable(const shared_table& t);
 shared_table getTable()const;
 void add_card(const shared_card& c);
-shared_card remove_card(int index);
-shared_card get_card(int index)
+shared_card remove_card(uint32 index);
+shared_card get_card(uint32 index);
 };
+typedef std::shared_ptr<Player> shared_player;
 
 #endif
 
@@ -94,7 +99,7 @@ std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->table;
 }
 
-void add_card(const shared_card& c)
+void Player::add_card(const shared_card& c)
 {
 std::unique_lock<std::shared_mutex> lck(this->mtx);
 cards.push_back(c);

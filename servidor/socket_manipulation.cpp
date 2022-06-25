@@ -18,7 +18,7 @@ using namespace dlb;
 
 static bool Sstarted=false;
 SOCKET mainsock=0;
-static std::unordered_map<uint32, shared_connection> connections;
+static connection_list connections;
 static std::shared_mutex mtx_sock;
 
 bool s_setup_server(uint32 port)
@@ -246,6 +246,14 @@ it->second->print(data);
 return true;
 }
 
+void s_send_to_list(std::vector<shared_connection>& cons, const std::string& str)
+{
+for(auto& it: cons)
+{
+it->print(str);
+}
+}
+
 void s_send_to_all(const std::string& data)
 {
 std::unique_lock<std::shared_mutex> lck(mtx_sock);
@@ -296,4 +304,9 @@ shared_connection s_find_connection(uint32 sock)
 std::shared_lock<std::shared_mutex> lck(mtx_sock);
 auto it=connections.find(sock);
 return ((it==connections.end()) ? shared_connection() : it->second);
+}
+
+connection_list get_connections()
+{
+return connections;
 }

@@ -1,0 +1,19 @@
+Inicializando servidor...
+Total de threads de apoio criados: 2
+Servidor iniciado na porta 4000
+Para interromper, tecle CTRL+c
+Mensagem recebida de 344: "fred"
+Mensagem recebida de 344: "who"
+Mensagem recebida de 344: "who ?"
+Mensagem recebida de 344: "comandos"
+Mensagem recebida de 344: "chat Opa, e aí"
+Mensagem recebida de 348: "dinossauro"
+Mensagem recebida de 348: "who"
+Mensagem recebida de 344: "chat e aí dinossauro"
+Mensagem recebida de 348: "chat e aí fred!"
+Mensagem recebida de 344: "who"
+Mensagem recebida de 344: "sair"
+Mensagem recebida de 348: "sair"
+Parando servidor...
+Total de threads parados: 2
+Servidor finalizado!
