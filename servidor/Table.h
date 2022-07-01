@@ -87,8 +87,7 @@ cmdtable={
 {"comandos", std::bind(&Table::commands, this, std::placeholders::_1, std::placeholders::_2)},
 {"voltar", std::bind(&Table::goBack, this, std::placeholders::_1, std::placeholders::_2)},
 {"startgame", std::bind(&Table::startGame, this, std::placeholders::_1, std::placeholders::_2)},
-{"jogar", std::bind(&Table::playCard, this, std::placeholders::_1,
-std::placeholders::_2)},
+{"jogar", std::bind(&Table::playCard, this, std::placeholders::_1, std::placeholders::_2)},
 {"pescar", std::bind(&Table::toFish, this, std::placeholders::_1, std::placeholders::_2)}
 };
 }
@@ -276,7 +275,28 @@ void Table::swap_turn()
 
 shared_player Table::next_player(bool jump_one)
 {
-return shared_player();
+FuncTimer ts(__FUNCTION__);
+bool achou=false;
+uint32 x=pindex.load()+1;
+shared_player ch;
+while(x!=pindex)
+{
+if(x>players.size()-1)
+{
+x=0;
+continue;
+}
+if(players[x]->getPState()==player_expectator)
+{
+x++;
+continue;
+}
+ch=players[x];
+break;
+}
+current_player=ch;
+pindex.store(x);
+return ch;
 }
 
 void Table::commands(shared_player& ch, const std::string& args)
@@ -344,11 +364,35 @@ deck.erase(deck.begin()+x);
 }
 ch->showCards();
 }
+turn_dir.store(turn_right);
+current_card=deck[0];
+deck.erase(deck.begin());
+current_player=players[0];
+pindex.store(0);
+_echo(players, "A carta virada foi: {}", current_card->toString());
+_echo(players, "{} começa o jogo.", current_player->getName());
 }
 
 void Table::playCard(shared_player& ch, const std::string& args)
 {
-
+if(ch->getSock()==current_player->getSock())
+{
+ch->print("Aguarde sua vez de jogar!");
+return;
+}
+uint32 index=std::atoi(args.c_str());
+if(index==0)
+{
+ch->print("Opção inválida!");
+return;
+}
+shared_card c=ch->remove_card(index-1);
+_echo(players, "{} jogou {}", ch->getName(), c->toString());
+discard.push_back(c);
+ch->showCards();
+this->next_player();
+_echo(players, "É a vez de {} jogar.", current_player->getName());
+current_player->showCards();
 }
 
 void Table::toFish(shared_player& ch, const std::string& args)

@@ -1,23 +1,1 @@
-Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
-
-Bem-vindo ao jogo, fred!
-Digite comandos para ver uma lista de comandos disponíveis.
-
-fred se conectou!
-
-Bem-vindo a mesa 1 fred.
-fred se juntou a mesa.
-
-roger iniciou o jogo.
-Iniciando embaralhamento e distribuição das cartas...
-Cartas geradas: 108
-
-Sua mão contém um total de 7 cartas
-(1) 6 Verde (2) Pular Amarelo (3) 0 Amarelo (4) +2 Verde (5) 0 Azul (6) 6 Vermelho (7) Inverter Vermelho 
-
-Sua mão contém um total de 7 cartas
-(1) 9 Azul (2) Inverter Amarelo (3) 5 Verde (4) 4 Vermelho (5) 2 Verde (6) 1 Azul (7) 9 Amarelo 
-
-
-fred nos deixou!
-
+Erro ao se conectar no servidor localhost na porta 4000.

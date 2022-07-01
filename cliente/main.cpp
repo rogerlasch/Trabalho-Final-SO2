@@ -11,7 +11,7 @@
 using namespace std;
 using namespace dlb;
 
-string ip_address="localhost";
+string ip_address="";
 uint32 port=4000;
 static shared_connection con;
 void connection_loop();
@@ -19,6 +19,8 @@ int main()
 {
 setlocale(LC_ALL, "Portuguese");
 system("chcp 1252");
+cout<<"Digite o endereço IP do servidor:"<<endl;
+cin>>ip_address;
 con=s_connect(ip_address, port);
 if(con==NULL)
 {
