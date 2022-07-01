@@ -2,11 +2,14 @@
 #pragma comment(lib, "..\\..\\dependencies\\libs\\biblioteca.lib")
 #include <signal.h>
 #include<cassert>
+#include<random>
+#include<algorithm>
 #include<map>
 #include<functional>
 #include<memory>
 #include<vector>
 #include"../dependencies/so2_includes.h"
+#include"StringUtils.h"
 #include"basic_connection.h"
 #include"socket_manipulation.h"
 #include"Card.h"
@@ -22,7 +25,10 @@ uint32 ServerState=0;
 shared_mutex  mtx_server;
 typedef function<void(shared_player&, const string&)> command_function;
 map<string, command_function> cmd_table;
+map<uint32, shared_table> tables;
 void signal_shutdown(int32 x);
+void s_setState(uint32 st);
+uint32 s_getState();
 void load_commands();
 void processEvent(dlb_event* ev);
 
@@ -82,6 +88,7 @@ cmd_table={
 {"comandos", do_commands},
 {"criar_partida", do_create_party},
 {"chat", do_chat},
+{"mesa", do_table},
 {"sair", do_quit},
 {"who", do_who},
 };
@@ -206,7 +213,14 @@ ch->print(ss.str());
 
 void do_create_party(shared_player& ch, const std::string& args)
 {
-ch->print("Comando não disponível, ainda.");
+if(args=="?")
+{
+ch->print("O comando criar_partida irá criar uma nova mesa para aguardar jogadores.");
+return;
+}
+shared_table ts=make_shared<Table>();
+ts->add_player(ch);
+tables.insert(make_pair(ts->getId(), ts));
 }
 
 void do_chat(shared_player& ch, const std::string& args)
@@ -222,7 +236,7 @@ connection_list ls=get_connections();
 for(auto it=ls.begin(); it!=ls.end(); ++it)
 {
 shared_player ch2=dynamic_pointer_cast<Player>(it->second);
-if((ch2!=NULL)&&(ch2->getName().size()>0))
+if((ch2!=NULL)&&(ch2->getName().size()>0)&&(ch2->getTable()==NULL))
 {
 ch2->print(msg);
 }
@@ -266,4 +280,35 @@ if(x>0)
 ss<<x<<" pessoas encontradas."<<endl;
 }
 ch->print(ss.str());
+}
+
+void do_table(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("O comando mesa tem duas finalidades.");
+ch->print("Digitando \"mesa\" sem argumentos irá mostrar todas as mesas de jogo atualmente criadas.");
+ch->print("Digitando \"mesa <Número>\" fará que você entre em uma mesa como expectador.\nCaso a mesa ainda não esteja com um jogo ativo, isto lhe tornará um jogador a sim que o jogo for iniciado.");
+return;
+}
+if(args.size()==0)
+{
+stringstream ss;
+ss<<"Mesas disponíveis:"<<endl;
+for(auto it=tables.begin(); it!=tables.end(); ++it)
+{
+ss<<it->second->toString()<<endl;
+}
+ss<<"Total de mesas encontradas: "<<tables.size()<<endl;
+ch->print(ss.str());
+return;
+}
+uint32 x=atoi(args.c_str());
+auto it=tables.find(x);
+if(it==tables.end())
+{
+ch->print(fmt::format("O argumento {} é inválido!", args));
+return;
+}
+it->second->add_player(ch);
 }

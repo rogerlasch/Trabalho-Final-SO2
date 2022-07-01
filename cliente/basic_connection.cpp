@@ -58,6 +58,14 @@ cmd_line+=str[i];
 }
 }
 
+void basic_connection::exec(const string& cmd)
+{
+unique_lock<shared_mutex> lck(this->mtx_input);
+input_buffer.push_back(cmd_line);
+lck.unlock();
+process_input();
+}
+
 void basic_connection::process_input()
 {
 unique_lock<shared_mutex> lck(this->mtx_input);

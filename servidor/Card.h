@@ -130,6 +130,7 @@ break;
 case joker:
 {
 ss<<"Coringa";
+break;
 }
 default:
 {

@@ -246,14 +246,6 @@ it->second->print(data);
 return true;
 }
 
-void s_send_to_list(std::vector<shared_connection>& cons, const std::string& str)
-{
-for(auto& it: cons)
-{
-it->print(str);
-}
-}
-
 void s_send_to_all(const std::string& data)
 {
 std::unique_lock<std::shared_mutex> lck(mtx_sock);

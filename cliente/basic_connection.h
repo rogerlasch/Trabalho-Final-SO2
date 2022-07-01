@@ -39,6 +39,7 @@ virtual ~basic_connection();
 virtual void print(const std::string& str);
 virtual std::string get_line_to_send();
 virtual void append_string_input(const std::string& str);
+void exec(const std::string& cmd);
 virtual void process_input();
 void setSock(int32 sock);
 int32 getSock()const;

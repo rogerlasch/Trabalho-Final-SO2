@@ -1,12 +1,3 @@
-Inicializando servidor...
-Total de threads de apoio criados: 2
-Servidor iniciado na porta 4000
-Para interromper, tecle CTRL+c
-Mensagem recebida de 272: "roger"
-Mensagem recebida de 272: "criar_partida"
-Mensagem recebida de 340: "fred"
-Mensagem recebida de 340: "mesa 1"
-Mensagem recebida de 272: "startgame"
 0 Vermelho
 0 Verde
 0 Amarelo
@@ -115,8 +106,3 @@ Coringa
 Coringa
 Coringa
 Coringa
-Mensagem recebida de 340: "sair"
-Mensagem recebida de 272: "sair"
-Parando servidor...
-Total de threads parados: 2
-Servidor finalizado!
