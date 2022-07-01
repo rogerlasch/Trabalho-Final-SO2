@@ -48,7 +48,119 @@ std::string toString()const;
 typedef std::shared_ptr<Card> shared_card;
 typedef std::vector<shared_card> Deck;
 
+struct CardFinder
+{
+int32 find_card_type(const Deck& cards, const std::initializer_list<uint32>& types)
+{
+for(uint32 i=0; i<cards.size(); i++)
+{
+for(auto& it : types)
+{
+if(cards[i]->getColor()==it)
+{
+return i;
+}
+}
+}
+return -1;
+}
+int32 find_card_color(const Deck& cards, const std::initializer_list<uint32>& colors)
+{
+for(uint32 i=0; i<cards.size(); i++)
+{
+for(auto& it : colors)
+{
+if(cards[i]->getColor()==it)
+{
+return i;
+}
+}
+}
+return -1;
+}
+int32 find_card_number(const Deck& cards, const std::initializer_list<uint32>& numbers)
+{
+for(uint32 i=0; i<cards.size(); i++)
+{
+for(auto& it : numbers)
+{
+if(cards[i]->getNumber()==it)
+{
+return i;
+}
+}
+}
+return -1;
+}
+uint32 find_TypeColor(const Deck& cards, const std::initializer_list<std::initializer_list<uint32>>& cs)
+{
+for(uint32 i=0; i<cards.size(); i++)
+{
+for(auto& it: cs)
+{
+std::vector<uint32> c(it);
+switch(c.size())
+{
+case 1:
+{
+if(cards[i]->getType()==c[0])
+{
+return i;
+}
+break;
+}
+case 2:
+{
+if((cards[i]->getType()==c[0])&&(cards[i]->getColor()==c[1]))
+{
+return i;
+}
+break;
+}
+}
+}
+}
+return -1;
+}
+uint32 find_ColorNumber(const Deck& cards, const std::initializer_list<std::initializer_list<uint32>>& cs)
+{
+for(uint32 i=0; i<cards.size(); i++)
+{
+if(cards[i]->getType()!=normal)
+{
+continue;
+}
+for(auto& it: cs)
+{
+std::vector<uint32> c(it);
+switch(c.size())
+{
+case 1:
+{
+if(cards[i]->getColor()==c[0])
+{
+return i;
+}
+break;
+}
+case 2:
+{
+if((cards[i]->getColor()==c[0])&&(cards[i]->getNumber()==c[1]))
+{
+return i;
+}
+break;
+}
+}
+}
+}
+return -1;
+}
+};
+
 std::string color_to_string(int c);
+uint32 color_to_int(const std::string& c);
+
 #endif
 
 #ifndef CARDS_IMPLEMENTATION_H
@@ -125,11 +237,21 @@ break;
 case plus_four:
 {
 ss<<"+4";
+uint32 c=this->getColor();
+if((c>=red)&&(c<=blue))
+{
+ss<<" "<<color_to_string(c);
+}
 break;
 }
 case joker:
 {
 ss<<"Coringa";
+uint32 c=this->getColor();
+if((c>=red)&&(c<=blue))
+{
+ss<<" "<<color_to_string(c);
+}
 break;
 }
 default:
@@ -155,5 +277,19 @@ inline std::string color_to_string(int c)
     };
 auto it=color_table.find(c);
 return ((it==color_table.end()) ? "" : it->second);
+}
+
+uint32 color_to_int(const std::string& c)
+{
+static std::map<std::string, uint32> colors={
+{"neutro", uncolor},
+{"preto", black},
+{"vermelho", red},
+{"verde", green},
+{"amarelo", yellow},
+{"azul", blue}
+};
+auto it=colors.find(c);
+return ((it==colors.end()) ? uncolor : it->second);
 }
 #endif

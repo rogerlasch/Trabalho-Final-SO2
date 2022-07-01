@@ -157,7 +157,11 @@ std::stringstream ss;
 ss<<"Sua mão contém um total de "<<cards.size()<<" cartas"<<std::endl;
 for(uint32 i=0; i<cards.size(); i++)
 {
-ss<<fmt::format("({}) {} ", (i+1), cards[i]->toString());
+ss<<fmt::format("({}): {} ", (i+1), cards[i]->toString());
+if(i<cards.size()-1)
+{
+ss<<", ";
+}
 }
 ss<<std::endl;
 this->print(ss.str());
