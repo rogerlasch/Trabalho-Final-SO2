@@ -26,8 +26,8 @@ Mattel, mas até hoje muitos jogadores têm dúvidas sobre como jogar Uno!
 * Pode haver de 2 a 10 jogadores;
 * A primeira carta do paralho deve ser virada para cima para iniciar o jogo;
 * Só pode jogar a carta se ela tiver o mesmo número ou cor/símbolo;
-* Só é possível "pescar" uma carta do baralho se não possuir nenhuma para jogar;
-  * Se não for possível joga-la, pule a vez;
+* É possível pescar independentemente se possuir ou não uma carta possível de ser jogada na mesa;
+  * OBS: Caso o jogador não possuir nenhuma carta possível de ser jogada, ele deve ser "forçado" a comprar uma carta;
 * Quando um jogador estiver com uma única carta, este deve dizer "UNO", se não falar e for pego no "flagra", deve pescar duas cartas;
 
   #### CARTAS ESPECIAIS:
