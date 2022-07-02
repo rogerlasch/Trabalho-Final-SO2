@@ -37,19 +37,30 @@ public:
 Card();
 Card(const Card& c)=delete;
 Card& operator=(const Card& c);
-void setNumber(int n);
-int getNumber()const;
-void setType(int type);
-int getType()const;
-void setColor(int c);
-int getColor()const;
+void setNumber(uint32 n);
+uint32 getNumber()const;
+void setType(uint32 type);
+uint32 getType()const;
+void setColor(uint32 c);
+uint32 getColor()const;
 std::string toString()const;
 };
 typedef std::shared_ptr<Card> shared_card;
 typedef std::vector<shared_card> Deck;
 
+std::string color_to_string(int c);
+uint32 color_to_int(const std::string& c);
+
 struct CardFinder
 {
+void print(const Deck& cards)
+{
+_log("Imprimindo baralho:");
+for(auto& it: cards)
+{
+_log("{}", it->toString());
+}
+}
 int32 find_card_type(const Deck& cards, const std::initializer_list<uint32>& types)
 {
 for(uint32 i=0; i<cards.size(); i++)
@@ -68,9 +79,14 @@ int32 find_card_color(const Deck& cards, const std::initializer_list<uint32>& co
 {
 for(uint32 i=0; i<cards.size(); i++)
 {
+uint32 c=cards[i]->getColor();
+if((c<red)||(c>blue))
+{
+continue;
+}
 for(auto& it : colors)
 {
-if(cards[i]->getColor()==it)
+if(c==it)
 {
 return i;
 }
@@ -82,8 +98,16 @@ int32 find_card_number(const Deck& cards, const std::initializer_list<uint32>& n
 {
 for(uint32 i=0; i<cards.size(); i++)
 {
+if(cards[i]->getType()!=normal)
+{
+continue;
+}
 for(auto& it : numbers)
 {
+if(it>9)
+{
+continue;
+}
 if(cards[i]->getNumber()==it)
 {
 return i;
@@ -96,6 +120,11 @@ uint32 find_TypeColor(const Deck& cards, const std::initializer_list<std::initia
 {
 for(uint32 i=0; i<cards.size(); i++)
 {
+int col=cards[i]->getColor();
+if((col<red)||(col>blue))
+{
+continue;
+}
 for(auto& it: cs)
 {
 std::vector<uint32> c(it);
@@ -124,6 +153,7 @@ return -1;
 }
 uint32 find_ColorNumber(const Deck& cards, const std::initializer_list<std::initializer_list<uint32>>& cs)
 {
+FuncTimer st(__FUNCTION__);
 for(uint32 i=0; i<cards.size(); i++)
 {
 if(cards[i]->getType()!=normal)
@@ -158,9 +188,6 @@ return -1;
 }
 };
 
-std::string color_to_string(int c);
-uint32 color_to_int(const std::string& c);
-
 #endif
 
 #ifndef CARDS_IMPLEMENTATION_H
@@ -173,37 +200,37 @@ setType(normal);
 setColor(uncolor);
 }
 
-void Card::setNumber(int n)
+void Card::setNumber(uint32 n)
 {
 std::unique_lock<std::shared_mutex> lck(this->mtx);
 this->number=n;
 }
 
-int Card::getNumber()const
+uint32 Card::getNumber()const
 {
 std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->number;
 }
 
-void Card::setType(int type)
+void Card::setType(uint32 type)
 {
 std::unique_lock<std::shared_mutex> lck(this->mtx);
 this->type=type;
 }
 
-int Card::getType()const
+uint32 Card::getType()const
 {
 std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->type;
 }
 
-void Card::setColor(int c)
+void Card::setColor(uint32 c)
 {
 std::unique_lock<std::shared_mutex> lck(this->mtx);
 this->color=c;
 }
 
-int Card::getColor()const
+uint32 Card::getColor()const
 {
 std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->color;
@@ -289,7 +316,8 @@ static std::map<std::string, uint32> colors={
 {"amarelo", yellow},
 {"azul", blue}
 };
-auto it=colors.find(c);
+StringUtils sc;
+auto it=colors.find(sc.to_lower_case(c));
 return ((it==colors.end()) ? uncolor : it->second);
 }
 #endif

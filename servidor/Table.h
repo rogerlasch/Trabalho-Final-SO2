@@ -49,8 +49,9 @@ void remove_player(const std::string& name);
 uint32 get_gstate()const;
 void generate_cards();
 void process_command(shared_player& ch, const std::string& cmdline);
-private:
+void interact_bot();
 uint32 calculate_plus_cards()const;
+private:
 shared_player next_player();
 void internal_PlayCard(shared_player& ch, shared_card& c, uint32 index);
 //NÃO INVOCAR OS PRÓXIMOS MÉTODOS DIRETAMENTE!!!!
@@ -59,6 +60,8 @@ void goBack(shared_player& ch, const std::string& args);
 void startGame(shared_player& ch, const std::string& args);
 void playCard(shared_player& ch, const std::string& args);
 void toFish(shared_player& ch, const std::string& args);
+void jumpChange(shared_player& ch, const std::string& args);
+void cmd_bot(shared_player& ch, const std::string& args);
 };
 typedef std::shared_ptr<Table> shared_table;
 typedef std::vector<shared_table> table_list;
@@ -70,6 +73,7 @@ void t_send_to_list(std::vector<shared_player>& players, uint32 ignore_sock, con
 
 #ifndef TABLE_IMPLEMENTATION
 #define TABLE_IMPLEMENTATION
+#include"Bot.h"
 
 Table::Table()
 {
@@ -89,7 +93,9 @@ cmdtable={
 {"voltar", std::bind(&Table::goBack, this, std::placeholders::_1, std::placeholders::_2)},
 {"startgame", std::bind(&Table::startGame, this, std::placeholders::_1, std::placeholders::_2)},
 {"jogar", std::bind(&Table::playCard, this, std::placeholders::_1, std::placeholders::_2)},
-{"pescar", std::bind(&Table::toFish, this, std::placeholders::_1, std::placeholders::_2)}
+{"pescar", std::bind(&Table::toFish, this, std::placeholders::_1, std::placeholders::_2)},
+{"pular_vez", std::bind(&Table::jumpChange, this, std::placeholders::_1, std::placeholders::_2)},
+{"bot", std::bind(&Table::cmd_bot, this, std::placeholders::_1, std::placeholders::_2)},
 };
 }
 
@@ -192,6 +198,28 @@ for(uint32 i=0; i<players.size(); i++)
 if(players[i]->getName()==name)
 {
 auto ch=players[i];
+if(ch->getPState()==player_playing)
+{
+Deck d=ch->getDeck();
+for(auto& it : d)
+{
+deck.insert(deck.begin()+random_int32(0, deck.size()-1), it);
+}
+if(pindex.load()==i)
+{
+next_player();
+_echo(players, 0, "É a vez de {} jogar.", current_player->getName());
+current_player->showCards();
+if(pindex.load()>i)
+{
+pindex.fetch_sub(1);
+}
+}
+else if(pindex.load()>i)
+{
+pindex.fetch_sub(1);
+}
+}
 ch->print("Até logo...");
 ch->setTable(shared_table());
 players.erase(players.begin()+i);
@@ -417,8 +445,54 @@ process_command(current_player, "pescar -s");
 }
 }
 }
+if(current_player->isBot())
+{
+dlb::dlb_event_send(150, this->getId(), "");
+}
 }
 
+void Table::interact_bot()
+{
+FuncTimer sh(__FUNCTION__);
+if(current_player->isPlayer())
+{
+return;
+}
+bool done=false;
+shared_bot ch=dynamic_pointer_cast<Bot>(current_player);
+uint32 fished=0;
+while(done==false)
+{
+std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+uint32 result=0;
+bot_args args;
+result=ch->decision(current_card, &args);
+switch(result)
+{
+case b_play:
+case b_jump:
+{
+this->process_command(current_player, args.toString());
+done=true;
+break;
+}
+case b_buy:
+{
+if(fished>3)
+{
+this->process_command(current_player, "pular_vez");
+done=true;
+break;
+}
+this->process_command(current_player, "pescar -s");
+fished++;
+break;
+}
+}
+}
+}
+
+//Comandos... Não invocar diretamente.
 void Table::commands(shared_player& ch, const std::string& args)
 {
 std::stringstream ss;
@@ -433,6 +507,11 @@ ch->print(ss.str());
 
 void Table::goBack(shared_player& ch, const std::string& args)
 {
+if(args=="?")
+{
+ch->print("Utilize o comando voltar para sair da mesa e retornar para a sala principal.");
+return;
+}
 for(uint32 i=0; i<players.size(); i++)
 {
 if(players[i]->getName()==ch->getName())
@@ -448,6 +527,11 @@ _echo(players, 0, "{} deixou a mesa.", ch->getName());
 
 void Table::startGame(shared_player& ch, const std::string& args)
 {
+if(args=="?")
+{
+ch->print("Digite startgame para iniciar o jogo. Apenas o criador da sala pode iniciar o jogo. Caso o criador saia, o controle passará para o próximo da lista, se possível.");
+return;
+}
 if(this->get_gstate()!=g_starting)
 {
 return;
@@ -507,6 +591,16 @@ _echo(players, 0, "{} começa o jogo.", current_player->getName());
 
 void Table::playCard(shared_player& ch, const std::string& args)
 {
+if(args=="?")
+{
+ch->print("Use o comando jogar para jogar uma carta se possível.");
+ch->print("Uso: jogar >índice> <cor>");
+ch->print("Onde <Índice> é o índice da carta em sua mão. Para saber o índice da carta, verifique o número que aparece entre () antes do nome.");
+ch->print("<Cor> é utilizado apenas com cartas especiais como +4 e coringa. As cores aceitas são Verde, Vermelho, Amarelo e Azul.");
+ch->print("Exemplos:\n\"jogar 1\" Irá jogar a primeira carta.");
+ch->print("\"jogar 2 azul\" Irá jogar a segunda carta, e selecionará a cor azul caso ela seja um +4 ou coringa.");
+return;
+}
 if(ch->getSock()!=current_player->getSock())
 {
 ch->print("Aguarde sua vez de jogar!");
@@ -527,6 +621,11 @@ if(c==NULL)
 {
 ch->print("Esta carta não existe em seu baralho.");
 return;
+}
+if(ch->isBot())
+{
+_log("Jogada de {}, args: {}", ch->getName(), color_str);
+_log("Última carta: {} Carta tentada: {}", current_card->toString(), c->toString());
 }
 if(acumulator.size()>0)
 {
@@ -594,7 +693,13 @@ ch->print("Carta inválida!");
 
 void Table::toFish(shared_player& ch, const std::string& args)
 {
-if(ch->getSock()!=current_player->getSock())
+if(args=="?")
+{
+ch->print("O comando pescar é utilizado para comprar cartas quando for sua vez de jogar.");
+ch->print("Use \"jogar -s\" se não quiser que toda sua mão seja mostrada novamente ao pescar a carta.");
+return;
+}
+if((ch->isPlayer())&&(ch->getSock()!=current_player->getSock()))
 {
 ch->print("Espere sua vez!");
 return;
@@ -622,12 +727,70 @@ std::mt19937 g(rd());
 std::shuffle(deck.begin(), deck.end(), g);
 }
 ch->add_card(deck[0]);
+if(ch->isPlayer())
+{
 ch->print(fmt::format("Você comprou \"{}\"", deck[0]->toString()));
+}
 deck.erase(deck.begin());
 _echo(players, ch->getSock(), "{} comprou uma carta.", ch->getName());
 if(args!="-s")
 {
 ch->showCards();
+}
+}
+
+void Table::jumpChange(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Use pular_vez para passar sua vez de jogar a outro jogador.");
+return;
+}
+if(acumulator.size()>0)
+{
+ch->print("Não é possível fazer isso agora.");
+return;
+}
+_echo(players, 0, "{} passou a vez!", ch->getName());
+this->next_player();
+_echo(players, 0, "É a vez de {} jogar.", current_player->getName());
+current_player->showCards();
+if(current_player->isBot())
+{
+dlb::dlb_event_send(150, this->getId(), "");
+}
+}
+
+void Table::cmd_bot(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Use o comando bot para gerenciar os bots na partida.");
+ch->print("\"bot add <nome>\", Adiciona um novo bot na partida.");
+ch->print("bot remove <nome>\" remove o bot especificado da partida.");
+return;
+}
+if(ch->isBot())
+{
+return;
+}
+std::string arg1="", arg2="";
+StringUtils sc;
+sc.parse(args, arg1, arg2);
+if(arg1=="add")
+{
+if(arg2.size()<4)
+{
+ch->print("Erro, o nome precisa ter pelo menos 4 caracteres.");
+return;
+}
+shared_player bh=std::make_shared<Bot>();
+bh->setName(arg2);
+this->add_player(bh);
+}
+else if(arg1=="remove")
+{
+this->remove_player(arg2);
 }
 }
 
@@ -643,7 +806,7 @@ void t_send_to_list(std::vector<shared_player>& cons, uint32 ignore_sock, const 
 {
 for(auto& it: cons)
 {
-if(ignore_sock==it->getSock())
+if((it->isBot())||(ignore_sock==it->getSock()))
 {
 continue;
 }

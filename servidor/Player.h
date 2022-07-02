@@ -17,10 +17,17 @@ player_expectator,
 player_playing
 };
 
+enum player_type
+{
+player_normal=0,
+player_bot
+};
+
 class Player : public basic_connection
 {
-private:
+protected:
 int id;
+uint32 type;
 uint32 pstate;
 std::string name;
 Deck cards;
@@ -31,6 +38,9 @@ Player();
 Player(const Player& p)=delete;
 Player& operator=(const Player& p)=delete;
 ~Player();
+uint32 getType()const;
+bool isBot()const;
+bool isPlayer()const;
 void setId(int id);
 int getId()const;
 void setPState(uint32 pstate);
@@ -56,11 +66,26 @@ typedef std::shared_ptr<Player> shared_player;
 
 Player::Player()
 {
-
+this->type=player_normal;
 }
 
 Player::~Player()
 {
+}
+
+uint32 Player::getType()const
+{
+return this->type;
+}
+
+bool Player::isBot()const
+{
+return this->type==player_bot;
+}
+
+bool Player::isPlayer()const
+{
+return this->type==player_normal;
 }
 
 void Player::setId(int id)
@@ -153,6 +178,10 @@ return cards[index];
 
 void Player::showCards()
 {
+if(isBot())
+{
+return;
+}
 std::stringstream ss;
 ss<<"Sua mão contém um total de "<<cards.size()<<" cartas"<<std::endl;
 for(uint32 i=0; i<cards.size(); i++)

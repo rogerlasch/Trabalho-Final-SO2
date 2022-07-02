@@ -117,6 +117,15 @@ void processEvent(dlb_event* ev)
 static StringUtils cs;
 switch(ev->type)
 {
+case 150:
+{
+auto it=tables.find(ev->id);
+if(it!=tables.end())
+{
+it->second->interact_bot();
+}
+break;
+}
 case event_connect:
 {
 shared_player ch=make_shared<Player>();
