@@ -349,7 +349,6 @@ continue;
 if((current_card->getType()==block)&&(jumped==false))
 {
 jumped=true;
-current_player->print(fmt::format("Jumping: {}", x));
 _echo(players, 0, "A vez de {} foi pulada", players[x]->getName());
 x++;
 continue;
@@ -378,7 +377,6 @@ continue;
 if((current_card->getType()==block)&&(jumped==false))
 {
 jumped=true;
-current_player->print(fmt::format("Jumping: {}", x));
 _echo(players, 0, "A vez de {} foi pulada", players[x-1]->getName());
 x--;
 continue;

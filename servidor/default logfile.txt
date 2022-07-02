@@ -1,54 +1,32 @@
 Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
 
 Bem-vindo ao jogo, roger!
-
-Digite comandos para ver uma lista de comandos diMensagem recebida de 152: "criar_pBem-vindoMensagem recebida de 152: "comandos"
-Mensagem recebida de 152: "bot ?"
-Mensagem recebida de 152: "bot add paula"
+Digite comandos para ver uma lista de comandos dispMensagem recebida de 336: "criar_pBem-vindoMensagem recebida de 336: "bot add paula"
 Bem-vindo a mesa 1 paula.
-Mensagem recebida de 152: "bot add amanda"
-Bem-vindo a mesa 1 amanda.
-Mensagem recebida de 152: "bot add inna"
-Bem-vindo a mesa 1 inna.
-Mensagem recebida de 152: "startgame"
-0 Vermelho
-0 Verde
-0 Amarelo
-0 Azul
-1 Vermelho
-1 Vermelho
-1 Verde
-1 Verde
-1 Amarelo
-1 Amarelo
-1 Azul
-1 Azul
-2 Vermelho
-2 Vermelho
-2 Verde
-2 Verde
-2 Amarelo
-2 Amarelo
-2 Azul
-2 Azul
-3 Vermelho
-3 Vermelho
-3 Verde
-3 Verde
-3 Amarelo
-3 AmareCartas geradas: 108
+Mensagem recebida de 336: "bot add fernanda"
+Bem-vindo a mesa 1 fernanda.
+Mensagem recebida de 336: "bot add amanda"
+Bem-vindamanda se juntou a mMensageminna se juntou a mesa.
+
+roger iniciou o jogo.
+Iniciando embaralhamento e distribuição das cartas...
+Cartas geradas: 108
 
 Sua mão contém um total de 7 cartas
-(1): 0 Verde , (2): 5 Amarelo , (3): 1 Azul , (4): Coringa , (5): 7 Azul , (6): 2 Vermelho , (7): +2 Azul 
+(1): Pular Amarelo , (2): 7 Amarelo , (3): Pular Vermelho , (4): +4 , (5): 4 Vermelho , (6): 1 Verde , (7): +4 
 
+A carta virada foi: 6 Vermelho
 
-A carta virada foi: 3 Vermelho
 roger começa o jogo.
 
-roger jogou 2 Vermelho
-É a vez de paula jogar.
+roger jogou Pular Vermelho
+Jumping: 1
 
-paula jogou 0 Vermelho
+A vez de paula foi pulada
+É a vez de fernanda jogar.
+
+fernanda jogou 7 Vermelho
+
 É a vez de amanda jogar.
 
 amanda jogou Pular Vermelho
@@ -56,270 +34,63 @@ A vez de inna foi pulada
 
 É a vez de roger jogar.
 Sua mão contém um total de 6 cartas
-(1): 0 Verde , (2): 5 Amarelo , (3): 1 Azul , (4): Coringa , (5): 7 Azul , (6): +2 Azul 
+(1): Pular Amarelo , (2): 7 Amarelo , (3): +4 , (4): 4 Vermelho , (5): 1 Verde , (6): +4 
 
 
-roger jogou Coringa Azul
-É a vez de paula jogar.
-
-paula comprou uma carta.
-
-paula comprou uma carta.
-
-paula comprou uma carta.
-
-paula comprou uma carta.
-
-paula passou a vez!
-É a vez de amanda jogar.
-
-amanda jogou Coringa Verde
-É a vez de inna jogar.
-
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna passou a vez!
-
-É a vez de roger jogar.
-Sua mão contém um total de 5 cartas
-(1): 0 Verde , (2): 5 Amarelo , (3): 1 Azul , (4): 7 Azul , (5): +2 Azul 
-
-
-roger jogou 0 Verde
-É a vez de paula jogar.
-
-paula jogou 6 Verde
-É a vez de amanda jogar.
-
-amanda jogou 6 Verde
-
-É a vez de inna jogar.
-
-inna jogou 9 Verde
-
-É a vez de roger jogar.
-Sua mão contém um total de 4 cartas
-(1): 5 Amarelo , (2): 1 Azul , (3): 7 Azul , (4): +2 Azul 
-
-
-Esta jogada é inválida!
-
-Você comprou "1 Amarelo"
-
-Sua mão contém um total de 5 cartas
-(1): 5 Amarelo , (2): 1 Azul , (3): 7 Azul , (4): +2 Azul , (5): 1 AmarelMensagemVocê comprou "5 Vermelho"
-SMensagem recebida de 152: "pescar"
-Mensagem recebida de 152: "pescar"
-Mensagem recebida de 152: "pescar"
-Mensagem recebida de 152: "jogar 9"
-Jogada de paula, args: 
-Última carta: 9 Vermelho Carta tentada: 6 Vermelho
+ho
+8 Vermelho
+8 Verde
+8 Verde
+8 Amarelo
+8 Amarelo
+8 Azul
+8 Azul
+9 Vermelho
+9 Vermelho
+9 Verde
+9 Verde
+9 Amarelo
+9 Amarelo
+9 Azul
+9 Azul
+Pular Vermelho
+Pular Vermelho
+Pular Verde
+Pular Verde
+Pular Amarelo
+Pular Amarelo
+Pular Azul
+Pular Azul
+Inverter Vermelho
+Inverter Vermelho
+Inverter Verde
+Inverter Verde
+Inverter Amarelo
+Inverter Amarelo
+Inverter Azul
+Inverter Azul
++2 Vermelho
++2 Vermelho
++2 Verde
++2 Verde
++2 Amarelo
++2 Amarelo
++2 Azul
++2 Azul
++4
++4
++4
++4
+Coringa
+Coringa
+Coringa
+Coringa
+Mensagem recebida de 336: "jogar 3"
+Jogada de fernanda, args: 
+Última carta: Pular Vermelho Carta tentada: 7 Vermelho
 Jogada de amanda, args: 
-Última carta: 6 Vermelho Carta tentada: 6 Amarelo
-Jogada de inna, args: 
-Última carta: 6 Amarelo Carta tentada: 1 Amarelo
-Mensagem recebida de 152: "jogar 1"
-Jogada de paula, args: 
-Última carta: 5 Amarelo Carta tentada: 9 Amarelo
-Jogada de amanda, args: 
-Última carta: 9 Amarelo Carta tentada: 4 Amarelo
-Jogada de inna, args: 
-Última carta: 4 Amarelo Carta tentada: 2 Amarelo
-Mensagem recebida de 152: "jogar 4"
-Jogada de paula, args: 
-Última carta: 1 Amarelo Carta tentada: 1 Verde
-Jogada de amanda, args: 
-Última carta: 1 Verde Carta tentada: Inverter Verde
-Jogada de paula, args: 
-Última carta: Inverter Verde Carta tentada: Inverter Azul
-Jogada de amanda, args: 
-Última carta: Inverter Azul Carta tentada: 2 Azul
-Jogada de inna, args: 
-Última carta: 2 Azul Carta tentada: 3 Azul
-Mensagem recebida de 152: "jogar 1"
-Jogada de paula, args: 
-Última carta: 1 Azul Carta tentada: 4 Azul
-Jogada de amanda, args: 
-Última carta: 4 Azul Carta tentada: +2 Azul
-Jogada de inna, args: 
-Última carta: +2 Azul Carta tentada: +2 Vermelho
-Mensagem recebida de 152: "jogar 3"
-Mensagem recebida de 152: "jogar 2"
-Jogada de paula, args: 
-Última carta: +2 Azul Carta tentada: +2 Verde
-Jogada de amanda, args: Amarelo
-Última carta: +2 Verde Carta tentada: +4
-Jogada de inna, args: 
-Última carta: +4 Amarelo Carta tentada: Inverter Amarelo
-Jogada de amanda, args: 
-Última carta: Inverter Amarelo Carta tentada: Pular Amarelo
-Jumping: 2
-Mensagem recebida de 152: "pescar"
-Mensagem recebida de 152: "jogar 4 azul"
-Mensagem recebida de 152: "jogar 5 azul"
-Jogada de inna, args: 
-Última carta: +4 Azul Carta tentada: +2 Vermelho
-Jogada de amanda, args: Vermelho
-Última carta: +2 Vermelho Carta tentada: +4
-Jogada de paula, args: 
-Última carta: +4 Vermelho Carta tentada: 4 Vermelho
-Mensagem recebida de 152: "jogar 2"
-Jogada de inna, args: 
-Última carta: 5 Vermelho Carta tentada: 5 Vermelho
-Jogada de amanda, args: 
-Última carta: 5 Vermelho Carta tentada: 7 Vermelho
-Jogada de paula, args: 
-Última carta: 7 Vermelho Carta tentada: 8 Vermelho
-Mensagem recebida de 152: "jogar 3"
-Jogada de inna, args: 
-Última carta: 1 Vermelho Carta tentada: 2 Vermelho
-Jogada de amanda, args: 
-Última carta: 2 Vermelho Carta tentada: 2 Amarelo
-Jogada de paula, args: 
-Última carta: 2 Amarelo Carta tentada: +2 Amarelo
+Última carta: 7 Vermelho Carta tentada: Pular Vermelho
+Jumping: 4
 Parando servidor...
 Total de threads parados: 2
 Servidor finalizado!
-ento porque um +2 Vermelho está ativo.
-
-roger jogou +2 Azul
-Acumulando +2 Azul. Total de cartas acumuladas: 6
-
-É a vez de paula jogar.
-
-paula jogou +2 Verde
-
-Acumulando +2 Verde. Total de cartas acumuladas: 8
-É a vez de amanda jogar.
-
-amanda jogou +4 Amarelo
-
-Acumulando +4 Amarelo. Total de cartas acumuladas: 12
-É a vez de inna jogar.
-
-inna não tem nenhum +2 ou +4, por tanto, terá que comprar +12 cartas!
-inna comprou uma carta.
-inna comprou uma carta.
-
-inna comprou uma carta.
-inna comprou uma carta.
-inna comprou uma carta.
-
-inna comprou uma carta.
-inna comprou uma carta.
-inna comprou uma carta.
-
-inna comprou uma carta.
-inna comprou uma carta.
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna jogou Inverter Amarelo
-O turno foi invertido para o lado oposto.
-
-É a vez de amanda jogar.
-
-amanda jogou Pular Amarelo
-A vez de paula foi pulada
-
-É a vez de roger jogar.
-Sua mão contém um total de 4 cartas
-(1): 7 Azul , (2): 5 Vermelho , (3): 7 Azul , (4): 1 Vermelho 
-
-
-Você comprou "+4"
-Sua mão contém um total de 5 cartas
-(1): 7 Azul , (2): 5 Vermelho , (3): 7 Azul , (4): 1 Vermelho , (5): +4 
-
-
-Carta inválida!
-
-roger jogou +4 Azul
-Acumulando +4 Azul. Total de cartas acumuladas: 4
-
-É a vez de inna jogar.
-
-inna jogou +2 Vermelho
-Acumulando +2 Vermelho. Total de cartas acumuladas: 6
-
-É a vez de amanda jogar.
-
-amanda jogou +4 Vermelho
-Acumulando +4 Vermelho. Total de cartas acumuladas: 10
-
-É a vez de paula jogar.
-paula não tem nenhum +2 ou +4, por tanto, terá que comprar +10 cartas!
-paula comprou uma carta.
-
-paula comprou uma carta.
-paula comprou uma carta.
-paula comprou uma carta.
-
-paula comprou uma carta.
-paula comprou uma carta.
-paula comprou uma carta.
-
-paula comprou uma carta.
-paula comprou uma carta.
-paula comprou uma carta.
-
-paula jogou 4 Vermelho
-É a vez de roger jogar.
-
-Sua mão contém um total de 4 cartas
-(1): 7 Azul , (2): 5 Vermelho , (3): 7 Azul , (4): 1 Vermelho 
-
-
-roger jogou 5 Vermelho
-É a vez de inna jogar.
-
-inna jogou 5 Vermelho
-
-É a vez de amanda jogar.
-
-amanda comprou uma carta.
-
-amanda comprou uma carta.
-
-amanda jogou 7 Vermelho
-
-É a vez de paula jogar.
-
-paula jogou 8 Vermelho
-É a vez de roger jogar.
-
-Sua mão contém um total de 3 cartas
-(1): 7 Azul , (2): 7 Azul , (3): 1 Vermelho 
-
-
-roger jogou 1 Vermelho
-É a vez de inna jogar.
-
-inna jogou 2 Vermelho
-É a vez de amanda jogar.
-
-amanda comprou uma carta.
-
-amanda jogou 2 Amarelo
-
-É a vez de paula jogar.
-
-paula jogou +2 Amarelo
-Acumulando +2 Amarelo. Total de cartas acumuladas: 2
-
-É a vez de roger jogar.
-Sua mão contém um total de 2 cartas
-(1): 7 Azul , (2): 7 Azul 
-
-roger não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
-
-Você comprou "3 Amarelo"
-Você comprou "3 Azul"
-
