@@ -1,1 +1,98 @@
-Erro ao se conectar no servidor localhost na porta 4000.
+Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
+
+Bem-vindo ao jogo, bruno!
+
+Digite comandos para ver uma lista de comandos disponíveis.
+bruno se conectou!
+
+Bem-vindo a mesa 1 bruno.
+
+bruno se juntou a mesa.
+
+roger iniciou o jogo.
+Iniciando embaralhamento e distribuição das cartas...
+Cartas geradas: 108
+
+Sua mão contém um total de 7 cartas
+(1): +2 Azul , (2): 8 Verde , (3): Pular Verde , (4): 2 Vermelho , (5): 3 Verde , (6): Pular Amarelo , (7)Sua mão contém uA carta virada foi: 7 Vermelho
+roger começa o jogo.
+
+roger jogou 0 Vermelho
+
+É a vez de bruno jogar.
+Sua mão contém um total de 7 cartas
+(1): +2 Azul , (2): 8 Verde , (3): Pular Verde , (4): 2 Vermelho , (5): 3 Verde , (6): Pular Amarelo , (7É a vez de bruno bruno jogobruno jogou 2 Vermelho
+É a vez de roger roger jogou Pular Vermelho
+A vez de bruno foi pulada
+
+É a vez de roger jogar.
+
+roger jogou 4 Vermelho
+
+É a vez de bruno jogar.
+Sua mão contém um total de 6 cartas
+(1): +2 Azul , (2): 8 Verde , (3): Pular Verde , (4): 3 Verde , (5): Pular Amarelo , (6): 7 Verde 
+
+
+Carta inválida!
+
+Esta jogada é inválida!
+
+Carta inválida!
+
+Esta jogada é inválida!
+
+Esta jogada é inválida!
+
+Você comprou "+2 Vbruno combruno comprou uma cbruno comprou uma carta.
+
+bruno jogou Coringa Verde
+
+É a vez de roger jogar.
+Sua mão contém um total de 4 cartas
+(1): 3 Azul , (2): +4 , (3): 6 Vermelho , (4): 2 Verde 
+
+
+roger jogou +4 Vermelho
+Acumulando +4 Vermelho. Total de cartas acumuladas: 4
+
+É a vez de bruno jogar.
+
+bruno jogou +2 Azul
+Acumulando +2 Azul. Total de cartas acumuladas: 6
+
+É a vez de roger jogar.
+Sua mão contém um total de 3 cartas
+(1): 3 Azul , (2): 6 Vermelho , (3): 2 Verde 
+
+roger não tem nenhum +2 ou +4, por tanto, terá que comprar +6 cartas!
+
+Você comprou "9 Vermelho"
+roger comprou uma carta.
+Você comprou "0 Amarelo"
+roger comprou uma carta.
+
+Você comprou "5 Azul"
+roger comprou uma carta.
+Você comprou "6 Azul"
+
+roger comprou uma carta.
+Você comprou "5 Verde"
+roger comprou uma carta.
+
+Você comprou "0 Verde"
+roger comprou uma carta.
+
+bruno nos deixou!
+
+ogar.
+roger não tem nenhum +2 ou +4, por tanto, terá que comprar +6 cartas!
+roger comprou uma carta.
+
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+
+roger comprou uma carta.
+

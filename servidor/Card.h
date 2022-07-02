@@ -56,7 +56,7 @@ for(uint32 i=0; i<cards.size(); i++)
 {
 for(auto& it : types)
 {
-if(cards[i]->getColor()==it)
+if(cards[i]->getType()==it)
 {
 return i;
 }

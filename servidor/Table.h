@@ -50,8 +50,8 @@ uint32 get_gstate()const;
 void generate_cards();
 void process_command(shared_player& ch, const std::string& cmdline);
 private:
-void swap_turn();
-shared_player next_player(bool jump_one=false);
+uint32 calculate_plus_cards()const;
+shared_player next_player();
 void internal_PlayCard(shared_player& ch, shared_card& c, uint32 index);
 //NÃO INVOCAR OS PRÓXIMOS MÉTODOS DIRETAMENTE!!!!
 void commands(shared_player& ch, const std::string& args);
@@ -64,8 +64,8 @@ typedef std::shared_ptr<Table> shared_table;
 typedef std::vector<shared_table> table_list;
 
 uint32 table_generate_id();
-void t_send_to_list(std::vector<shared_player>& players, const std::string& msg);
-#define _echo(cons, str, ...) t_send_to_list(cons, fmt::format(str, __VA_ARGS__))
+void t_send_to_list(std::vector<shared_player>& players, uint32 ignore_sock, const std::string& msg);
+#define _echo(cons, ignore_sock, str, ...) t_send_to_list(cons, ignore_sock, fmt::format(str, __VA_ARGS__))
 #endif
 
 #ifndef TABLE_IMPLEMENTATION
@@ -182,7 +182,7 @@ if(players.size()==1)
 {
 c->print("Digite o comando \"startgame\" para iniciar a partida quando tiver pelo menos mais um jogador.");
 }
-_echo(players, "{} se juntou a mesa.", c->getName());
+_echo(players, 0, "{} se juntou a mesa.", c->getName());
 }
 
 void Table::remove_player(const std::string& name)
@@ -239,7 +239,7 @@ ct(deck, ctype, color, 0, 2);
 }
 ct(deck, plus_four, uncolor, 0, 4);
 ct(deck, joker, uncolor, 0, 4);
-_echo(players, "Cartas geradas: {}", deck.size());
+_echo(players, 0, "Cartas geradas: {}", deck.size());
 for(auto& c: deck)
 {
 _log("{}", c->toString());
@@ -270,13 +270,34 @@ return;
 it->second(ch, args);
 }
 
-void Table::swap_turn()
+uint32 Table::calculate_plus_cards()const
 {
+if(acumulator.size()==0)
+{
+return 0;
+}
+uint32 x=0;
+for(auto& it : acumulator)
+{
+switch(it->getType())
+{
+case plus_two:
+{
+x+=2;
+break;
+}
+case plus_four:
+{
+x+=4;
+break;
+}
+}
+}
+return x;
 }
 
-shared_player Table::next_player(bool jump_one)
+shared_player Table::next_player()
 {
-FuncTimer ts(__FUNCTION__);
 shared_player ch;
 uint32 x=0;
 switch(turn_dir.load())
@@ -300,7 +321,8 @@ continue;
 if((current_card->getType()==block)&&(jumped==false))
 {
 jumped=true;
-_echo(players, "A vez de {} foi pulada", players[x]->getName());
+current_player->print(fmt::format("Jumping: {}", x));
+_echo(players, 0, "A vez de {} foi pulada", players[x]->getName());
 x++;
 continue;
 }
@@ -313,22 +335,14 @@ case turn_left:
 {
 x=pindex.load();
 bool jumped=false;
-if(x==0)
-{
-x=players.size()-1;
-}
-else
-{
-x--;
-}
-while(x!=pindex)
+while((x-1)!=pindex)
 {
 if(x==0)
 {
-x=players.size()-1;
+x=players.size();
 continue;
 }
-if(players[x]->getPState()==player_expectator)
+if(players[x-1]->getPState()==player_expectator)
 {
 x--;
 continue;
@@ -336,11 +350,13 @@ continue;
 if((current_card->getType()==block)&&(jumped==false))
 {
 jumped=true;
-_echo(players, "A vez de {} foi pulada", players[x]->getName());
+current_player->print(fmt::format("Jumping: {}", x));
+_echo(players, 0, "A vez de {} foi pulada", players[x-1]->getName());
 x--;
 continue;
-ch=players[x];
 }
+ch=players[x-1];
+x--;
 break;
 }
 break;
@@ -356,7 +372,7 @@ return ch;
 
 void Table::internal_PlayCard(shared_player& ch, shared_card& c, uint32 index)
 {
-_echo(players, "{} jogou {}", ch->getName(), c->toString());
+_echo(players, 0, "{} jogou {}", ch->getName(), c->toString());
 discard.push_back(c);
 current_card=discard[discard.size()-1];
 ch->remove_card(index);
@@ -366,6 +382,7 @@ case plus_two:
 case plus_four:
 {
 acumulator.push_back(c);
+_echo(players, 0, "Acumulando {}. Total de cartas acumuladas: {}", c->toString(), calculate_plus_cards());
 break;
 }
 case reverse_turn:
@@ -378,14 +395,28 @@ else
 {
 turn_dir.store(turn_right);
 }
-_echo(players, "O turno foi invertido para o lado oposto.");
+_echo(players, 0, "O turno foi invertido para o lado oposto.");
 break;
 }
 }
 //ch->showCards();
 this->next_player();
-_echo(players, "É a vez de {} jogar.", current_player->getName());
+_echo(players, 0, "É a vez de {} jogar.", current_player->getName());
 current_player->showCards();
+if(acumulator.size()>0)
+{
+CardFinder sf;
+int32 x=calculate_plus_cards();
+if(sf.find_card_type(current_player->getDeck(), {plus_two, plus_four})==-1)
+{
+_echo(players, 0, "{} não tem nenhum +2 ou +4, por tanto, terá que comprar {:+} cartas!", current_player->getName(), x);
+acumulator.clear();
+for(uint32 i=0; i<x; i++)
+{
+process_command(current_player, "pescar -s");
+}
+}
+}
 }
 
 void Table::commands(shared_player& ch, const std::string& args)
@@ -410,7 +441,7 @@ ch->print("Até logo...");
 ch->setTable(shared_table());
 players.erase(players.begin()+i);
 ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
-_echo(players, "{} deixou a mesa.", ch->getName());
+_echo(players, 0, "{} deixou a mesa.", ch->getName());
 }
 }
 }
@@ -437,7 +468,7 @@ for(auto& it : players)
 it->setPState(player_playing);
 it->dropCards();
 }
-_echo(players, "{} iniciou o jogo.\nIniciando embaralhamento e distribuição das cartas...", ch->getName());
+_echo(players, 0, "{} iniciou o jogo.\nIniciando embaralhamento e distribuição das cartas...", ch->getName());
 this->generate_cards();
 //Embaralhar as cartas...
 std::random_device rd;
@@ -470,8 +501,8 @@ break;
 turn_dir.store(turn_right);
 current_player=players[0];
 pindex.store(0);
-_echo(players, "A carta virada foi: {}", current_card->toString());
-_echo(players, "{} começa o jogo.", current_player->getName());
+_echo(players, 0, "A carta virada foi: {}", current_card->toString());
+_echo(players, 0, "{} começa o jogo.", current_player->getName());
 }
 
 void Table::playCard(shared_player& ch, const std::string& args)
@@ -496,6 +527,15 @@ if(c==NULL)
 {
 ch->print("Esta carta não existe em seu baralho.");
 return;
+}
+if(acumulator.size()>0)
+{
+CardFinder sf;
+if((c->getType()!=plus_two)&&(c->getType()!=plus_four)&&(sf.find_card_type(ch->getDeck(), {plus_two, plus_four})>-1))
+{
+ch->print(fmt::format("Você não pode jogar esta carta no momento porque um {} está ativo.", current_card->toString()));
+return;
+}
 }
 if((c->getType()==normal)&&(current_card->getType()==normal))
 {
@@ -530,6 +570,17 @@ return;
 }
 c->setColor(color_id);
 this->internal_PlayCard(ch, c, index-1);
+}
+else if(c->getType()==plus_two)
+{
+if((c->getColor()==current_card->getColor())||(c->getType()==current_card->getType())||(current_card->getType()==plus_four))
+{
+internal_PlayCard(ch, c, index-1);
+}
+else
+{
+ch->print("Jogada inválida!");
+}
 }
 else if((c->getType()==current_card->getType())||(c->getColor()==current_card->getColor()))
 {
@@ -573,8 +624,11 @@ std::shuffle(deck.begin(), deck.end(), g);
 ch->add_card(deck[0]);
 ch->print(fmt::format("Você comprou \"{}\"", deck[0]->toString()));
 deck.erase(deck.begin());
-_echo(players, "{} comprou uma carta.", ch->getName());
+_echo(players, ch->getSock(), "{} comprou uma carta.", ch->getName());
+if(args!="-s")
+{
 ch->showCards();
+}
 }
 
 //Funções...
@@ -585,10 +639,14 @@ x++;
 return x;
 }
 
-void t_send_to_list(std::vector<shared_player>& cons, const std::string& msg)
+void t_send_to_list(std::vector<shared_player>& cons, uint32 ignore_sock, const std::string& msg)
 {
 for(auto& it: cons)
 {
+if(ignore_sock==it->getSock())
+{
+continue;
+}
 it->print(msg);
 }
 }
