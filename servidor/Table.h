@@ -17,7 +17,12 @@ turn_left=0,
 turn_right
 };
 
-class Table : public std::enable_shared_from_this<Table>
+enum table_flags
+{
+table_delay=(1<<0)
+};
+
+class Table : public dlb::dlb_basic_flags, public std::enable_shared_from_this<Table>
 {
 private:
 typedef std::function<void(shared_player&, const std::string&)> table_command;
@@ -27,12 +32,16 @@ std::atomic<uint32> current_turn;
 std::atomic<uint32> gstate;
 std::atomic<uint32> pindex;
 std::atomic<uint32> turn_dir;
+std::atomic<uint32> active_players;
+std::atomic<int64> delay_start_time;
+std::atomic<int64> delay_ms;
 std::vector<shared_player> players;
 Deck deck;
 Deck discard;
 Deck acumulator;
 shared_player current_player;
 shared_card current_card;
+std::vector<std::string> winers;
 public:
 Table();
 Table(const Table& t)=delete;
@@ -41,19 +50,25 @@ Table& operator=(const Table& t);
 void setId(uint32 id);
 uint32 getId()const;
 uint32 playerCount()const;
+void make_delay(int64 delay_time);
+bool isDelayed();
+void table_loop();
 std::string toString();
 shared_player find_player(uint32 sock);
 shared_player find_player(const std::string& name);
+shared_player has_admin();
 void add_player(const shared_player& c);
 void remove_player(const std::string& name);
 uint32 get_gstate()const;
 void generate_cards();
 void process_command(shared_player& ch, const std::string& cmdline);
-void interact_bot();
+void interact_bot(shared_player& ch);
 uint32 calculate_plus_cards()const;
 private:
 shared_player next_player();
 void internal_PlayCard(shared_player& ch, shared_card& c, uint32 index);
+void internal_next_player();
+void endGame();
 //NÃO INVOCAR OS PRÓXIMOS MÉTODOS DIRETAMENTE!!!!
 void commands(shared_player& ch, const std::string& args);
 void goBack(shared_player& ch, const std::string& args);
@@ -62,6 +77,10 @@ void playCard(shared_player& ch, const std::string& args);
 void toFish(shared_player& ch, const std::string& args);
 void jumpChange(shared_player& ch, const std::string& args);
 void cmd_bot(shared_player& ch, const std::string& args);
+void do_who(shared_player& ch, const std::string& args);
+void do_chat(shared_player& ch, const std::string& args);
+void do_quero(shared_player& ch, const std::string& args);
+void do_uno(shared_player& ch, const std::string& args);
 };
 typedef std::shared_ptr<Table> shared_table;
 typedef std::vector<shared_table> table_list;
@@ -82,12 +101,14 @@ current_turn.store(0);
 gstate.store(g_starting);
 pindex.store(0);
 turn_dir.store(turn_right);
+active_players.store(0);
 players.clear();
 deck.clear();
 discard.clear();
 acumulator.clear();
 current_player=NULL;
 current_card=NULL;
+winers.clear();
 cmdtable={
 {"comandos", std::bind(&Table::commands, this, std::placeholders::_1, std::placeholders::_2)},
 {"voltar", std::bind(&Table::goBack, this, std::placeholders::_1, std::placeholders::_2)},
@@ -96,6 +117,10 @@ cmdtable={
 {"pescar", std::bind(&Table::toFish, this, std::placeholders::_1, std::placeholders::_2)},
 {"pular_vez", std::bind(&Table::jumpChange, this, std::placeholders::_1, std::placeholders::_2)},
 {"bot", std::bind(&Table::cmd_bot, this, std::placeholders::_1, std::placeholders::_2)},
+{"chat", std::bind(&Table::do_chat, this, std::placeholders::_1, std::placeholders::_2)},
+{"who", std::bind(&Table::do_who, this, std::placeholders::_1, std::placeholders::_2)},
+{"quero", std::bind(&Table::do_quero, this, std::placeholders::_1, std::placeholders::_2)},
+{"uno", std::bind(&Table::do_uno, this, std::placeholders::_1, std::placeholders::_2)},
 };
 }
 
@@ -117,6 +142,74 @@ return this->id;
 uint32 Table::playerCount()const
 {
 return players.size();
+}
+
+void Table::make_delay(int64 delay_time)
+{
+if(this->flag_contains(table_delay))
+{
+return;
+}
+if(delay_time<=0)
+{
+return;
+}
+if(delay_time>5000)
+{
+delay_time=5000;
+}
+if((current_player!=NULL)&&(current_player->isBot()))
+{
+this->setflag(table_delay);
+this->delay_start_time.store(gettimestamp());
+delay_ms.store(delay_time);
+}
+}
+
+bool Table::isDelayed()
+{
+if(this->flag_contains(table_delay))
+{
+int64 end=gettimestamp();
+if((end-delay_start_time.load())>delay_ms.load())
+{
+this->removeflag(table_delay);
+return false;
+}
+return true;
+}
+return false;
+}
+
+void Table::table_loop()
+{
+switch(this->get_gstate())
+{
+case g_starting:
+case g_finished:
+{
+break;
+}
+case g_playing:
+{
+if((current_player!=NULL)&&(current_player->isBot())&&(!isDelayed()))
+{
+interact_bot(current_player);
+}
+if((current_player!=NULL)&&(current_player->flag_contains(player_waiting_uno)))
+{
+int64 diff=(gettimestamp()-current_player->getUnoTime());
+if(diff>=5000)
+{
+current_player->removeflag(player_waiting_uno);
+_echo(players, 0, "{} esqueceu de anunciar uno, por tanto como penalidade, terá que comprar mais duas cartas!", current_player->getName());
+this->process_command(current_player, "pescar -s");
+this->process_command(current_player, "pescar -s");
+this->internal_next_player();
+}
+}
+}
+}
 }
 
 std::string Table::toString()
@@ -178,15 +271,55 @@ return *it;
 return shared_player();
 }
 
+shared_player Table::has_admin()
+{
+shared_player ch;
+for(auto& it : players)
+{
+if(it->flag_contains(player_admin))
+{
+return it;
+}
+if((ch==NULL)&&(!it->flag_contains(player_admin)))
+{
+ch=it;
+}
+}
+if(ch!=NULL)
+{
+ch->setflag(player_admin);
+_echo(players, 0, "Agora {} é o administrador da mesa.", ch->getName());
+}
+return ch;
+}
+
 void Table::add_player(const shared_player& c)
 {
+if(this->get_gstate()==g_playing)
+{
+c->setflag(player_expectator);
+}
+else
+{
+c->setflag(player_playing);
+}
 players.push_back(c);
-c->setPState(player_expectator);
 c->setTable(this->shared_from_this());
 c->print(fmt::format("Bem-vindo a mesa {} {}.", this->getId(), c->getName()));
 if(players.size()==1)
 {
-c->print("Digite o comando \"startgame\" para iniciar a partida quando tiver pelo menos mais um jogador.");
+c->setflag(player_admin);
+c->print("Você agora é o administrador da mesa.");
+c->print("Digite: \"startgame\" quando estiver pronto.");
+}
+else
+{
+has_admin();
+}
+if(c->isPlayer())
+{
+c->print("Digite \"comandos\" para ver uma lista de comandos disponíveis.");
+c->print("digite: \"<comando> ?\" para ler a ajuda do comando.");
 }
 _echo(players, 0, "{} se juntou a mesa.", c->getName());
 }
@@ -198,7 +331,7 @@ for(uint32 i=0; i<players.size(); i++)
 if(players[i]->getName()==name)
 {
 auto ch=players[i];
-if(ch->getPState()==player_playing)
+if(ch->flag_contains(player_playing))
 {
 Deck d=ch->getDeck();
 for(auto& it : d)
@@ -219,12 +352,23 @@ else if(pindex.load()>i)
 {
 pindex.fetch_sub(1);
 }
+active_players.fetch_sub(1);
 }
 ch->print("Até logo...");
 ch->setTable(shared_table());
 players.erase(players.begin()+i);
-ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
+if(ch->flag_contains(player_admin))
+{
+this->has_admin();
 }
+ch->replace_flags(0);
+ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
+break;
+}
+}
+if(active_players.load()<2)
+{
+this->endGame();
 }
 }
 
@@ -267,11 +411,6 @@ ct(deck, ctype, color, 0, 2);
 }
 ct(deck, plus_four, uncolor, 0, 4);
 ct(deck, joker, uncolor, 0, 4);
-_echo(players, 0, "Cartas geradas: {}", deck.size());
-for(auto& c: deck)
-{
-_log("{}", c->toString());
-}
 }
 
 void Table::process_command(shared_player& ch, const std::string& cmdline)
@@ -341,7 +480,7 @@ if(x>players.size()-1)
 x=0;
 continue;
 }
-if(players[x]->getPState()==player_expectator)
+if((players[x]->flag_contains(player_expectator))||(!players[x]->flag_contains(player_playing)))
 {
 x++;
 continue;
@@ -369,7 +508,7 @@ if(x==0)
 x=players.size();
 continue;
 }
-if(players[x-1]->getPState()==player_expectator)
+if((players[x-1]->flag_contains(player_expectator))||(!players[x-1]->flag_contains(player_playing)))
 {
 x--;
 continue;
@@ -390,7 +529,9 @@ break;
 }
 if(ch!=NULL)
 {
+current_player->removeflag(player_turn);
 current_player=ch;
+current_player->setflag(player_turn);
 pindex.store(x);
 }
 return ch;
@@ -398,7 +539,12 @@ return ch;
 
 void Table::internal_PlayCard(shared_player& ch, shared_card& c, uint32 index)
 {
+if(this->get_gstate()!=g_playing)
+{
+return;
+}
 _echo(players, 0, "{} jogou {}", ch->getName(), c->toString());
+_log("Última carta: {}, Carta atual: {}", current_card->toString(), c->toString());
 discard.push_back(c);
 current_card=discard[discard.size()-1];
 ch->remove_card(index);
@@ -408,7 +554,7 @@ case plus_two:
 case plus_four:
 {
 acumulator.push_back(c);
-_echo(players, 0, "Acumulando {}. Total de cartas acumuladas: {}", c->toString(), calculate_plus_cards());
+_echo(players, 0, "Acumulando {}.", c->toString());
 break;
 }
 case reverse_turn:
@@ -425,7 +571,40 @@ _echo(players, 0, "O turno foi invertido para o lado oposto.");
 break;
 }
 }
-//ch->showCards();
+if(ch->deckSize()==0)
+{
+_echo(players, 0, "{} terminou o jogo!", ch->getName());
+_echo(players, 0, "{} agora é um expectador.", ch->getName());
+ch->setflag(player_expectator);
+ch->removeflag(player_playing);
+ch->removeflag(player_waiting_uno);
+ch->removeflag(player_uno);
+winers.push_back(ch->getName());
+active_players.fetch_sub(1);
+if(active_players.load()<2)
+{
+this->endGame();
+return;
+}
+this->internal_next_player();
+return;
+}
+ch->check_uno();
+if((ch->isBot())&&(ch->flag_contains(player_waiting_uno)))
+{
+this->process_command(ch, "uno");
+return;
+}
+else if(ch->flag_contains(player_waiting_uno))
+{
+//Retorna porque o servidor deve esperar o jogador digitar uno...
+return;
+}
+this->internal_next_player();
+}
+
+void Table::internal_next_player()
+{
 this->next_player();
 _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
 current_player->showCards();
@@ -443,49 +622,87 @@ process_command(current_player, "pescar -s");
 }
 }
 }
-if(current_player->isBot())
+this->make_delay(2500);
+}
+
+void Table::endGame()
 {
-dlb::dlb_event_send(150, this->getId(), "");
+gstate.store(g_finished);
+_echo(players, 0, "O jogo terminou!");
+for(auto& it: players)
+{
+it->dropCards();
+it->removeflag(player_uno);
+it->removeflag(player_waiting_uno);
+this->process_command(it, "quero jogar");
+}
+std::stringstream ss;
+ss<<"Classificação geral dos jogadores..."<<std::endl;
+for(uint32 i=0; i<winers.size(); i++)
+{
+ss<<(i+1)<<": "<<winers[i]<<std::endl;
+}
+_echo(players, 0, ss.str());
+winers.clear();
+current_player=shared_player();
+current_card=shared_card();
+acumulator.resize(0);
+deck.resize(0);
+active_players.store(0);
+pindex.store(0);
+gstate.store(g_starting);
+shared_player ch=has_admin();
+if(ch!=NULL)
+{
+ch->print("Agora você pode inicciar uma nova partida digitando \"startgame\"");
 }
 }
 
-void Table::interact_bot()
+void Table::interact_bot(shared_player& ch)
 {
 FuncTimer sh(__FUNCTION__);
-if(current_player->isPlayer())
+if(ch->isPlayer())
 {
 return;
 }
 bool done=false;
-shared_bot ch=dynamic_pointer_cast<Bot>(current_player);
-uint32 fished=0;
-while(done==false)
-{
-std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+shared_bot bh=dynamic_pointer_cast<Bot>(ch);
 uint32 result=0;
 bot_args args;
-result=ch->decision(current_card, &args);
+result=bh->decision(current_card, &args);
 switch(result)
 {
 case b_play:
+{
+this->process_command(ch, args.toString());
+bh->fished=0;
+bh->max_fish=0;
+break;
+}
 case b_jump:
 {
-this->process_command(current_player, args.toString());
-done=true;
+this->process_command(ch, args.toString());
 break;
 }
 case b_buy:
 {
-if(fished>3)
+if(bh->max_fish==0)
 {
+bh->max_fish=random_int32(1, 3);
+}
+if(bh->fished<bh->max_fish)
+{
+bh->fished++;
+this->process_command(ch, "pescar -s");
+}
+else
+{
+bh->fished=0;
+bh->max_fish=random_int32(1, 3);
 this->process_command(current_player, "pular_vez");
-done=true;
-break;
 }
-this->process_command(current_player, "pescar -s");
-fished++;
+this->make_delay(500);
 break;
-}
 }
 }
 }
@@ -500,6 +717,7 @@ for(auto it=cmdtable.begin(); it!=cmdtable.end(); ++it)
 ss<<it->first<<std::endl;
 }
 ss<<cmdtable.size()<<" comandos encontrados."<<std::endl;
+ss<<"Digite \"<comando> ?\" para mais ajuda sobre um comando."<<std::endl;
 ch->print(ss.str());
 }
 
@@ -510,17 +728,7 @@ if(args=="?")
 ch->print("Utilize o comando voltar para sair da mesa e retornar para a sala principal.");
 return;
 }
-for(uint32 i=0; i<players.size(); i++)
-{
-if(players[i]->getName()==ch->getName())
-{
-ch->print("Até logo...");
-ch->setTable(shared_table());
-players.erase(players.begin()+i);
-ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
-_echo(players, 0, "{} deixou a mesa.", ch->getName());
-}
-}
+remove_player(ch->getName());
 }
 
 void Table::startGame(shared_player& ch, const std::string& args)
@@ -530,8 +738,14 @@ if(args=="?")
 ch->print("Digite startgame para iniciar o jogo. Apenas o criador da sala pode iniciar o jogo. Caso o criador saia, o controle passará para o próximo da lista, se possível.");
 return;
 }
-if(this->get_gstate()!=g_starting)
+if(this->get_gstate()==g_playing)
 {
+ch->print("O jogo já começou!");
+return;
+}
+if(!ch->flag_contains(player_admin))
+{
+ch->print("Apenas o administrador pode iniciar o jogo.");
 return;
 }
 if(players.size()<2)
@@ -539,18 +753,30 @@ if(players.size()<2)
 ch->print("Ainda não existem jogadores o suficiente para dar início a partida.");
 return;
 }
-if(ch->getSock()!=players[0]->getSock())
-{
-ch->print("Você não pode iniciar a partida.");
-return;
-}
 this->gstate.store(g_playing);
+shared_player first_player;
+uint32 count=0;
 for(auto& it : players)
 {
-it->setPState(player_playing);
+if(!it->flag_contains(player_expectator))
+{
+it->setflag(player_playing);
 it->dropCards();
+count++;
+if(first_player==NULL)
+{
+first_player=it;
 }
-_echo(players, 0, "{} iniciou o jogo.\nIniciando embaralhamento e distribuição das cartas...", ch->getName());
+}
+}
+if((first_player==NULL)||(count<2))
+{
+ch->print("Existem expectadores de mais. O jogo precisa de pelo menos 2 jogadores que não são expectadores para começar.");
+this->gstate.store(g_starting);
+return;
+}
+active_players.store(count);
+_echo(players, 0, "{} Iniciou o jogo.\nTotal de jogadores na partida: {}", ch->getName(), count);
 this->generate_cards();
 //Embaralhar as cartas...
 std::random_device rd;
@@ -559,7 +785,7 @@ std::shuffle(deck.begin(), deck.end(), g);
 for(auto& ch : players)
 {
 //Expectadores não recebem cartas!
-if(ch->getPState()==player_expectator)
+if(ch->flag_contains(player_expectator))
 {
 continue;
 }
@@ -581,7 +807,8 @@ break;
 }
 }
 turn_dir.store(turn_right);
-current_player=players[0];
+current_player=first_player;
+current_player->setflag(player_turn);
 pindex.store(0);
 _echo(players, 0, "A carta virada foi: {}", current_card->toString());
 _echo(players, 0, "{} começa o jogo.", current_player->getName());
@@ -599,7 +826,12 @@ ch->print("Exemplos:\n\"jogar 1\" Irá jogar a primeira carta.");
 ch->print("\"jogar 2 azul\" Irá jogar a segunda carta, e selecionará a cor azul caso ela seja um +4 ou coringa.");
 return;
 }
-if(ch->getSock()!=current_player->getSock())
+if(this->get_gstate()!=g_playing)
+{
+ch->print("O jogo ainda não começou!!");
+return;
+}
+if(!ch->flag_contains(player_turn))
 {
 ch->print("Aguarde sua vez de jogar!");
 return;
@@ -697,13 +929,19 @@ ch->print("O comando pescar é utilizado para comprar cartas quando for sua vez d
 ch->print("Use \"jogar -s\" se não quiser que toda sua mão seja mostrada novamente ao pescar a carta.");
 return;
 }
-if((ch->isPlayer())&&(ch->getSock()!=current_player->getSock()))
+if(this->get_gstate()!=g_playing)
+{
+ch->print("O jogo ainda não começou...");
+return;
+}
+if(!ch->flag_contains(player_turn))
 {
 ch->print("Espere sua vez!");
 return;
 }
 if(deck.size()==0)
 {
+_echo(players, 0, "As cartas acabaram! Reembaralhando...");
 uint32 x=discard.size()-1;
 for(uint32 i=0; i<discard.size(); i++)
 {
@@ -718,7 +956,7 @@ break;
 }
 deck.push_back(discard[i]);
 }
-deck.erase(discard.begin(), discard.begin()+x);
+discard.erase(discard.begin(), discard.begin()+x);
 //Embaralhar as cartas...
 std::random_device rd;
 std::mt19937 g(rd());
@@ -730,6 +968,7 @@ if(ch->isPlayer())
 ch->print(fmt::format("Você comprou \"{}\"", deck[0]->toString()));
 }
 deck.erase(deck.begin());
+ch->check_uno();
 _echo(players, ch->getSock(), "{} comprou uma carta.", ch->getName());
 if(args!="-s")
 {
@@ -744,6 +983,16 @@ if(args=="?")
 ch->print("Use pular_vez para passar sua vez de jogar a outro jogador.");
 return;
 }
+if(this->get_gstate()!=g_playing)
+{
+ch->print("O jogo ainda não começou...");
+return;
+}
+if(!ch->flag_contains(player_turn))
+{
+ch->print("Aguarde sua vez antes de desistir!");
+return;
+}
 if(acumulator.size()>0)
 {
 ch->print("Não é possível fazer isso agora.");
@@ -753,10 +1002,7 @@ _echo(players, 0, "{} passou a vez!", ch->getName());
 this->next_player();
 _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
 current_player->showCards();
-if(current_player->isBot())
-{
-dlb::dlb_event_send(150, this->getId(), "");
-}
+this->make_delay(2500);
 }
 
 void Table::cmd_bot(shared_player& ch, const std::string& args)
@@ -770,6 +1016,16 @@ return;
 }
 if(ch->isBot())
 {
+return;
+}
+if(this->get_gstate()==g_playing)
+{
+ch->print("O jogo já começou, o comando ficou indisponível.");
+return;
+}
+if(!ch->flag_contains(player_admin))
+{
+ch->print("Apenas o administrador pode gerenciar os bots.");
 return;
 }
 std::string arg1="", arg2="";
@@ -792,6 +1048,107 @@ this->remove_player(arg2);
 }
 }
 
+void Table::do_who(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Use o comando \"who\" para ver quem está atualmente na mesa.");
+return;
+}
+std::stringstream ss;
+ss<<"Quem está na mesa?"<<std::endl;
+for(auto& it: players)
+{
+if(it->isBot())
+{
+ss<<it->getName()<<" (BOT)"<<std::endl;
+}
+else
+{
+ss<<it->getName()<<std::endl;
+}
+}
+ss<<players.size()<<" players encontrados."<<std::endl;
+ch->print(ss.str());
+}
+
+void Table::do_chat(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Use \"<chat> <mensagem>\" para enviar uma mensagem a todos integrantes atualmente na mesa.");
+return;
+}
+std::string str=fmt::format("{} disse \"{}\"", ch->getName(), args);
+_echo(players, 0, str);
+}
+
+void Table::do_quero(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Este comando lhe permite alternar entre o modo de expectador e de jogador.");
+ch->print("Uso: \"quero assistir\" para ser expectador do jogo.");
+ch->print("\"quero jogar\" para ser um jogador.");
+ch->print("Note que o comando só funcionará antes do jogo ser iniciado.");
+return;
+}
+if(this->get_gstate()==g_playing)
+{
+ch->print("O jogo já foi iniciado. Não é possível trocar de modo agora!");
+return;
+}
+if(args=="assistir")
+{
+ch->setflag(player_expectator);
+ch->removeflag(player_playing);
+ch->print("Agora você é um expectador.");
+}
+else if(args=="jogar")
+{
+ch->setflag(player_playing);
+ch->removeflag(player_expectator);
+ch->print("Agora você é um jogador.");
+}
+else
+{
+ch->print("Argumento inválido!");
+ch->print("Use \"quero ?\" para obter ajuda.");
+}
+}
+
+void Table::do_uno(shared_player& ch, const std::string& args)
+{
+if(args=="?")
+{
+ch->print("Digite \"uno\" quando estiver com uma carta na mão.");
+ch->print("Voc~ê terá 5 segundos para teclar \"uno\" ou será penalizado com a compra de duas cartas.");
+return;
+}
+if(this->get_gstate()!=g_playing)
+{
+ch->print("O jogo ainda não começou!");
+return;
+}
+if(!ch->flag_contains(player_waiting_uno))
+{
+if(this->flag_contains(player_uno))
+{
+ch->print("Você já disse \"UNO\"");
+}
+else
+{
+ch->print("Você ainda não está pronto para cantar vitória!");
+}
+return;
+}
+ch->setflag(player_uno);
+ch->removeflag(player_waiting_uno);
+_echo(players, 0, "{} anunciou \"UNO!!!\"", ch->getName());
+//
+this->internal_next_player();
+}
+
 //Funções...
 uint32 table_generate_id()
 {
@@ -811,6 +1168,5 @@ continue;
 it->print(msg);
 }
 }
-
 
 #endif

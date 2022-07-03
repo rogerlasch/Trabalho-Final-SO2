@@ -1,96 +1,416 @@
 Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
 
 Bem-vindo ao jogo, roger!
-Digite comandos para ver uma lista de comandos dispMensagem recebida de 336: "criar_pBem-vindoMensagem recebida de 336: "bot add paula"
+Digite comandos para ver uma lista de comandos dispMensagem recebida de 340: "criar_pBem-vindoMensagem recebida de 340: "bot add inna"
+Bem-vindo a mesa 1 inna.
+Mensagem recebida de 340: "bot add mariah"
+Bem-vindo a mesa 1 mariah.
+Mensagem recebida de 340: "bot add paula"
 Bem-vindo a mesa 1 paula.
-Mensagem recebida de 336: "bot add fernanda"
-Bem-vindo a mesa 1 fernanda.
-Mensagem recebida de 336: "bot add amanda"
-Bem-vindamanda se juntou a mMensageminna se juntou a mesa.
+Mensagem recebida de 340: "bot add sarah"
+Bem-vindo a mesa 1 sarah.
+Mensagem recebida de 340: "startgame"
+Mensagem recebida de 340: "jogar 1 verde"
+Última carta: 6 Vermelho, Carta atual: +4 Verde
+Jogada de inna, args: 
+Última carta: +4 Verde Carta tentada: +2 Vermelho
+Última carta: +4 Verde, Carta atual: +2 Vermelho
+Jogada de mariah, args: 
+Última carta: +2 Vermelho Carta tentada: 4 Vermelho
+Última carta: +2 Vermelho, Carta atual: 4 Vermelho
+Jogada de paula, args: 
+Última carta: 4 Vermelho Carta tentada: 4 Vermelho
+Última carta: 4 Vermelho, Carta atual: 4 Vermelho
+Jogada de sarah, args: 
+Última carta: 4 Vermelho Carta tentada: 3 Vermelho
+Última carta: 4 Vermelho, Carta atual: 3 Vermelho
+Mensagem recebida de 340: "pescar"
+Mensagem recebida de 340: "jogar 7 verde"
+Última carta: 3 Vermelho, Carta atual: +4 Verde
+Jogada de inna, args: 
+Última carta: +4 Verde Carta tentada: +2 Azul
+Última carta: +4 Verde, Carta atual: +2 Azul
+Jogada de mariah, args: 
+Última carta: +2 Azul Carta tentada: +2 Azul
+Última carta: +2 Azul, Carta atual: +2 Azul
+Jogada de paula, args: 
+Última carta: +2 Azul Carta tentada: +2 Verde
+Última carta: +2 Azul, Carta atual: +2 Verde
+Jogada de sarah, args: 
+Última carta: +2 Verde Carta tentada: 9 Verde
+Última carta: +2 Verde, Carta atual: 9 Verde
+Mensagem recebida de 340: "jogar 2"
+Última carta: 9 Verde, Carta atual: 0 Verde
+Jogada de inna, args: 
+Última carta: 0 Verde Carta tentada: 4 Verde
+Última carta: 0 Verde, Carta atual: 4 Verde
+Jogada de mariah, args: 
+Última carta: 4 Verde Carta tentada: Pular Verde
+Última carta: 4 Verde, Carta atual: Pular Verde
+Jogada de sarah, args: 
+Última carta: Pular Verde Carta tentada: Pular Azul
+Última carta: Pular Verde, Carta atual: Pular Azul
+Jogada de inna, args: 
+Última carta: Pular Azul Carta tentada: Pular Amarelo
+Última carta: Pular Azul, Carta atual: Pular Amarelo
+Jogada de paula, args: 
+Última carta: Pular Amarelo Carta tentada: 9 Amarelo
+Última carta: Pular Amarelo, Carta atual: 9 Amarelo
+Jogada de sarah, args: 
+Última carta: 9 Amarelo Carta tentada: Inverter Amarelo
+Última carta: 9 Amarelo, Carta atual: Inverter Amarelo
+Jogada de paula, args: 
+Última carta: Inverter Amarelo Carta tentada: 6 Amarelo
+Última carta: Inverter Amarelo, Carta atual: 6 Amarelo
+Jogada de mariah, args: 
+Última carta: 6 Amarelo Carta tentada: 6 Amarelo
+Última carta: 6 Amarelo, Carta atual: 6 Amarelo
+Jogada de inna, args: 
+Última carta: 6 Amarelo Carta tentada: Pular Amarelo
+Última carta: 6 Amarelo, Carta atual: Pular Amarelo
+Jogada de sarah, args: 
+Última carta: Pular Amarelo Carta tentada: 4 Amarelo
+Última carta: Pular Amarelo, Carta atual: 4 Amarelo
+Jogada de mariah, args: 
+Última carta: 4 Amarelo Carta tentada: 3 Amarelo
+Última carta: 4 Amarelo, Carta atual: 3 Amarelo
+Mensagem recebida de 340: "jogar 1"
+Última carta: 3 Amarelo, Carta atual: +2 Amarelo
+Jogada de sarah, args: 
+Última carta: +2 Amarelo Carta tentada: 3 Amarelo
+Última carta: +2 Amarelo, Carta atual: 3 Amarelo
+Jogada de paula, args: 
+Última carta: 3 Amarelo Carta tentada: 3 Vermelho
+Última carta: 3 Amarelo, Carta atual: 3 Vermelho
+Jogada de mariah, args: 
+Última carta: 3 Vermelho Carta tentada: Pular Vermelho
+Última carta: 3 Vermelho, Carta atual: Pular Vermelho
+Mensagem recebida de 340: "jogar 3"
+Última carta: Pular Vermelho, Carta atual: Pular Azul
+Jogada de paula, args: 
+Última carta: Pular Azul Carta tentada: 6 Azul
+Última carta: Pular Azul, Carta atual: 6 Azul
+Jogada de mariah, args: 
+Última carta: 6 Azul Carta tentada: 7 Azul
+Última carta: 6 Azul, Carta atual: 7 Azul
+Jogada de inna, args: 
+Última carta: 7 Azul Carta tentada: 8 Azul
+Última carta: 7 Azul, Carta atual: 8 Azul
+Mensagem recebida de 340: "jogar jogar 3"
+Mensagem recebida de 340: "jogar 4"
+Mensagem recebida de 340: "jogar 2"
+Mensagem recebida de 340: "jogar 1"
+Mensagem recebida de 340: "pescar"
+Mensagem recebida de 340: "pular_vez"
+Jogada de sarah, args: 
+Última carta: 8 Azul Carta tentada: 3 Azul
+Última carta: 8 Azul, Carta atual: 3 Azul
+Jogada de paula, args: 
+Última carta: 3 Azul Carta tentada: 7 Azul
+Última carta: 3 Azul, Carta atual: 7 Azul
+Jogada de mariah, args: 
+Última carta: 7 Azul Carta tentada: 5 Azul
+Última carta: 7 Azul, Carta atual: 5 Azul
+Jogada de inna, args: 
+Última carta: 5 Azul Carta tentada: 9 Azul
+Última carta: 5 Azul, Carta atual: 9 Azul
+Mensagem recebida de 340: "jogar 1"
+Última carta: 9 Azul, Carta atual: 9 Verde
+Jogada de sarah, args: 
+Última carta: 9 Verde Carta tentada: 4 Verde
+Última carta: 9 Verde, Carta atual: 4 Verde
+Jogada de paula, args: 
+Última carta: 4 Verde Carta tentada: 8 Verde
+Última cpaula jogou 8 Verde
+É a vez de mariaJogada de mamariah jogou 6 Verde
 
-roger iniciou o jogo.
-Iniciando embaralhamento e distribuição das cartas...
-Cartas geradas: 108
+É a vez de inna jogar.
 
-Sua mão contém um total de 7 cartas
-(1): Pular Amarelo , (2): 7 Amarelo , (3): Pular Vermelho , (4): +4 , (5): 4 Vermelho , (6): 1 Verde , (7): +4 
+inna comprou uma carta.
 
-A carta virada foi: 6 Vermelho
+inna comprou uma carta.
 
-roger começa o jogo.
+inna jogou 8 Verde
+É a vez de roger jogar.
 
-roger jogou Pular Vermelho
-Jumping: 1
+Sua mão contém um total de 3 cartas
+(1): 5 Verde , (2): 1 Azul , (3)Mensagem recebidroger jogou 5 Verde
+É a vez de sarah jogar.
 
-A vez de paula foi pulada
-É a vez de fernanda jogar.
+sarah jogou 1 Verde
+É a vez de paula jogar.
 
-fernanda jogou 7 Vermelho
+paula comprou uma carta.
 
-É a vez de amanda jogar.
+paula jogou Coringa Vermelho
 
-amanda jogou Pular Vermelho
-A vez de inna foi pulada
+É a vez de mariah jogar.
+
+mariah jogou 1 Vermelho
+
+É a vez de inna jogar.
+
+inna jogou 5 Vermelho
+É a vez de roger jogar.
+
+Sua mão contém um total de 2 cartas
+(1): 1 Azul , (2): 6 Verde 
+
+
+Esta jogada é inválida!
+
+Você comprou "7 Verde"
+Sua mão contém um total de 3 cartas
+(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
+
+
+roger passou a vez!
+É a vez de sarah jogar.
+
+sarah jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
 
 É a vez de roger jogar.
-Sua mão contém um total de 6 cartas
-(1): Pular Amarelo , (2): 7 Amarelo , (3): +4 , (4): 4 Vermelho , (5): 1 Verde , (6): +4 
+Sua mão contém um total de 3 cartas
+(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
 
 
-ho
-8 Vermelho
-8 Verde
-8 Verde
-8 Amarelo
-8 Amarelo
-8 Azul
-8 Azul
-9 Vermelho
-9 Vermelho
-9 Verde
-9 Verde
-9 Amarelo
-9 Amarelo
-9 Azul
-9 Azul
-Pular Vermelho
-Pular Vermelho
-Pular Verde
-Pular Verde
-Pular Amarelo
-Pular Amarelo
-Pular Azul
-Pular Azul
-Inverter Vermelho
-Inverter Vermelho
-Inverter Verde
-Inverter Verde
-Inverter Amarelo
-Inverter Amarelo
-Inverter Azul
-Inverter Azul
-+2 Vermelho
-+2 Vermelho
-+2 Verde
-+2 Verde
-+2 Amarelo
-+2 Amarelo
-+2 Azul
-+2 Azul
-+4
-+4
-+4
-+4
-Coringa
-Coringa
-Coringa
-Coringa
-Mensagem recebida de 336: "jogar 3"
-Jogada de fernanda, args: 
-Última carta: Pular Vermelho Carta tentada: 7 Vermelho
-Jogada de amanda, args: 
-Última carta: 7 Vermelho Carta tentada: Pular Vermelho
-Jumping: 4
+roger passou a vez!
+É a vez de inna jogar.
+
+inna jogou 7 Vermelho
+
+inna anunciou "UNO!!!"
+É a vez de mariah jogar.
+
+mariah jogou 6 Vermelho
+É a vez de paula jogar.
+
+paula jogou Inverter Vermelho
+
+O turno foi invertido para o lado oposto.
+paula anunciou "UNO!!!"
+
+É a vez de mariah jogar.
+
+mariah comprou uma carta.
+
+mariah passou a vez!
+É a vez de inna jogar.
+
+inna comprou uma carta.
+
+inna passou a vez!
+
+É a vez de roger jogar.
+Sua mão contém um total de 3 cartas
+(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
+
+
+Você comprou "Inverter Verde"
+Sua mão contém um totalMensagem recebida de 340: "jogar 4"
+Última carta: Inverter Vermelho, Carta atual: Iroger jogou InvJogada de inna, args: 
+Última carta: Inverter Verde Carta tentada: 1 Verde
+Última carta: Inverter Verde, Carta atual: 1 Verde
+Jogada de mariah, args: 
+Última carta: 1 Verde Carta tentada: 3 Verde
+Última carta: mariah jogou 3 Verde
+É a vez dJogada de paula, args: Vermelho
+Última carta:paula jogou +4 Vermelho
+
+Acumulando +4 Vermelho.
+paula anunciou "UNO!!!"
+Jogada de sarah, args: 
+Última carta: +4 Vermelho Carta tentada: 8 Vermelho
+Última carta: +4 Vermelho, Carta atual: 8 Vermelho
+Mensagem recebida de 340: "pescar"
+Mensagem recebida de 340: "pular_vez"
+Jogada de inna, args: 
+Última carta: 8 Vermelho Carta tentada: Pular Vermelho
+Última carta: 8 Vermelho, Carta atual: Pular Vermelho
+Jogada de paula, args: 
+Última carta: Pular Vermelho Carta tentada: 9 Vermelho
+Última carta: Pular Vermelho, Carta atual: 9 Vermelho
+Jogada de sarah, args: Azul
+Última carta: 9 Vermelho Carta tentada: Coringa
+Última carta: 9 Vermelho, Carta atual: Coringa Azul
+Mensagem recebida de 340: "jogar 1"
+Última carta: Coringa Azul, Carta atual: 1 Azul
+Jogada de inna, args: 
+Última carta: 1 Azul Carta tentada: 2 Azul
+Última carta: 1 Azul, Carta atual: 2 Azul
+Jogada de mariah, args: 
+Última carta: 2 Azul Carta tentada: 9 Azul
+Última carta: 2 Azul, Carta atual: 9 Azul
+Jogada de sarah, args: 
+Última carta: 9 Azul Carta tentada: Inverter Azul
+Última carta: 9 Azul, Carta atual: Inverter AzusarJogada de inna, args: 
+Última carta: Inverter Azul Carta tentada: 6 Azul
+Última carta: Inverter Azul, Carta atual: 6 Azul
+Mensagem recebida de 340: "jogar 1"
+Última carta: 6 Azul, Carta atual: 6 Verde
+Jogada de sarah, args: 
+Última carta: 6 Verde Carta tentada: 2 Verde
+Última carta: 6 Verde, Carta atual: 2 Verde
+Jogada de mariah, args: 
+Última carta: 2 Verde Carta tentada: 7 Verde
+Última carta: 2 Verde, Carta atual: 7 Verde
+Mensagem recebida de 340: "jogar 1"
+Última carta: 7 Verde, Carta atual: 7 Verde
+Mensagem recebida de 340: "uno"
+Jogada de sarah, args: 
+Última carta: 7 Verde Carta tentada: 7 Amarelo
+Última carta: 7 Verde, Carta atual: 7 Amarelo
+Jogada de mariah, args: 
+Última carta: 7 Amarelo Carta tentada: 1 Amarelo
+Última carta: 7 Amarelo, Carta atual: 1 Amarelo
+Jogada de inna, args: 
+Última carta: 1 Amarelo Carta tentada: 9 Amarelo
+Última carta: 1 Amarelo, Carta atual: 9 AmareinnaMensagem recebida de 340: "jogar 1"
+Última carta: 9 Amarelo, Carta atual: 5 Amarelo
+Jogada de sarah, args: 
+Última carta: 5 Amarelo Carta tentada: 1 Amarelo
+Última carta: 5 Amarelo, Carta atual: 1 AmarelosJogada de mariah, args: Vermelho
+Última carta: 1 Amarelo Carta tentada: +4
+Últimariah jogou +4 Vermelho
+
+Acumulando +4 VermeJogada de inna, args: 
+Última carta: +4 Vermelho Carta tentada: 1 Vermelho
+Última carta: +4 Vermelho, Carta atual: 1 Vermelho
+Jogada de sarah, args: Azul
+Última carta: 1 Vermelho Carta tentada: Coringa
+Última carta: 1 Vermelho, Carta atual: Coringa AzsaraJogada de inna, args: 
+Última carta: Coringa Azul Carta tentada: 4 Azul
+Última carta: Coringa Azul, Carta atual: 4 Azul
+Jogada de sarah, args: 
+Última carta: 4 Azul Carta tesarah jogou Inverter Azul
+
+O turno foi invertido para o lado oposto.
+Jogada de inna, args: 
+Úlinna jogou 2 Azul
+É a vez de mariah jogar.
+
+mariah jogou 2 Vermelho
+É a vez de sarah jogar.
+
+sarah comprou uma carta.
+
+sarah passou a vez!
+É a vez de inna jogar.
+
+inna jogou 9 Vermelho
+
+É a vez de mariah jogar.
+
+mariah jogou 5 Vermelho
+
+mariah anunciou "UNO!!!"
+É a vez de sarah jogar.
+
+sarah jogou 5 Amarelo
+É a vez de inna jogar.
+
+inna comprou uma carta.
+
+inna jogou 8 Amarelo
+
+É a vez de mariah jogar.
+
+mariah jogou 2 Amarelo
+
+mariah terminou o jogo!
+mariah agora é um expectador.
+
+É a vez de sarah jogar.
+
+sarah jogou +2 Amarelo
+
+Acumulando +2 Amarelo.
+É a vez de inna jogar.
+
+inna não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+inna comprou uma carta.
+
+inna comprou uma carta.
+
+inna comprou uma carta.
+
+inna jogou 2 Amarelo
+É a vez de sarah jogar.
+
+sarah jogou 4 Amarelo
+
+É a vez de inna jogar.
+
+inna comprou uma carta.
+
+inna jogou 0 Amarelo
+É a vez de sarah jogar.
+
+sarah comprou uma carta.
+
+sarah jogou 8 Amarelo
+
+É a vez de inna jogar.
+
+inna comprou uma carta.
+
+inna jogou Coringa Azul
+
+É a vez de sarah jogar.
+
+sarah jogou 5 Azul
+É a vez de inna jogar.
+
+inna jogou 3 Azul
+
+É a vez de sarah jogar.
+
+sarah jogou 4 Azul
+sarah anunciou "UNO!!!"
+
+É a vez de inna jogar.
+
+inna jogou 0 Azul
+
+É a vez de sarah jogar.
+
+sarah jogou 8 Azul
+
+sarah terminou o jogo!
+sarah agora é um expectador.
+
+O jogo terminou!
+Agora você é um jogador.
+
+Classificação geral dos jogadores...
+1: paula
+2: roger
+3: mariah
+4: sarah
+
+Agora você pode inicciar uma nova partida digitando "startgame"
+
+ul
+Jogada de sarah, args: 
+Última carta: Coringa Azul Carta tentada: 5 Azul
+Última carta: Coringa Azul, Carta atual: 5 Azul
+Jogada de inna, args: 
+Última carta: 5 Azul Carta tentada: 3 Azul
+Última carta: 5 Azul, Carta atual: 3 Azul
+Jogada de sarah, args: 
+Última carta: 3 Azul Carta tentada: 4 Azul
+Última carta: 3 Azul, Carta atual: 4 Azul
+Jogada de inna, args: 
+Última carta: 4 Azul Carta tentada: 0 Azul
+Última carta: 4 Azul, Carta atual: 0 Azul
+Jogada de sarah, args: 
+Última carta: 0 Azul Carta tentada: 8 Azul
+Última carta: 0 Azul, Carta atual: 8 Azul
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
 Parando servidor...
 Total de threads parados: 2
 Servidor finalizado!

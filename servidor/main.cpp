@@ -53,6 +53,7 @@ s_setState(server_running);
 _log("Servidor iniciado na porta {}", DefaultPort);
 _log("Para interromper, tecle CTRL+c");
 bool stop=false;
+int64 start_table_time=gettimestamp();
 while(stop==false)
 {
 this_thread::sleep_for(chrono::milliseconds(5));
@@ -61,6 +62,14 @@ switch(s_getState())
 case server_running:
 {
 s_sock_loop();
+if((gettimestamp()-start_table_time)>200)
+{
+for(auto it=tables.begin(); it!=tables.end(); ++it)
+{
+it->second->table_loop();
+}
+start_table_time=gettimestamp();
+}
 break;
 }
 default:
@@ -117,15 +126,6 @@ void processEvent(dlb_event* ev)
 static StringUtils cs;
 switch(ev->type)
 {
-case 150:
-{
-auto it=tables.find(ev->id);
-if(it!=tables.end())
-{
-it->second->interact_bot();
-}
-break;
-}
 case event_connect:
 {
 shared_player ch=make_shared<Player>();

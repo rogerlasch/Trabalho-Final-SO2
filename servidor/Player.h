@@ -10,11 +10,14 @@ class Table;
 typedef std::shared_ptr<Table> shared_table;
 #endif
 
-enum player_game
+enum player_flags
 {
-player_default=0,
-player_expectator,
-player_playing
+player_expectator=(1<<0),//Ele é expectador...
+player_playing=(1<<1),//Ele está jogando ou irá jogar...
+player_admin=(1<<2),
+player_turn=(1<<3),
+player_waiting_uno=(1<<4),
+player_uno=(1<<5)
 };
 
 enum player_type
@@ -23,12 +26,12 @@ player_normal=0,
 player_bot
 };
 
-class Player : public basic_connection
+class Player : public basic_connection, public dlb::dlb_basic_flags
 {
 protected:
 int id;
 uint32 type;
-uint32 pstate;
+int64 unotime;
 std::string name;
 Deck cards;
 shared_table table;
@@ -39,14 +42,15 @@ Player(const Player& p)=delete;
 Player& operator=(const Player& p)=delete;
 ~Player();
 uint32 getType()const;
+uint32 deckSize()const;
 bool isBot()const;
 bool isPlayer()const;
 void setId(int id);
 int getId()const;
-void setPState(uint32 pstate);
-uint32 getPState()const;
 void setName(const std::string& name);
 std::string getName()const;
+void setUnoTime(int64 utime);
+int64 getUnoTime()const;
 void setDeck(const Deck& d);
 Deck getDeck()const;
 void setTable(const shared_table& t);
@@ -56,6 +60,7 @@ shared_card remove_card(uint32 index);
 shared_card get_card(uint32 index);
 void showCards();
 void dropCards();
+void check_uno();
 };
 typedef std::shared_ptr<Player> shared_player;
 
@@ -67,6 +72,8 @@ typedef std::shared_ptr<Player> shared_player;
 Player::Player()
 {
 this->type=player_normal;
+this->replace_flags(0);
+this->setUnoTime(gettimestamp());
 }
 
 Player::~Player()
@@ -76,6 +83,12 @@ Player::~Player()
 uint32 Player::getType()const
 {
 return this->type;
+}
+
+uint32 Player::deckSize()const
+{
+std::shared_lock<std::shared_mutex> lck(this->mtx);
+return this->cards.size();
 }
 
 bool Player::isBot()const
@@ -100,18 +113,6 @@ std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->id;
 }
 
-void Player::setPState(uint32 pstate)
-{
-std::unique_lock<std::shared_mutex> lck(this->mtx);
-this->pstate=pstate;
-}
-
-uint32 Player::getPState()const
-{
-std::shared_lock<std::shared_mutex> lck(this->mtx);
-return this->pstate;
-}
-
 void Player::setName(const std::string& name)
 {
 std::unique_lock<std::shared_mutex> lck(this->mtx);
@@ -122,6 +123,18 @@ std::string Player::getName()const
 {
 std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->name;
+}
+
+void Player::setUnoTime(int64 utime)
+{
+std::unique_lock<std::shared_mutex> lck(this->mtx);
+this->unotime=utime;
+}
+
+int64 Player::getUnoTime()const
+{
+std::shared_lock<std::shared_mutex> lck(this->mtx);
+return this->unotime;
 }
 
 void Player::setDeck(const Deck& d)
@@ -199,5 +212,22 @@ this->print(ss.str());
 void Player::dropCards()
 {
 cards.clear();
+}
+
+void Player::check_uno()
+{
+if(this->deckSize()<2)
+{
+if(!this->flag_contains(player_waiting_uno))
+{
+this->setflag(player_waiting_uno);
+this->setUnoTime(gettimestamp());
+}
+}
+else
+{
+this->removeflag(player_waiting_uno);
+this->removeflag(player_uno);
+}
 }
 #endif

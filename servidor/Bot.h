@@ -46,6 +46,10 @@ return ss.str();
 
 class Bot : public Player
 {
+private:
+//Quantas vezes no turno o bot pescou...
+uint32 fished;
+uint32 max_fish;
 public:
 Bot();
 Bot(const Bot& b)=delete;
@@ -54,6 +58,7 @@ virtual ~Bot();
 uint32 decision(const shared_card& c, bot_args* args);
 uint32 select_color();
 virtual void print(const std::string& str);
+friend class Table;
 };
 typedef std::shared_ptr<Bot> shared_bot;
 
@@ -66,6 +71,8 @@ Bot::Bot()
 : Player()
 {
 this->type=player_bot;
+this->fished=0;
+this->max_fish=0;
 }
 
 Bot::~Bot()
@@ -99,31 +106,31 @@ args->color_id=select_color();
 return args->cmd_type;
 }
 args->cmd_type=b_play;
-if((args->index=sf.find_card_color(cards, {c->getColor()}))==-1)
+if(((args->index=sf.find_card_color(cards, {c->getColor()}))>-1)||((args->index=sf.find_card_type(cards, {joker, plus_four}))>-1))
 {
-args->cmd_type=b_buy;
+uint32 ctype=cards[args->index]->getType();
+if((type==plus_four)||(ctype==joker))
+{
+args->color_id=select_color();
 }
 return args->cmd_type;
-break;
+}
+args->cmd_type=b_buy;
+return args->cmd_type;
 }
 case joker:
 {
 args->cmd_type=b_play;
-if((args->index=sf.find_card_color(cards, {c->getColor()}))==-1)
+if(((args->index=sf.find_card_color(cards, {c->getColor()}))>-1)||((args->index=sf.find_card_type(cards, {joker, plus_four}))>-1))
 {
-if((args->index=sf.find_card_type(cards, {joker}))==-1)
+uint32 ctype=cards[args->index]->getType();
+if((ctype==joker)||(ctype==plus_four))
 {
+args->color_id=select_color();
+}
+return args->cmd_type;
+}
 args->cmd_type=b_buy;
-}
-else
-{
-args->color_id=this->select_color();
-}
-}
-else
-{
-args->cmd_type=b_buy;
-}
 return args->cmd_type;
 }
 case block:
@@ -133,13 +140,18 @@ case normal:
 args->cmd_type=b_play;
 if(c->getType()==normal)
 {
+uint32 color=c->getColor();
+if((args->index=sf.find_TypeColor(cards, {{reverse_turn, color}, {block, color}, {plus_two, color}}))>-1)
+{
+return args->cmd_type;
+}
 if(((args->index=sf.find_card_color(cards, {c->getColor()}))>-1)||((args->index=sf.find_card_number(cards, {c->getNumber()}))>-1))
 {
 return args->cmd_type;
 }
-uint32 color=c->getColor();
-if((args->index=sf.find_TypeColor(cards, {{reverse_turn, color}, {block, color}, {plus_two, color}}))>-1)
+if((args->index=sf.find_card_type(cards, {joker, plus_four}))>-1)
 {
+args->color_id=select_color();
 return args->cmd_type;
 }
 args->cmd_type=b_buy;
