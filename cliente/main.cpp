@@ -58,6 +58,12 @@ FuncTimer ts(__FUNCTION__);
         s_send(con);
 if(data.size()>0)
 {
+if(data[0]=='\b')
+{
+system("cls");
+this_thread::sleep_for(chrono::milliseconds(750));
+continue;
+}
 _log(data);
 }
         }

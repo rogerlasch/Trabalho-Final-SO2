@@ -1,31 +1,36 @@
 Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
 
-Bem-vindo ao jogo, roger!
+Bem-vindo ao jogo, teste!
 Digite comandos para ver uma lista de comandos disponíveis.
 
-roger se conectou!
+teste se conectou!
 
-Bem-vindo a mesa 1 roger.
-Digite o comando "startgame" para iniciar a partida quando tiver pelo menos mais um jogador.
+Bem-vindo a mesa 1 teste.
+Digite "comandos" para ver uma lista de comandos disponíveis.
 
-roger se juntou a mesa.
+digite: "<comando> ?" para ler a ajuda do comando.
+teste se juntou a mesa.
 
-paula se juntou a mesa.
-
-roger iniciou o jogo.
-Iniciando embaralhamento e distribuição das cartas...
-Cartas geradas: 108
+roger Iniciou o jogo.
+Total de jogadores na partida: 2
 
 Sua mão contém um total de 7 cartas
-(1): 7 Verde , (2): 5 Amarelo , (3): Pular Verde , (4): +2 Amarelo , (5): 5 Verde , (6): 1 Verde , (7): Coringa 
+(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho 
 
+A carta virada foi: 7 Verde
 
-A carta virada foi: 8 Amarelo
 roger começa o jogo.
 
-roger jogou 5 Amarelo
-É a vez de paula jogar.
+roger jogou 4 Verde
 
-Result: 0, args: jogar 6
-Card: Pular Vermelho
+É a vez de teste jogar.
+Última carta jogada: 4 Verde
+Sua mão contém um total de 7 cartas
+(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho 
+
+
+Você comprou "Pular Amarelo"
+Sua mão contém um total de 8 cartas
+(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho , (8): Pular Amarelo 
+
 

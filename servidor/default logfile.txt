@@ -1,189 +1,934 @@
 Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
 
 Bem-vindo ao jogo, roger!
-Digite comandos para ver uma lista de comandos dispMensagem recebida de 340: "criar_pBem-vindoMensagem recebida de 340: "bot add inna"
-Bem-vindo a mesa 1 inna.
-Mensagem recebida de 340: "bot add mariah"
-Bem-vindo a mesa 1 mariah.
-Mensagem recebida de 340: "bot add paula"
+Digite comandos para ver uma lista de comandos dispMensagem recebida de 320: "criar_pBem-vindo a mesa 1 roger.
+Você agMensagem recebida de 320: "bot add paula"
 Bem-vindo a mesa 1 paula.
-Mensagem recebida de 340: "bot add sarah"
+paula se juntou a mesa.
+Mensagem recebida de 320: "bot add mariah"
+Bem-vindo a mesa 1 mariah.
+mariah se juntou a mesa.
+Mensagem recebida de 320: "bot add sarah"
 Bem-vindo a mesa 1 sarah.
-Mensagem recebida de 340: "startgame"
-Mensagem recebida de 340: "jogar 1 verde"
-Última carta: 6 Vermelho, Carta atual: +4 Verde
-Jogada de inna, args: 
-Última carta: +4 Verde Carta tentada: +2 Vermelho
-Última carta: +4 Verde, Carta atual: +2 Vermelho
-Jogada de mariah, args: 
-Última carta: +2 Vermelho Carta tentada: 4 Vermelho
-Última carta: +2 Vermelho, Carta atual: 4 Vermelho
-Jogada de paula, args: 
-Última carta: 4 Vermelho Carta tentada: 4 Vermelho
-Última carta: 4 Vermelho, Carta atual: 4 Vermelho
-Jogada de sarah, args: 
-Última carta: 4 Vermelho Carta tentada: 3 Vermelho
-Última carta: 4 Vermelho, Carta atual: 3 Vermelho
-Mensagem recebida de 340: "pescar"
-Mensagem recebida de 340: "jogar 7 verde"
-Última carta: 3 Vermelho, Carta atual: +4 Verde
-Jogada de inna, args: 
-Última carta: +4 Verde Carta tentada: +2 Azul
-Última carta: +4 Verde, Carta atual: +2 Azul
-Jogada de mariah, args: 
-Última carta: +2 Azul Carta tentada: +2 Azul
-Última carta: +2 Azul, Carta atual: +2 Azul
-Jogada de paula, args: 
-Última carta: +2 Azul Carta tentada: +2 Verde
-Última carta: +2 Azul, Carta atual: +2 Verde
-Jogada de sarah, args: 
-Última carta: +2 Verde Carta tentada: 9 Verde
-Última carta: +2 Verde, Carta atual: 9 Verde
-Mensagem recebida de 340: "jogar 2"
-Última carta: 9 Verde, Carta atual: 0 Verde
-Jogada de inna, args: 
-Última carta: 0 Verde Carta tentada: 4 Verde
-Última carta: 0 Verde, Carta atual: 4 Verde
-Jogada de mariah, args: 
-Última carta: 4 Verde Carta tentada: Pular Verde
-Última carta: 4 Verde, Carta atual: Pular Verde
-Jogada de sarah, args: 
-Última carta: Pular Verde Carta tentada: Pular Azul
-Última carta: Pular Verde, Carta atual: Pular Azul
-Jogada de inna, args: 
-Última carta: Pular Azul Carta tentada: Pular Amarelo
-Última carta: Pular Azul, Carta atual: Pular Amarelo
-Jogada de paula, args: 
-Última carta: Pular Amarelo Carta tentada: 9 Amarelo
-Última carta: Pular Amarelo, Carta atual: 9 Amarelo
-Jogada de sarah, args: 
-Última carta: 9 Amarelo Carta tentada: Inverter Amarelo
-Última carta: 9 Amarelo, Carta atual: Inverter Amarelo
-Jogada de paula, args: 
-Última carta: Inverter Amarelo Carta tentada: 6 Amarelo
-Última carta: Inverter Amarelo, Carta atual: 6 Amarelo
-Jogada de mariah, args: 
-Última carta: 6 Amarelo Carta tentada: 6 Amarelo
-Última carta: 6 Amarelo, Carta atual: 6 Amarelo
-Jogada de inna, args: 
-Última carta: 6 Amarelo Carta tentada: Pular Amarelo
-Última carta: 6 Amarelo, Carta atual: Pular Amarelo
-Jogada de sarah, args: 
-Última carta: Pular Amarelo Carta tentada: 4 Amarelo
-Última carta: Pular Amarelo, Carta atual: 4 Amarelo
-Jogada de mariah, args: 
-Última carta: 4 Amarelo Carta tentada: 3 Amarelo
-Última carta: 4 Amarelo, Carta atual: 3 Amarelo
-Mensagem recebida de 340: "jogar 1"
-Última carta: 3 Amarelo, Carta atual: +2 Amarelo
-Jogada de sarah, args: 
-Última carta: +2 Amarelo Carta tentada: 3 Amarelo
-Última carta: +2 Amarelo, Carta atual: 3 Amarelo
-Jogada de paula, args: 
-Última carta: 3 Amarelo Carta tentada: 3 Vermelho
-Última carta: 3 Amarelo, Carta atual: 3 Vermelho
-Jogada de mariah, args: 
-Última carta: 3 Vermelho Carta tentada: Pular Vermelho
-Última carta: 3 Vermelho, Carta atual: Pular Vermelho
-Mensagem recebida de 340: "jogar 3"
-Última carta: Pular Vermelho, Carta atual: Pular Azul
-Jogada de paula, args: 
-Última carta: Pular Azul Carta tentada: 6 Azul
-Última carta: Pular Azul, Carta atual: 6 Azul
-Jogada de mariah, args: 
-Última carta: 6 Azul Carta tentada: 7 Azul
-Última carta: 6 Azul, Carta atual: 7 Azul
-Jogada de inna, args: 
-Última carta: 7 Azul Carta tentada: 8 Azul
-Última carta: 7 Azul, Carta atual: 8 Azul
-Mensagem recebida de 340: "jogar jogar 3"
-Mensagem recebida de 340: "jogar 4"
-Mensagem recebida de 340: "jogar 2"
-Mensagem recebida de 340: "jogar 1"
-Mensagem recebida de 340: "pescar"
-Mensagem recebida de 340: "pular_vez"
-Jogada de sarah, args: 
-Última carta: 8 Azul Carta tentada: 3 Azul
-Última carta: 8 Azul, Carta atual: 3 Azul
-Jogada de paula, args: 
-Última carta: 3 Azul Carta tentada: 7 Azul
-Última carta: 3 Azul, Carta atual: 7 Azul
-Jogada de mariah, args: 
-Última carta: 7 Azul Carta tentada: 5 Azul
-Última carta: 7 Azul, Carta atual: 5 Azul
-Jogada de inna, args: 
-Última carta: 5 Azul Carta tentada: 9 Azul
-Última carta: 5 Azul, Carta atual: 9 Azul
-Mensagem recebida de 340: "jogar 1"
-Última carta: 9 Azul, Carta atual: 9 Verde
-Jogada de sarah, args: 
-Última carta: 9 Verde Carta tentada: 4 Verde
-Última carta: 9 Verde, Carta atual: 4 Verde
-Jogada de paula, args: 
-Última carta: 4 Verde Carta tentada: 8 Verde
-Última cpaula jogou 8 Verde
-É a vez de mariaJogada de mamariah jogou 6 Verde
+sarah se juntosarah se juMensagem recebidroger Iniciou o jogo.
+Total de jogadores na partida: 4
 
-É a vez de inna jogar.
-
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna jogou 8 Verde
+Sua mão contém um total de 7 cartas
+(1): 5 Verde , (2): +2 Amarelo , (3):Mensagem recebida de 320: "jogar 3"
+roger jogou 4 Amarelo
+É a vez de paula jogar.
+paula jogou 3 Amarelo
+É a vez de mariah jogar.
+mariah jogou 6 Amarelo
+É a vez de sarah jogar.
+sarah jogou 7 Amarelo
 É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou +2 Amarelo
+Acumulando +2 Amarelo.
+É a vez de paula jogar.
+paula não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou 8 Amarelo
+É a vez de mariah jogar.
+mariah jogou Coringa Verde
+É a vez de sarah jogar.
+sarah jogou 9 Verde
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 3"
+roger jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou Coringa Vermelho
+É a vez de mariah jogar.
+mariah jogou 1 Vermelho
+É a vez de paula jogar.
+paula jogou Pular Vermelho
+A vez de roger foi pulada
+É a vez de sarah jogar.
+sarah jogou Pular Azul
+A vez de mariah foi pulada
+É a vez de paula jogar.
+paula jogou 8 Azul
+É a vez de roger jogar.
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 4"
+Mensagem recebida de 320: "jogar 5"
+roger jogou 6 Azul
+É a vez de sarah jogar.
+sarah jogou Coringa Vermelho
+É a vez de mariah jogar.
+mariah jogou 0 Vermelho
+É a vez de paula jogar.
+paula jogou 3 Vermelho
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou Inverter Azul
+O turno foi invertido para o lado oposto.
+É a vez de roger jogar.
+Mensagem recebida de 320: "pular_vez"
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "pular_vez"
+roger passou a vez!
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah jogou 9 Azul
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 1"
+Mensagem recebida de 320: "jogar 2"
+roger jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 4 Vermelho
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou 2 Vermelho
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou 9 Vermelho
+É a vez de sarah jogar.
+sarah jogou 5 Vermelho
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou Inverter Amarelo
+O turno foi invertido para o lado oposto.
+É a vez de mariah jogar.
+mariah jogou Inverter Azul
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou 5 Azul
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 1"
+roger jogou 5 Verde
+Mensagem recebida de 320: "uno"
+roger anunciou "UNO!!!"
+É a vez de paula jogar.
+paula jogou Pular Verde
+A vez de mariah foi pulada
+É a vez de sarah jogar.
+sarah jogou 8 Verde
+sarah anunciou "UNO!!!"
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 1"
+Mensagem recebida de 320: "pular_vez"
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 2"
+roger jogou 7 Verde
+Mensagem recebida de 320: "uno"
+roger anunciou "UNO!!!"
+É a vez de paula jogar.
+paula jogou 3 Verde
+É a vez de mariah jogar.
+mariah jogou +2 Verde
+Acumulando +2 Verde.
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 7 Verde
+É a vez de roger jogar.
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 3"
+roger jogou 1 Verde
+É a vez de paula jogar.
+paula jogou 2 Verde
+É a vez de mariah jogar.
+mariah jogou 0 Verde
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah jogou +4 Vermelho
+Acumulando +4 Vermelho.
+É a vez de roger jogar.
+roger não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 1"
+roger jogou 6 Vermelho
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou +4 Verde
+Acumulando +4 Verde.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 6 Verde
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 1 Verde
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 3"
+roger jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou 6 Verde
+É a vez de paula jogar.
+paula jogou 5 Verde
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 4"
+roger jogou 9 Verde
+É a vez de sarah jogar.
+sarah jogou 9 Azul
+É a vez de mariah jogar.
+mariah jogou 4 Azul
+É a vez de paula jogar.
+paula jogou 3 Azul
+paula anunciou "UNO!!!"
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou 7 Azul
+É a vez de sarah jogar.
+sarah jogou 5 Azul
+É a vez de mariah jogar.
+mariah jogou 1 Azul
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de roger jogar.
+roger não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+roger comprou uma carta.
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 3"
+roger jogou 0 Azul
+É a vez de sarah jogar.
+sarah jogou 6 Azul
+É a vez de mariah jogar.
+mariah jogou Coringa Amarelo
+É a vez de paula jogar.
+paula jogou 5 Amarelo
+paula anunciou "UNO!!!"
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou Pular Amarelo
+A vez de sarah foi pulada
+É a vez de mariah jogar.
+mariah jogou Pular Amarelo
+A vez de paula foi pulada
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+Mensagem recebida de 320: "pescar"
+roger comprou uma carta.
+Mensagem recebida de 320: "jogar 3"
+roger jogou 4 Amarelo
+É a vez de sarah jogar.
+sarah jogou 6 Amarelo
+É a vez de mariah jogar.
+mariah jogou +2 Amarelo
+Acumulando +2 Amarelo.
+É a vez de paula jogar.
+paula não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou 7 Amarelo
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 2"
+roger jogou 7 Vermelho
+Mensagem recebida de 320: "uno"
+roger anunciou "UNO!!!"
+É a vez de sarah jogar.
+sarah jogou 1 Vermelho
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de roger jogar.
+Mensagem recebida de 320: "jogar 1"
+roger jogou 2 Vermelho
+roger terminou o jogo!
+roger agora é um expectador.
+O jogo terminou!
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
+Mensagem recebida de 320: "quero assistir"
+Mensagem recebida de 320: "startgame"
+roger Iniciou o jogo.
+Total de jogadores na partida: 3
+A carta virada foi: 8 Azul
+paula começa o jogo.
+paula jogou 3 Azul
+É a vez de paula jogar.
+paula jogou +4 Vermelho
+Acumulando +4 Vermelho.
+É a vez de mariah jogar.
+mariah jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de sarah jogar.
+sarah jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de paula jogar.
+paula não tem nenhum +2 ou +4, por tanto, terá que comprar +8 cartas!
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou 2 Vermelho
+É a vez de mariah jogar.
+mariah jogou 2 Vermelho
+É a vez de sarah jogar.
+sarah jogou 9 Vermelho
+É a vez de paula jogar.
+paula jogou 8 Vermelho
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de sarah jogar.
+sarah jogou 6 Vermelho
+É a vez de paula jogar.
+paula jogou 1 Vermelho
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de sarah jogar.
+sarah jogou 1 Amarelo
+É a vez de paula jogar.
+paula jogou Inverter Amarelo
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou 9 Amarelo
+É a vez de paula jogar.
+paula jogou 7 Amarelo
+É a vez de sarah jogar.
+sarah jogou 7 Azul
+É a vez de mariah jogar.
+mariah jogou 2 Azul
+É a vez de paula jogar.
+paula jogou 4 Azul
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah jogou 6 Azul
+É a vez de mariah jogar.
+mariah jogou 3 Azul
+É a vez de paula jogar.
+paula jogou 3 Verde
+É a vez de sarah jogar.
+sarah jogou 6 Verde
+É a vez de mariah jogar.
+mariah jogou 5 Verde
+É a vez de paula jogar.
+paula jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de mariah jogar.
+mariah jogou 5 Verde
+É a vez de sarah jogar.
+sarah jogou 1 Verde
+sarah anunciou "UNO!!!"
+É a vez de paula jogar.
+paula jogou 7 Verde
+É a vez de mariah jogar.
+mariah jogou 7 Verde
+mariah anunciou "UNO!!!"
+É a vez de sarah jogar.
+sarah jogou 2 Verde
+sarah terminou o jogo!
+sarah agora é um expectador.
+O jogo terminou!
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
+Mensagem recebida de 320: "quero assistir"
+Mensagem recebida de 320: "startgame"
+roger Iniciou o jogo.
+Total de jogadores na partida: 3
+A carta virada foi: 9 Vermelho
+paula começa o jogo.
+paula jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou 6 Vermelho
+É a vez de mariah jogar.
+mariah jogou 7 Vermelho
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou 4 Vermelho
+É a vez de sarah jogar.
+sarah jogou 2 Vermelho
+É a vez de mariah jogar.
+mariah jogou 1 Vermelho
+É a vez de paula jogar.
+paula jogou 1 Azul
+É a vez de sarah jogar.
+sarah jogou 9 Azul
+É a vez de mariah jogar.
+mariah jogou 4 Azul
+É a vez de paula jogar.
+paula jogou 4 Azul
+É a vez de sarah jogar.
+sarah jogou 7 Azul
+É a vez de mariah jogar.
+mariah jogou 5 Azul
+É a vez de paula jogar.
+paula jogou 2 Azul
+É a vez de sarah jogar.
+sarah jogou 9 Azul
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 8 Azul
+É a vez de paula jogar.
+paula jogou 8 Verde
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 8 Verde
+É a vez de mariah jogar.
+mariah jogou 7 Verde
+É a vez de paula jogar.
+paula jogou Pular Verde
+A vez de sarah foi pulada
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 0 Verde
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou Coringa Amarelo
+É a vez de sarah jogar.
+sarah jogou Pular Amarelo
+A vez de mariah foi pulada
+É a vez de paula jogar.
+paula jogou Inverter Amarelo
+O turno foi invertido para o lado oposto.
+É a vez de mariah jogar.
+mariah jogou 2 Amarelo
+É a vez de sarah jogar.
+sarah jogou +2 Amarelo
+Acumulando +2 Amarelo.
+É a vez de paula jogar.
+paula jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 8 Vermelho
+É a vez de sarah jogar.
+sarah jogou 5 Vermelho
+sarah anunciou "UNO!!!"
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou +4 Amarelo
+Acumulando +4 Amarelo.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 6 Amarelo
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou Pular Amarelo
+A vez de paula foi pulada
+É a vez de mariah jogar.
+mariah jogou 0 Amarelo
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de paula jogar.
+paula jogou Inverter Amarelo
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou 9 Amarelo
+É a vez de paula jogar.
+paula jogou 4 Amarelo
+paula anunciou "UNO!!!"
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou +2 Amarelo
+Acumulando +2 Amarelo.
+É a vez de paula jogar.
+paula não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah jogou 8 Amarelo
+É a vez de paula jogar.
+paula jogou 8 Azul
+É a vez de sarah jogar.
+sarah jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 1 Azul
+É a vez de paula jogar.
+paula jogou 3 Azul
+É a vez de sarah jogar.
+sarah jogou Inverter Azul
+O turno foi invertido para o lado oposto.
+É a vez de paula jogar.
+paula jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou +2 Verde
+Acumulando +2 Verde.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 7 Verde
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou 5 Verde
+É a vez de paula jogar.
+paula jogou 5 Azul
+É a vez de sarah jogar.
+sarah jogou Inverter Azul
+O turno foi invertido para o lado oposto.
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de mariah jogar.
+mariah jogou 7 Azul
+É a vez de sarah jogar.
+sarah jogou 2 Azul
+É a vez de paula jogar.
+paula jogou 2 Vermelho
+É a vez de mariah jogar.
+mariah jogou 4 Vermelho
+É a vez de sarah jogar.
+sarah jogou Pular Vermelho
+A vez de paula foi pulada
+É a vez de mariah jogar.
+mariah jogou 0 Vermelho
+É a vez de sarah jogar.
+sarah jogou 1 Vermelho
+É a vez de paula jogar.
+paula jogou Pular Vermelho
+A vez de mariah foi pulada
+É a vez de sarah jogar.
+sarah jogou 8 Vermelho
+É a vez de paula jogar.
+paula jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 5 Vermelho
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de paula jogar.
+paula jogou 6 Vermelho
+paula anunciou "UNO!!!"
+É a vez de mariah jogar.
+mariah jogou 7 Vermelho
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou +4 Amarelo
+Acumulando +4 Amarelo.
+paula anunciou "UNO!!!"
+É a vez de mariah jogar.
+mariah jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +6 cartas!
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 6 Azul
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+É a vez de mariah jogar.
+mariah jogou 3 Azul
+É a vez de sarah jogar.
+sarah jogou Pular Azul
+A vez de paula foi pulada
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+A vez de sarah foi pulada
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+A vez de mariah foi pulada
+É a vez de sarah jogar.
+sarah jogou Pular Verde
+A vez de paula foi pulada
+É a vez de mariah jogar.
+mariah jogou 9 Verde
+É a vez de sarah jogar.
+sarah jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de mariah jogar.
+mariah jogou 2 Verde
+É a vez de paula jogar.
+paula jogou 2 Verde
+É a vez de sarah jogar.
+sarah jogou 3 Verde
+É a vez de mariah jogar.
+mariah jogou 6 Verde
+É a vez de paula jogar.
+paula comprou uma carta.
+paula comprou uma carta.
+paula jogou 4 Verde
+É a vez de sarah jogar.
+sarah jogou Coringa Amarelo
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah passou a vez!
+É a vez de paula jogar.
+paula jogou 5 Amarelo
+É a vez de sarah jogar.
+sarah jogou 3 Amarelo
+É a vez de mariah jogar.
+mariah comprou uma carta.
+mariah jogou 4 Amarelo
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou 6 Amarelo
+É a vez de sarah jogar.
+sarah jogou 9 Amarelo
+É a vez de mariah jogar.
+mariah jogou 9 Verde
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou 4 Verde
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+É a vez de mariah jogar.
+mariah jogou 1 Verde
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou +2 Verde
+Acumulando +2 Verde.
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou +4 Amarelo
+Acumulando +4 Amarelo.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 2 Amarelo
+É a vez de paula jogar.
+paula comprou uma carta.
+paula jogou Coringa Vermelho
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah jogou 3 Vermelho
+É a vez de mariah jogar.
+mariah jogou 9 Vermelho
+É a vez de paula jogar.
+paula jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
+paula anunciou "UNO!!!"
+É a vez de mariah jogar.
+mariah jogou +4 Verde
+Acumulando +4 Verde.
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah jogou 3 Verde
+É a vez de paula jogar.
+paula jogou 3 Vermelho
+paula terminou o jogo!
+paula agora é um expectador.
+O jogo terminou!
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
+Mensagem recebida de 320: "startgame"
+roger Iniciou o jogo.
+Total de jogadores na partida: 4
+A carta virada foi: 9 Verde
+roger começa o jogo.
+Parando servidor...
+Total de threads parados: 2
+Servidor finalizado!
+a jogar.
 
-Sua mão contém um total de 3 cartas
-(1): 5 Verde , (2): 1 Azul , (3)Mensagem recebidroger jogou 5 Verde
+paula comprou uma carta.
+
+paula jogou +4 Amarelo
+
+Acumulando +4 Amarelo.
+paula anunciou "UNO!!!"
+
+É a vez de mariah jogar.
+
+mariah jogou +2 Azul
+
+Acumulando +2 Azul.
 É a vez de sarah jogar.
 
-sarah jogou 1 Verde
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +6 cartas!
+sarah comprou uma carta.
+
+sarah comprou uma carta.
+sarah comprou uma carta.
+sarah comprou uma carta.
+
+sarah comprou uma carta.
+sarah comprou uma carta.
+
+sarah jogou 6 Azul
+
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula passou a vez!
+É a vez de mariah jogar.
+
+mariah jogou 3 Azul
+
+É a vez de sarah jogar.
+
+sarah jogou Pular Azul
+A vez de paula foi pulada
+
+É a vez de mariah jogar.
+
+mariah comprou uma carta.
+
+mariah passou a vez!
+A vez de sarah foi pulada
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula passou a vez!
+A vez de mariah foi pulada
+
+É a vez de sarah jogar.
+
+sarah jogou Pular Verde
+A vez de paula foi pulada
+
+É a vez de mariah jogar.
+
+mariah jogou 9 Verde
+É a vez de sarah jogar.
+
+sarah jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+
+É a vez de mariah jogar.
+
+mariah jogou 2 Verde
+
+É a vez de paula jogar.
+
+paula jogou 2 Verde
+
+É a vez de sarah jogar.
+
+sarah jogou 3 Verde
+É a vez de mariah jogar.
+
+mariah jogou 6 Verde
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula comprou uma carta.
+
+paula jogou 4 Verde
+É a vez de sarah jogar.
+
+sarah jogou Coringa Amarelo
+
+É a vez de mariah jogar.
+
+mariah comprou uma carta.
+
+mariah passou a vez!
+
+É a vez de paula jogar.
+
+paula jogou 5 Amarelo
+É a vez de sarah jogar.
+
+sarah jogou 3 Amarelo
+É a vez de mariah jogar.
+
+mariah comprou uma carta.
+
+mariah jogou 4 Amarelo
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula jogou 6 Amarelo
+É a vez de sarah jogar.
+
+sarah jogou 9 Amarelo
+É a vez de mariah jogar.
+
+mariah jogou 9 Verde
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula jogou 4 Verde
+É a vez de sarah jogar.
+
+sarah comprou uma carta.
+
+sarah passou a vez!
+É a vez de mariah jogar.
+
+mariah jogou 1 Verde
+É a vez de paula jogar.
+
+paula comprou uma carta.
+
+paula jogou +2 Verde
+Acumulando +2 Verde.
+
+É a vez de sarah jogar.
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+
+sarah comprou uma carta.
+sarah comprou uma carta.
+
+sarah jogou +4 Amarelo
+Acumulando +4 Amarelo.
+
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah comprou uma carta.
+
+mariah comprou uma carta.
+
+mariah jogou 2 Amarelo
 É a vez de paula jogar.
 
 paula comprou uma carta.
 
 paula jogou Coringa Vermelho
 
-É a vez de mariah jogar.
-
-mariah jogou 1 Vermelho
-
-É a vez de inna jogar.
-
-inna jogou 5 Vermelho
-É a vez de roger jogar.
-
-Sua mão contém um total de 2 cartas
-(1): 1 Azul , (2): 6 Verde 
-
-
-Esta jogada é inválida!
-
-Você comprou "7 Verde"
-Sua mão contém um total de 3 cartas
-(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
-
-
-roger passou a vez!
 É a vez de sarah jogar.
 
-sarah jogou Inverter Vermelho
-O turno foi invertido para o lado oposto.
+sarah comprou uma carta.
 
-É a vez de roger jogar.
-Sua mão contém um total de 3 cartas
-(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
-
-
-roger passou a vez!
-É a vez de inna jogar.
-
-inna jogou 7 Vermelho
-
-inna anunciou "UNO!!!"
+sarah jogou 3 Vermelho
 É a vez de mariah jogar.
 
-mariah jogou 6 Vermelho
+mariah jogou 9 Vermelho
 É a vez de paula jogar.
 
 paula jogou Inverter Vermelho
@@ -193,224 +938,43 @@ paula anunciou "UNO!!!"
 
 É a vez de mariah jogar.
 
-mariah comprou uma carta.
+mariah jogou +4 Verde
 
-mariah passou a vez!
-É a vez de inna jogar.
-
-inna comprou uma carta.
-
-inna passou a vez!
-
-É a vez de roger jogar.
-Sua mão contém um total de 3 cartas
-(1): 1 Azul , (2): 6 Verde , (3): 7 Verde 
-
-
-Você comprou "Inverter Verde"
-Sua mão contém um totalMensagem recebida de 340: "jogar 4"
-Última carta: Inverter Vermelho, Carta atual: Iroger jogou InvJogada de inna, args: 
-Última carta: Inverter Verde Carta tentada: 1 Verde
-Última carta: Inverter Verde, Carta atual: 1 Verde
-Jogada de mariah, args: 
-Última carta: 1 Verde Carta tentada: 3 Verde
-Última carta: mariah jogou 3 Verde
-É a vez dJogada de paula, args: Vermelho
-Última carta:paula jogou +4 Vermelho
-
-Acumulando +4 Vermelho.
-paula anunciou "UNO!!!"
-Jogada de sarah, args: 
-Última carta: +4 Vermelho Carta tentada: 8 Vermelho
-Última carta: +4 Vermelho, Carta atual: 8 Vermelho
-Mensagem recebida de 340: "pescar"
-Mensagem recebida de 340: "pular_vez"
-Jogada de inna, args: 
-Última carta: 8 Vermelho Carta tentada: Pular Vermelho
-Última carta: 8 Vermelho, Carta atual: Pular Vermelho
-Jogada de paula, args: 
-Última carta: Pular Vermelho Carta tentada: 9 Vermelho
-Última carta: Pular Vermelho, Carta atual: 9 Vermelho
-Jogada de sarah, args: Azul
-Última carta: 9 Vermelho Carta tentada: Coringa
-Última carta: 9 Vermelho, Carta atual: Coringa Azul
-Mensagem recebida de 340: "jogar 1"
-Última carta: Coringa Azul, Carta atual: 1 Azul
-Jogada de inna, args: 
-Última carta: 1 Azul Carta tentada: 2 Azul
-Última carta: 1 Azul, Carta atual: 2 Azul
-Jogada de mariah, args: 
-Última carta: 2 Azul Carta tentada: 9 Azul
-Última carta: 2 Azul, Carta atual: 9 Azul
-Jogada de sarah, args: 
-Última carta: 9 Azul Carta tentada: Inverter Azul
-Última carta: 9 Azul, Carta atual: Inverter AzusarJogada de inna, args: 
-Última carta: Inverter Azul Carta tentada: 6 Azul
-Última carta: Inverter Azul, Carta atual: 6 Azul
-Mensagem recebida de 340: "jogar 1"
-Última carta: 6 Azul, Carta atual: 6 Verde
-Jogada de sarah, args: 
-Última carta: 6 Verde Carta tentada: 2 Verde
-Última carta: 6 Verde, Carta atual: 2 Verde
-Jogada de mariah, args: 
-Última carta: 2 Verde Carta tentada: 7 Verde
-Última carta: 2 Verde, Carta atual: 7 Verde
-Mensagem recebida de 340: "jogar 1"
-Última carta: 7 Verde, Carta atual: 7 Verde
-Mensagem recebida de 340: "uno"
-Jogada de sarah, args: 
-Última carta: 7 Verde Carta tentada: 7 Amarelo
-Última carta: 7 Verde, Carta atual: 7 Amarelo
-Jogada de mariah, args: 
-Última carta: 7 Amarelo Carta tentada: 1 Amarelo
-Última carta: 7 Amarelo, Carta atual: 1 Amarelo
-Jogada de inna, args: 
-Última carta: 1 Amarelo Carta tentada: 9 Amarelo
-Última carta: 1 Amarelo, Carta atual: 9 AmareinnaMensagem recebida de 340: "jogar 1"
-Última carta: 9 Amarelo, Carta atual: 5 Amarelo
-Jogada de sarah, args: 
-Última carta: 5 Amarelo Carta tentada: 1 Amarelo
-Última carta: 5 Amarelo, Carta atual: 1 AmarelosJogada de mariah, args: Vermelho
-Última carta: 1 Amarelo Carta tentada: +4
-Últimariah jogou +4 Vermelho
-
-Acumulando +4 VermeJogada de inna, args: 
-Última carta: +4 Vermelho Carta tentada: 1 Vermelho
-Última carta: +4 Vermelho, Carta atual: 1 Vermelho
-Jogada de sarah, args: Azul
-Última carta: 1 Vermelho Carta tentada: Coringa
-Última carta: 1 Vermelho, Carta atual: Coringa AzsaraJogada de inna, args: 
-Última carta: Coringa Azul Carta tentada: 4 Azul
-Última carta: Coringa Azul, Carta atual: 4 Azul
-Jogada de sarah, args: 
-Última carta: 4 Azul Carta tesarah jogou Inverter Azul
-
-O turno foi invertido para o lado oposto.
-Jogada de inna, args: 
-Úlinna jogou 2 Azul
-É a vez de mariah jogar.
-
-mariah jogou 2 Vermelho
+Acumulando +4 Verde.
 É a vez de sarah jogar.
 
+sarah não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
+sarah comprou uma carta.
 sarah comprou uma carta.
 
-sarah passou a vez!
-É a vez de inna jogar.
-
-inna jogou 9 Vermelho
-
-É a vez de mariah jogar.
-
-mariah jogou 5 Vermelho
-
-mariah anunciou "UNO!!!"
-É a vez de sarah jogar.
-
-sarah jogou 5 Amarelo
-É a vez de inna jogar.
-
-inna comprou uma carta.
-
-inna jogou 8 Amarelo
-
-É a vez de mariah jogar.
-
-mariah jogou 2 Amarelo
-
-mariah terminou o jogo!
-mariah agora é um expectador.
-
-É a vez de sarah jogar.
-
-sarah jogou +2 Amarelo
-
-Acumulando +2 Amarelo.
-É a vez de inna jogar.
-
-inna não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna comprou uma carta.
-
-inna jogou 2 Amarelo
-É a vez de sarah jogar.
-
-sarah jogou 4 Amarelo
-
-É a vez de inna jogar.
-
-inna comprou uma carta.
-
-inna jogou 0 Amarelo
-É a vez de sarah jogar.
-
+sarah comprou uma carta.
 sarah comprou uma carta.
 
-sarah jogou 8 Amarelo
+sarah jogou 3 Verde
+É a vez de paula jogar.
 
-É a vez de inna jogar.
+paula jogou 3 Vermelho
+paula terminou o jogo!
 
-inna comprou uma carta.
-
-inna jogou Coringa Azul
-
-É a vez de sarah jogar.
-
-sarah jogou 5 Azul
-É a vez de inna jogar.
-
-inna jogou 3 Azul
-
-É a vez de sarah jogar.
-
-sarah jogou 4 Azul
-sarah anunciou "UNO!!!"
-
-É a vez de inna jogar.
-
-inna jogou 0 Azul
-
-É a vez de sarah jogar.
-
-sarah jogou 8 Azul
-
-sarah terminou o jogo!
-sarah agora é um expectador.
-
+paula agora é um expectador.
 O jogo terminou!
+
+Mostrando ranking dos jogadores...
+sarah	108 pontos
+paula	98 pontos
+roger	64 pontos
+mariah	0 pontos
+
 Agora você é um jogador.
 
-Classificação geral dos jogadores...
-1: paula
-2: roger
-3: mariah
-4: sarah
+Agora você pode iniciar uma nova partida digitando "startgame"
 
-Agora você pode inicciar uma nova partida digitando "startgame"
+roger Iniciou o jogo.
+Total de jogadores na partida: 4
 
-ul
-Jogada de sarah, args: 
-Última carta: Coringa Azul Carta tentada: 5 Azul
-Última carta: Coringa Azul, Carta atual: 5 Azul
-Jogada de inna, args: 
-Última carta: 5 Azul Carta tentada: 3 Azul
-Última carta: 5 Azul, Carta atual: 3 Azul
-Jogada de sarah, args: 
-Última carta: 3 Azul Carta tentada: 4 Azul
-Última carta: 3 Azul, Carta atual: 4 Azul
-Jogada de inna, args: 
-Última carta: 4 Azul Carta tentada: 0 Azul
-Última carta: 4 Azul, Carta atual: 0 Azul
-Jogada de sarah, args: 
-Última carta: 0 Azul Carta tentada: 8 Azul
-Última carta: 0 Azul, Carta atual: 8 Azul
-Agora você é um jogador.
-Agora você é um jogador.
-Agora você é um jogador.
-Agora você é um jogador.
-Parando servidor...
-Total de threads parados: 2
-Servidor finalizado!
+Sua mão contém um total de 7 cartas
+(1): +4 , (2): 2 Azul , (3): Coringa , (4): 1 Azul , (5): Pular Amarelo , (6): 1 Azul , (7): 9 Vermelho 
+
+A carta virada foi: 9 Verde
+roger começa o jogo.
+

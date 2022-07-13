@@ -109,7 +109,7 @@ args->cmd_type=b_play;
 if(((args->index=sf.find_card_color(cards, {c->getColor()}))>-1)||((args->index=sf.find_card_type(cards, {joker, plus_four}))>-1))
 {
 uint32 ctype=cards[args->index]->getType();
-if((type==plus_four)||(ctype==joker))
+if((ctype==plus_four)||(ctype==joker))
 {
 args->color_id=select_color();
 }

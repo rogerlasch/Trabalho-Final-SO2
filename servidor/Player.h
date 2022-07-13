@@ -17,7 +17,8 @@ player_playing=(1<<1),//Ele está jogando ou irá jogar...
 player_admin=(1<<2),
 player_turn=(1<<3),
 player_waiting_uno=(1<<4),
-player_uno=(1<<5)
+player_uno=(1<<5),
+player_fished=(1<<6)
 };
 
 enum player_type
@@ -31,6 +32,7 @@ class Player : public basic_connection, public dlb::dlb_basic_flags
 protected:
 int id;
 uint32 type;
+uint32 points;
 int64 unotime;
 std::string name;
 Deck cards;
@@ -47,6 +49,8 @@ bool isBot()const;
 bool isPlayer()const;
 void setId(int id);
 int getId()const;
+void setPoints(uint32 points);
+uint32 getPoints()const;
 void setName(const std::string& name);
 std::string getName()const;
 void setUnoTime(int64 utime);
@@ -58,9 +62,10 @@ shared_table getTable()const;
 void add_card(const shared_card& c);
 shared_card remove_card(uint32 index);
 shared_card get_card(uint32 index);
-void showCards();
+void showCards(const shared_card& c=shared_card());
 void dropCards();
 void check_uno();
+void clearScreen();
 };
 typedef std::shared_ptr<Player> shared_player;
 
@@ -72,6 +77,7 @@ typedef std::shared_ptr<Player> shared_player;
 Player::Player()
 {
 this->type=player_normal;
+this->setPoints(0);
 this->replace_flags(0);
 this->setUnoTime(gettimestamp());
 }
@@ -111,6 +117,16 @@ int Player::getId()const
 {
 std::shared_lock<std::shared_mutex> lck(this->mtx);
 return this->id;
+}
+
+void Player::setPoints(uint32 points)
+{
+this->points=points;
+}
+
+uint32 Player::getPoints()const
+{
+return this->points;
 }
 
 void Player::setName(const std::string& name)
@@ -189,13 +205,17 @@ return shared_card();
 return cards[index];
 }
 
-void Player::showCards()
+void Player::showCards(const shared_card& c)
 {
 if(isBot())
 {
 return;
 }
 std::stringstream ss;
+if(c!=NULL)
+{
+ss<<"Última carta jogada: "<<c->toString()<<std::endl;
+}
 ss<<"Sua mão contém um total de "<<cards.size()<<" cartas"<<std::endl;
 for(uint32 i=0; i<cards.size(); i++)
 {
@@ -229,5 +249,10 @@ else
 this->removeflag(player_waiting_uno);
 this->removeflag(player_uno);
 }
+}
+
+void Player::clearScreen()
+{
+this->print("\b");
 }
 #endif

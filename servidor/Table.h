@@ -49,6 +49,7 @@ Table& operator=(const Table& t);
 ~Table();
 void setId(uint32 id);
 uint32 getId()const;
+shared_card getCurrentCard();
 uint32 playerCount()const;
 void make_delay(int64 delay_time);
 bool isDelayed();
@@ -69,6 +70,7 @@ shared_player next_player();
 void internal_PlayCard(shared_player& ch, shared_card& c, uint32 index);
 void internal_next_player();
 void endGame();
+void calculatePoints(shared_player& ch);
 //NÃO INVOCAR OS PRÓXIMOS MÉTODOS DIRETAMENTE!!!!
 void commands(shared_player& ch, const std::string& args);
 void goBack(shared_player& ch, const std::string& args);
@@ -81,6 +83,7 @@ void do_who(shared_player& ch, const std::string& args);
 void do_chat(shared_player& ch, const std::string& args);
 void do_quero(shared_player& ch, const std::string& args);
 void do_uno(shared_player& ch, const std::string& args);
+void do_ranking(shared_player& ch, const std::string& args);
 };
 typedef std::shared_ptr<Table> shared_table;
 typedef std::vector<shared_table> table_list;
@@ -121,6 +124,7 @@ cmdtable={
 {"who", std::bind(&Table::do_who, this, std::placeholders::_1, std::placeholders::_2)},
 {"quero", std::bind(&Table::do_quero, this, std::placeholders::_1, std::placeholders::_2)},
 {"uno", std::bind(&Table::do_uno, this, std::placeholders::_1, std::placeholders::_2)},
+{"ranking", std::bind(&Table::do_ranking, this, std::placeholders::_1, std::placeholders::_2)},
 };
 }
 
@@ -342,7 +346,7 @@ if(pindex.load()==i)
 {
 next_player();
 _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
-current_player->showCards();
+current_player->showCards(current_card);
 if(pindex.load()>i)
 {
 pindex.fetch_sub(1);
@@ -543,11 +547,10 @@ if(this->get_gstate()!=g_playing)
 {
 return;
 }
-_echo(players, 0, "{} jogou {}", ch->getName(), c->toString());
-_log("Última carta: {}, Carta atual: {}", current_card->toString(), c->toString());
 discard.push_back(c);
 current_card=discard[discard.size()-1];
 ch->remove_card(index);
+_echo(players, 0, "{} jogou {}", ch->getName(), c->toString());
 switch(c->getType())
 {
 case plus_two:
@@ -575,18 +578,21 @@ if(ch->deckSize()==0)
 {
 _echo(players, 0, "{} terminou o jogo!", ch->getName());
 _echo(players, 0, "{} agora é um expectador.", ch->getName());
+calculatePoints(ch);
 ch->setflag(player_expectator);
 ch->removeflag(player_playing);
 ch->removeflag(player_waiting_uno);
 ch->removeflag(player_uno);
-winers.push_back(ch->getName());
+this->endGame();
 active_players.fetch_sub(1);
+/*
 if(active_players.load()<2)
 {
 this->endGame();
 return;
 }
 this->internal_next_player();
+*/
 return;
 }
 ch->check_uno();
@@ -607,7 +613,8 @@ void Table::internal_next_player()
 {
 this->next_player();
 _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
-current_player->showCards();
+current_player->removeflag(player_fished);
+current_player->showCards(current_card);
 if(acumulator.size()>0)
 {
 CardFinder sf;
@@ -620,6 +627,7 @@ for(uint32 i=0; i<x; i++)
 {
 process_command(current_player, "pescar -s");
 }
+current_player->showCards(current_card);
 }
 }
 this->make_delay(2500);
@@ -634,16 +642,10 @@ for(auto& it: players)
 it->dropCards();
 it->removeflag(player_uno);
 it->removeflag(player_waiting_uno);
+this->process_command(it, "ranking");
 this->process_command(it, "quero jogar");
 }
 std::stringstream ss;
-ss<<"Classificação geral dos jogadores..."<<std::endl;
-for(uint32 i=0; i<winers.size(); i++)
-{
-ss<<(i+1)<<": "<<winers[i]<<std::endl;
-}
-_echo(players, 0, ss.str());
-winers.clear();
 current_player=shared_player();
 current_card=shared_card();
 acumulator.resize(0);
@@ -654,13 +656,50 @@ gstate.store(g_starting);
 shared_player ch=has_admin();
 if(ch!=NULL)
 {
-ch->print("Agora você pode inicciar uma nova partida digitando \"startgame\"");
+ch->print("Agora você pode iniciar uma nova partida digitando \"startgame\"");
 }
+}
+
+void Table::calculatePoints(shared_player& ch)
+{
+uint32 x=0;
+for(auto& it: players)
+{
+if(it->getName()==ch->getName())
+{
+continue;
+}
+Deck cards=it->getDeck();
+for(uint32 i=0; i<cards.size(); i++)
+{
+switch(cards[i]->getType())
+{
+case normal:
+{
+x+=cards[i]->getNumber();
+break;
+}
+case block:
+case reverse_turn:
+case plus_two:
+{
+x+=20;
+break;
+}
+case plus_four:
+case joker:
+{
+x+=50;
+break;
+}
+}
+}
+}
+ch->setPoints(ch->getPoints()+x);
 }
 
 void Table::interact_bot(shared_player& ch)
 {
-FuncTimer sh(__FUNCTION__);
 if(ch->isPlayer())
 {
 return;
@@ -758,6 +797,10 @@ shared_player first_player;
 uint32 count=0;
 for(auto& it : players)
 {
+if(it->isBot())
+{
+it->removeflag(player_expectator);
+}
 if(!it->flag_contains(player_expectator))
 {
 it->setflag(player_playing);
@@ -854,8 +897,8 @@ return;
 }
 if(ch->isBot())
 {
-_log("Jogada de {}, args: {}", ch->getName(), color_str);
-_log("Última carta: {} Carta tentada: {}", current_card->toString(), c->toString());
+//_log("Jogada de {}, args: {}", ch->getName(), color_str);
+//_log("Última carta: {} Carta tentada: {}", current_card->toString(), c->toString());
 }
 if(acumulator.size()>0)
 {
@@ -963,6 +1006,7 @@ std::mt19937 g(rd());
 std::shuffle(deck.begin(), deck.end(), g);
 }
 ch->add_card(deck[0]);
+ch->setflag(player_fished);
 if(ch->isPlayer())
 {
 ch->print(fmt::format("Você comprou \"{}\"", deck[0]->toString()));
@@ -972,7 +1016,7 @@ ch->check_uno();
 _echo(players, ch->getSock(), "{} comprou uma carta.", ch->getName());
 if(args!="-s")
 {
-ch->showCards();
+ch->showCards(current_card);
 }
 }
 
@@ -993,6 +1037,11 @@ if(!ch->flag_contains(player_turn))
 ch->print("Aguarde sua vez antes de desistir!");
 return;
 }
+if(!ch->flag_contains(player_fished))
+{
+ch->print("Você precisa comprar pelo menos uma carta antes de passar a vez...");
+return;
+}
 if(acumulator.size()>0)
 {
 ch->print("Não é possível fazer isso agora.");
@@ -1001,7 +1050,7 @@ return;
 _echo(players, 0, "{} passou a vez!", ch->getName());
 this->next_player();
 _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
-current_player->showCards();
+current_player->showCards(current_card);
 this->make_delay(2500);
 }
 
@@ -1149,6 +1198,32 @@ _echo(players, 0, "{} anunciou \"UNO!!!\"", ch->getName());
 this->internal_next_player();
 }
 
+void Table::do_ranking(shared_player& ch, const std::string& args)
+{
+if((ch==NULL)||(ch->isBot()))
+{
+return;
+}
+if(args=="?")
+{
+ch->print("Use o comando ranking para ver a classificação geral da partida.");
+ch->print("O jogo continuará até que reste apenas um jogador ativo.");
+return;
+}
+std::multimap<uint32, shared_player> jogs;
+for(auto& it : players)
+{
+jogs.insert(make_pair(it->getPoints(), it));
+}
+std::stringstream ss;
+ss<<"Mostrando ranking dos jogadores..."<<std::endl;
+for(auto it=jogs.rbegin(); it!=jogs.rend(); ++it)
+{
+ss<<it->second->getName()<<"\t"<<it->first<<" pontos"<<std::endl;
+}
+ch->print(ss.str());
+}
+
 //Funções...
 uint32 table_generate_id()
 {
@@ -1159,6 +1234,7 @@ return x;
 
 void t_send_to_list(std::vector<shared_player>& cons, uint32 ignore_sock, const std::string& msg)
 {
+_log("{}", msg);
 for(auto& it: cons)
 {
 if((it->isBot())||(ignore_sock==it->getSock()))

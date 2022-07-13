@@ -1,0 +1,5 @@
+
+
+O primeiro jogador a jogar todas cartas, o jogo deve terminar.
+Comando pra ver a última carta jogada
+comando para ver a  mão
