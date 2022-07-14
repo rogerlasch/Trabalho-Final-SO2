@@ -1,5 +1,5 @@
 
-#pragma comment(lib, "../../dependencies/libs/biblioteca.lib")
+#pragma comment(lib, "../../dependencies/libs/biblioteca.lib")//Dependências...
 #include <iostream>
 #include <thread>
 #include <future>
@@ -12,14 +12,14 @@ using namespace dlb;
 
 string ip_address = "";
 uint32 port = 4000;
-static shared_connection con;
+static shared_connection con;//Nossa conexão com o servidor...
 void connection_loop();
 
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
     system("chcp 1252");
-    cout << "Digite o endereÃ§o IP do servidor: ";
+    cout << "Digite o endereço IP do servidor: ";
     cin >> ip_address;
 
     // Faz a conexao no ip/porta
@@ -33,7 +33,7 @@ int main()
 
     thread th(connection_loop);
 
-    // Enquanto estiver conectado 
+    // Enquanto estiver conectado
     while (con->getConState() == con_connected)
     {
         string line = "";
@@ -44,6 +44,7 @@ int main()
 
         if (line.size() > 0)
         {
+//Envia os dados para o servidor...
             con->print(line);
         }
 
@@ -65,17 +66,11 @@ void connection_loop()
     while (con->getConState() == con_connected)
     {
         this_thread::sleep_for(chrono::milliseconds(20));
-        string data = s_request(con);
-        s_send(con);
-        
+        string data = s_request(con);//Recebe os dados do servidor...
+        s_send(con);//Envia dados enfileirados, se possível...
+
         if (data.size() > 0)
         {
-            if (data[0] == '\b')
-            {
-                system("cls");
-                this_thread::sleep_for(chrono::milliseconds(750));
-                continue;
-            }
             _log(data);
         }
     }

@@ -190,6 +190,7 @@ cv_workers.wait(lck);
 }
 break;
 }
+//Recupera um evento e processe ele...
 case dlb_worker_can_work:
 {
 dlb_event* ev=NULL;

@@ -300,7 +300,7 @@ std::string Card::toString() const
 
     default:
     {
-        ss << fmt::format("Carta desconhecida! Nï¿½mero: {} Cor: {}, Tipo: {}", getNumber(), getColor(), getType());
+        ss << fmt::format("Carta desconhecida! Número: {} Cor: {}, Tipo: {}", getNumber(), getColor(), getType());
         break;
     }
     }

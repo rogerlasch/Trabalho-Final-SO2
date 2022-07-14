@@ -67,6 +67,7 @@ return;
 unique_lock<shared_mutex> lck(mtx_event);
 ev->timestamp=gettimestamp();
 dlb_events.push_back(ev);
+//despertar os workers para cuidarem dos eventos...
 if(dlb_events.size()==1)
 {
 dlb_worker_set_can_state(dlb_worker_can_work);
@@ -86,6 +87,7 @@ return false;
 }
 *ev=*dlb_events.begin();
 dlb_events.erase(dlb_events.begin());
+//Se não existir mais eventos, avise os workers para ibernarem até surgir mais trabalho.
 if(dlb_events.size()==0)
 {
 dlb_worker_set_can_state(dlb_worker_can_pause);

@@ -7,14 +7,14 @@
 #include <vector>
 #include <string>
 
-// Estados de conex√£o
+// Estados de conex„o
 enum connection_stats
 {
     con_connected = 1,
     con_disconnected
 };
 
-// Eventos que dizem o que aconteceu na conex√£o
+// Eventos que dizem o que aconteceu na conex„o
 enum NetEvents
 {
     event_connect = 1, // Alguem se conectou, reserve recursos para ele...
@@ -27,11 +27,11 @@ class basic_connection
 {
 private:
     int32 sock;  // Socket
-    uint32 conState; // Estado da conex√£o
+    uint32 conState; // Estado da conex„o
     std::string cmd_line; // Linha processada
     std::vector<std::string> input_buffer; // Todas os comandos que foram recebidos e que devem ser processados
     std::vector<std::string> output_buffer; // Enfileira todas as mensagens que devem ser enviadas para o servidor ou cliente
-    mutable std::shared_mutex mtx_input, mtx_output, mtx_con; // Sincronizam os acessos as propriedades da conex√£o
+    mutable std::shared_mutex mtx_input, mtx_output, mtx_con; // Sincronizam os acessos as propriedades da conex„o
 
 public:
     basic_connection();
@@ -41,7 +41,6 @@ public:
     virtual void print(const std::string &str);
     virtual std::string get_line_to_send();
     virtual void append_string_input(const std::string &str);
-    void exec(const std::string &cmd);
     virtual void process_input();
     void setSock(int32 sock);
     int32 getSock() const;

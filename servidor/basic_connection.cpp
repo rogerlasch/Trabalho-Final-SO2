@@ -22,7 +22,7 @@ basic_connection::~basic_connection()
 {
 }
 
-// Enfileira uma menasgem para ser enviada para o servidor
+// Enfileira uma mensagem para ser enviada para o servidor
 void basic_connection::print(const string &str)
 {
     // Pega direito de escrita j� que algo vai ser modificado...
@@ -43,7 +43,7 @@ string basic_connection::get_line_to_send()
     return str;
 }
 
-// Processa os dados recebidos, verificando se é possível processar um comando
+// Processa os dados recebidos, verificando se � possível processar um comando
 void basic_connection::append_string_input(const string &str)
 {
     unique_lock<shared_mutex> lck(this->mtx_input);
@@ -72,7 +72,7 @@ void basic_connection::process_input()
     {
         while (input_buffer.size() > 0)
         {
-            // Despacha um evento para os workers darem um jeito...
+            // Despacha um evento para os workers tratarem...
             dlb_event_send(event_receive, getSock(), input_buffer[0]);
             input_buffer.erase(input_buffer.begin());
         }

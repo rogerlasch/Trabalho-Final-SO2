@@ -1,7 +1,7 @@
 
 #if defined(_WIN32)
 #define NOMINMAX
-#include <winsock2.h>
+#include <winsock2.h>//Biblioteca de sockets do windows...
 #include <ws2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "winmm.lib")
@@ -12,7 +12,7 @@
 #include "basic_connection.h"
 #include "ClienteSocket.h"
 
-/* Estrutura responsÃ¡vel para iniciar as bibliotecas de rede do Windows e garantir
+/* Estrutura responsável para iniciar as bibliotecas de rede do Windows e garantir
  o correto descarregamento quando o programa e encerrado */
 struct WinSockCleaner
 {
@@ -22,7 +22,7 @@ struct WinSockCleaner
         int32 res = WSAStartup(MAKEWORD(2, 2), &wsadata);
         if (res != 0)
         {
-            throw std::runtime_error("Erro ao inicializar a winsock. Programa nï¿½o pode continuar!");
+            throw std::runtime_error("Erro ao inicializar a winsock. Programa não pode continuar!");
         }
     }
     ~WinSockCleaner()
@@ -33,7 +33,7 @@ struct WinSockCleaner
 
 WinSockCleaner cls;
 
-// Tenta abrir uma conexao com o servidor no endereÃ§o/porta especificado 
+// Tenta abrir uma conexao com o servidor no endereço/porta especificado
 shared_connection s_connect(const std::string ip_address, uint32 port)
 {
     SOCKET sock = INVALID_SOCKET;
@@ -42,8 +42,9 @@ shared_connection s_connect(const std::string ip_address, uint32 port)
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
+//Resolve o endereço...
     int32 res = getaddrinfo(ip_address.c_str(), std::to_string(port).c_str(), &hints, &result);
-    
+
     if (res != 0)
     {
         return shared_connection();
@@ -59,7 +60,7 @@ shared_connection s_connect(const std::string ip_address, uint32 port)
         }
 
         res = connect(sock, ptr->ai_addr, (int)ptr->ai_addrlen);
-        
+
         if (res == SOCKET_ERROR)
         {
             closesocket(sock);
@@ -75,7 +76,7 @@ shared_connection s_connect(const std::string ip_address, uint32 port)
     {
         return shared_connection();
     }
-
+//Define o socket como não bloqueante.
     u_long x = 1;
     ioctlsocket(sock, FIONBIO, &x);
     shared_connection c = std::make_shared<basic_connection>();
@@ -85,7 +86,7 @@ shared_connection s_connect(const std::string ip_address, uint32 port)
     return c;
 }
 
-// Recebe os dados do servidor 
+// Recebe os dados do servidor
 std::string s_request(shared_connection &c)
 {
     std::string str = "";
@@ -129,16 +130,10 @@ void s_send(shared_connection &c)
 
     line += '\n';
     int32 res = send(c->getSock(), &line[0], line.size(), 0);
-    
+
     if (res == SOCKET_ERROR)
     {
-        _log("Erro!");
-        res = WSAGetLastError();
-
-        if ((res == WSAENETDOWN) || (res == WSAENOTCONN) || (res == WSAESHUTDOWN))
-        {
             c->setConState(con_disconnected);
-        }
     }
 }
 
@@ -149,7 +144,7 @@ void s_disconnect(shared_connection &c)
     {
         return;
     }
-    
+
     shutdown(c->getSock(), SD_SEND);
     closesocket(c->getSock());
     c->setSock(0);

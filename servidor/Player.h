@@ -79,7 +79,7 @@ typedef std::shared_ptr<Player> shared_player;
 // Construtor
 Player::Player()
 {
-    this->type = player_normal; // Define que ele construiu um objeto de um "player normal" 
+    this->type = player_normal; // Define que ele construiu um objeto de um "player normal"
     this->setPoints(0); // Inicia a pontuacao do jogador
     this->replace_flags(0); // Inicia os flags do jogador, desativando todas
     this->setUnoTime(gettimestamp());  // Inicia o tempo de espera para o jogador digitar "UNO"
@@ -226,10 +226,10 @@ void Player::showCards(const shared_card &c)
     std::stringstream ss;
     if (c != NULL)
     {
-        ss << "√öltima carta jogada: " << c->toString() << std::endl;
+        ss << "⁄ltima carta jogada: " << c->toString() << std::endl;
     }
 
-    ss << "Sua m√£o cont√™m um total de " << cards.size() << " cartas" << std::endl;
+    ss << "Sua m„o contÈm um total de " << cards.size() << " cartas" << std::endl;
     for (uint32 i = 0; i < cards.size(); i++)
     {
         ss << fmt::format("({}): {} ", (i + 1), cards[i]->toString());
@@ -266,7 +266,7 @@ void Player::check_uno()
     }
 }
 
-/* Limpa a tela para deixar melhor a visualiza√ß√£o do jogo
+/* Limpa a tela para deixar melhor a visualiza√ß„o do jogo
 Nao foi utilizado pois optamos por deixar o decorrer do jogo */
 void Player::clearScreen()
 {

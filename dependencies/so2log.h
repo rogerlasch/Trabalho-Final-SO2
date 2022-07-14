@@ -1,5 +1,7 @@
 
 
+//Apenas uma biblioteca básica de log.
+//Ela usa a biblioteca de formatação fmt, que se tornou padrão c++ na versão 20.
 
 #ifndef SO2LOG_H
 #define SO2LOG_H

@@ -61,7 +61,7 @@ int main()
 
         _log("Servidor iniciado na porta {}", DefaultPort);
         _log("Para interromper, tecle CTRL + C");
-        
+
         bool stop = false;
         int64 start_table_time = gettimestamp();
 
@@ -139,7 +139,7 @@ uint32 s_getState()
 
 void signal_shutdown(int x)
 {
-    s_send_to_all("Aviso... O servidor estï¿½ sendo parado...");
+    s_send_to_all("Aviso... O servidor está sendo parado...");
     s_setState(server_shuting_down);
 }
 
@@ -148,7 +148,7 @@ void processEvent(dlb_event *ev)
 {
     static StringUtils cs;
 
-    
+
     switch (ev->type)
     {
     case event_connect: // Caso receba um evento de conexao, deve alocar os recusos para essa conexao
@@ -157,7 +157,7 @@ void processEvent(dlb_event *ev)
         ch->setSock(ev->id);
         ch->setConState(con_connected);
         s_insert_connection(ch);
-        ch->print("SaudaÃ§Ãµes... Para comeÃ§ar, digite o seu nome de usuÃ¡rio com no mÃ­nimo 4 caracteres.");
+        ch->print("Saudações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.");
         break;
     }
 
@@ -180,7 +180,7 @@ void processEvent(dlb_event *ev)
     {
         shared_player ch = dynamic_pointer_cast<Player>(s_find_connection(ev->id));
         _log("Mensagem recebida de {}: \"{}\"", ch->getSock(), ev->data);
-        
+
         if (ev->data == "sair")
         {
             do_quit(ch, "");
@@ -197,7 +197,7 @@ void processEvent(dlb_event *ev)
             }
             ch->setName(ev->data);
             ch->print(fmt::format("Bem-vindo ao jogo, {}!", ch->getName()));
-            ch->print("Digite comandos para ver uma lista de comandos disponÃ­veis.");
+            ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
             _s_send_to_all("{} se conectou!", ch->getName());
         }
 
@@ -235,21 +235,21 @@ void processEvent(dlb_event *ev)
 // Comandos em geral que o jogador pode digitar...
 void do_help(shared_player &ch, const std::string &args)
 {
-    ch->print("VocÃª pode digitar o nome do comando seguido por \'?\' para obter mais informaÃ§Ãµes sobre ele.");
-    ch->print("Digite 'comandos' para ver uma lista de todos os comandos disponÃ­veis.");
+    ch->print("Você pode digitar o nome do comando seguido por \'?\' para obter mais informações sobre ele.");
+    ch->print("Digite 'comandos' para ver uma lista de todos os comandos disponíveis.");
 }
 
 // Printa todos os comandos disponiveis no saguao principal
 void do_commands(shared_player &ch, const std::string &args)
 {
     stringstream ss;
-    ss << "Lista de comandos disponÃ­veis:" << endl;
+    ss << "Lista de comandos disponíveis:" << endl;
     for (auto it = cmd_table.begin(); it != cmd_table.end(); ++it)
     {
         ss << it->first << endl;
     }
     ss << cmd_table.size() << " comandos encontrados." << endl;
-    ss << "Digite o 'comando' seguido de \'?\' para mais detalhes." << endl;
+    ss << "Digite o \'comando\' seguido de \'?\' para mais detalhes." << endl;
     ch->print(ss.str());
 }
 
@@ -258,7 +258,7 @@ void do_create_party(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("O comando criar_partida irÃ¡ criar uma nova mesa para aguardar jogadores.");
+        ch->print("O comando criar_partida irá criar uma nova mesa para aguardar jogadores.");
         return;
     }
     shared_table ts = make_shared<Table>();
@@ -271,7 +271,7 @@ void do_chat(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("O comando chat lhe permite enviar uma mensagem pÃºblica para todos que estiverem conectados, exceto quem estiver jogando.");
+        ch->print("O comando chat lhe permite enviar uma mensagem pública para todos que estiverem conectados, exceto quem estiver jogando.");
         ch->print("Uso: \'chat Menssagem\'");
         return;
     }
@@ -294,10 +294,10 @@ void do_quit(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("O comando sair irÃ¡ lhe desconectar do servidor.");
+        ch->print("O comando sair irá lhe desconectar do servidor.");
         return;
     }
-    ch->print("AtÃ© mais!");
+    ch->print("Até mais!");
     s_disconnect_sock(ch->getSock());
 }
 
@@ -306,7 +306,7 @@ void do_who(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("O comando who mostra todo mundo que estÃ¡ online no momento.");
+        ch->print("O comando who mostra todo mundo que está online no momento.");
         ch->print("Uso: \'who\'");
         return;
     }
@@ -340,15 +340,15 @@ void do_table(shared_player &ch, const std::string &args)
     if (args == "?")
     {
         ch->print("O comando mesa tem duas finalidades.");
-        ch->print("Digitando \"mesa\" sem argumentos irÃ¡ mostrar todas as mesas de jogo atualmente criadas.");
-        ch->print("Digitando \"mesa <NÃºmero>\" farÃ¡ que vocÃª entre em uma mesa como expectador.\nCaso a mesa ainda nÃ£o esteja com um jogo ativo, isto lhe tornarÃ¡ um jogador a sim que o jogo for iniciado.");
+        ch->print("Digitando \"mesa\" sem argumentos irá mostrar todas as mesas de jogo atualmente criadas.");
+        ch->print("Digitando \"mesa <Número>\" fará que você entre em uma mesa como expectador.\nCaso a mesa ainda nÃ£o esteja com um jogo ativo, isto lhe tornará um jogador a sim que o jogo for iniciado.");
         return;
     }
 
     if (args.size() == 0)
     {
         stringstream ss;
-        ss << "Mesas disponï¿½veis:" << endl;
+        ss << "Mesas disponíveis:" << endl;
 
         for (auto it = tables.begin(); it != tables.end(); ++it)
         {
@@ -366,7 +366,7 @@ void do_table(shared_player &ch, const std::string &args)
 
     if (it == tables.end())
     {
-        ch->print(fmt::format("O argumento {} ï¿½ invï¿½lido!", args));
+        ch->print(fmt::format("O argumento {} é inválido!", args));
         return;
     }
     

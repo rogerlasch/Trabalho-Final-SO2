@@ -33,10 +33,10 @@ dlb_worker_can_work//Acorde, tem trabalho à ser feito!
 
 enum dlb_worker_flags
 {
-dlb_worker_paused=(1<<0),
-dlb_worker_active=(1<<1),
+dlb_worker_paused=(1<<0),//O worker está pausado.
+dlb_worker_active=(1<<1),//Ele está ativo.
 //Não usar esta flag...
-dlb_worker_stop_work=(1<<2)
+dlb_worker_stop_work=(1<<2)//Notifica que o trabalho deve ser interrompido a sim que possível.
 };
 
 enum dlb_worker_stop_result
@@ -47,6 +47,7 @@ dlb_worker_timeout=std::future_status::timeout,
 dlb_worker_handle//Handle inválido
 };
 
+//Estrutura para analisar estatísticas...
 class dlb_worker_info
 {
 public:
@@ -62,12 +63,12 @@ void reset();
 class dlb_worker : public dlb_basic_flags
 {
 private:
-uint32 id;
-std::string name;
-dlb_worker_info winfo;
-dlb_event_callback evcall;
-std::future<void> handle;
-mutable std::shared_mutex mtx;
+uint32 id;//Id do worker...
+std::string name;//Nome, opcional...
+dlb_worker_info winfo;//estatísticas
+dlb_event_callback evcall;//A função que deve chamar para resolver os eventos.
+std::future<void> handle;//Handle para a função assíncrona.
+mutable std::shared_mutex mtx;//Sincronizador de acessos as propriedades.
 public:
 dlb_worker(uint32 id=0, uint32 flags=0, const std::string& name="", dlb_event_callback evcall=NULL);
 dlb_worker(const dlb_worker& dw)=delete;
@@ -91,6 +92,7 @@ bool continueLoop()const;
 void workerLoop();
 };
 
+//Funções para manipular o pool de workers.
 void dlb_worker_set_can_state(uint32 wstate);
 uint32 dlb_worker_get_can_state();
 bool dlb_worker_is_awakening();

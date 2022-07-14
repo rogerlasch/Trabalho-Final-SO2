@@ -48,7 +48,7 @@ bool s_setup_server(uint32 port)
     res = getaddrinfo(NULL, std::to_string(port).c_str(), &hints, &result);
     if (res != 0)
     {
-        _log("Getaddrinfo falhou! C√≥digo: {}", res);
+        _log("Getaddrinfo falhou! CÛdigo: {}", res);
         // s_shutdown_server();
         return false;
     }
@@ -65,7 +65,7 @@ bool s_setup_server(uint32 port)
     
     if (res == SOCKET_ERROR)
     {
-        _log("Bind falhou com o c√≥digo: {}", WSAGetLastError());
+        _log("Bind falhou com o cÛdigo: {}", WSAGetLastError());
         freeaddrinfo(result);
         // s_shutdown_server();
         return false;
@@ -74,7 +74,7 @@ bool s_setup_server(uint32 port)
     
     if (listen(mainsock, SOMAXCONN) == SOCKET_ERROR)
     {
-        _log("Fun√ß√£o listen falhou com o c√≥digo: {}", WSAGetLastError());
+        _log("FunÁ„o listen falhou com o cÛdigo: {}", WSAGetLastError());
         // s_shutdown_server();
         return false;
     }
@@ -82,7 +82,7 @@ bool s_setup_server(uint32 port)
     res = ioctlsocket(mainsock, FIONBIO, &x);
     if (res != 0)
     {
-        _log("Erro ao tornar o socket ass√≠ncrono. C√≥digo: {}", WSAGetLastError());
+        _log("Erro ao tornar o socket assÌncrono. CÛdigo: {}", WSAGetLastError());
         // s_shutdown_server();
         return false;
     }
@@ -97,7 +97,7 @@ void s_shutdown_server()
     _log("Parando servidor...");
     if (!server_is_running())
     {
-        _log("Erro... O servidor j√° est√° offline!!!");
+        _log("Erro... O servidor j· est· offline!!!");
         return;
     }
     // Feche o socket que recebe pedidos de conexoes...
@@ -122,7 +122,7 @@ void s_shutdown_server()
     Sstarted = false;
 }
 
-// Verifica se o servidor est√° online
+// Verifica se o servidor est· online
 bool server_is_running()
 {
     std::shared_lock<std::shared_mutex> lck(mtx_sock);
@@ -176,7 +176,7 @@ void s_sock_loop()
         SOCKET s = accept(mainsock, NULL, NULL);
         if (s == SOCKET_ERROR)
         {
-            _log("Erro ao aceitar conex√µes... {}", WSAGetLastError());
+            _log("Erro ao aceitar conexıes... {}", WSAGetLastError());
         }
         else
         {

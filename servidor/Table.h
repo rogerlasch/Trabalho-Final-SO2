@@ -219,7 +219,7 @@ void Table::table_loop()
             if (diff >= 5000)
             {
                 current_player->removeflag(player_waiting_uno);
-                _echo(players, 0, "{} esqueceu de anunciar uno, por tanto como penalidade, terÃ¡ que comprar mais duas cartas!", current_player->getName());
+                _echo(players, 0, "{} esqueceu de anunciar uno, por tanto como penalidade, terá que comprar mais duas cartas!", current_player->getName());
                 this->process_command(current_player, "pescar -s");
                 this->process_command(current_player, "pescar -s");
                 this->internal_next_player();
@@ -249,7 +249,7 @@ std::string Table::toString()
             ss << "Jogando";
             break;
         }
-        
+
         case g_finished:
         {
             ss << "Jogo finalizado";
@@ -316,7 +316,7 @@ shared_player Table::has_admin()
     if (ch != NULL)
     {
         ch->setflag(player_admin);
-        _echo(players, 0, "Agora {} ï¿½ o administrador da mesa.", ch->getName());
+        _echo(players, 0, "Agora {} é o administrador da mesa.", ch->getName());
     }
 
     return ch;
@@ -337,11 +337,11 @@ void Table::add_player(const shared_player &c)
     players.push_back(c);
     c->setTable(this->shared_from_this());
     c->print(fmt::format("Bem-vindo a mesa {} {}.", this->getId(), c->getName()));
-    
+
     if (players.size() == 1)
     {
         c->setflag(player_admin);
-        c->print("VocÃª agora Ã© o administrador da mesa.");
+        c->print("Você agora é o administrador da mesa.");
         c->print("Digite: \"startgame\" quando estiver pronto.");
     }
     else
@@ -351,7 +351,7 @@ void Table::add_player(const shared_player &c)
     
     if (c->isPlayer())
     {
-        c->print("Digite \"comandos\" para ver uma lista de comandos disponÃ­veis.");
+        c->print("Digite \"comandos\" para ver uma lista de comandos disponíveis.");
         c->print("digite: \"<comando> ?\" para ler a ajuda do comando.");
     }
     _echo(players, 0, "{} se juntou a mesa.", c->getName());
@@ -377,7 +377,7 @@ void Table::remove_player(const std::string &name)
                 if (pindex.load() == i)
                 {
                     next_player();
-                    _echo(players, 0, "Ã© a vez de {} jogar.", current_player->getName());
+                    _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
                     current_player->showCards(current_card);
                     if (pindex.load() > i)
                     {
@@ -391,7 +391,7 @@ void Table::remove_player(const std::string &name)
                 active_players.fetch_sub(1);
             }
 
-            ch->print("Atï¿½ logo...");
+            ch->print("Até logo...");
             ch->setTable(shared_table());
             players.erase(players.begin() + i);
             
@@ -401,7 +401,7 @@ void Table::remove_player(const std::string &name)
             }
 
             ch->replace_flags(0);
-            ch->print("Digite comandos para ver uma lista de comandos disponÃ­veis.");
+            ch->print("Digite comandos para ver uma lista de comandos disponíveis.");
             break;
         }
     }
@@ -465,7 +465,7 @@ void Table::process_command(shared_player &ch, const std::string &cmdline)
     assert(ch->getTable() != NULL);
     if (this->getId() != ch->getTable()->getId())
     {
-        ch->print("VocÃª esta na mesa errada, man!");
+        ch->print("Você está na mesa errada, man!");
         return;
     }
 
@@ -633,7 +633,7 @@ void Table::internal_PlayCard(shared_player &ch, shared_card &c, uint32 index)
     if (ch->deckSize() == 0)
     {
         _echo(players, 0, "{} terminou o jogo!", ch->getName());
-        _echo(players, 0, "{} agora ï¿½ um expectador.", ch->getName());
+        _echo(players, 0, "{} agora é um expectador.", ch->getName());
         calculatePoints(ch);
         ch->setflag(player_expectator);
         ch->removeflag(player_playing);
@@ -664,7 +664,7 @@ void Table::internal_PlayCard(shared_player &ch, shared_card &c, uint32 index)
 void Table::internal_next_player()
 {
     this->next_player();
-    _echo(players, 0, "Ã© a vez de {} jogar.", current_player->getName());
+    _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
     current_player->removeflag(player_fished);
     current_player->showCards(current_card);
     if (acumulator.size() > 0)
@@ -674,7 +674,7 @@ void Table::internal_next_player()
 
         if (sf.find_card_type(current_player->getDeck(), {plus_two, plus_four}) == -1)
         {
-            _echo(players, 0, "{} nÃ£o tem nenhum +2 ou +4, por tanto, terÃ¡ que comprar {:+} cartas!", current_player->getName(), x);
+            _echo(players, 0, "{} não tem nenhum +2 ou +4, por tanto, terá que comprar {:+} cartas!", current_player->getName(), x);
             acumulator.clear();
 
             for (uint32 i = 0; i < x; i++)
@@ -687,7 +687,7 @@ void Table::internal_next_player()
     this->make_delay(2500);
 }
 
-// Termina o jogo e arruma a mesa para a proxima partida na mesma mesa, tambÃ©m, mostra a pontuacao
+// Termina o jogo e arruma a mesa para a proxima partida na mesma mesa, tambÉm, mostra a pontuacao
 void Table::endGame()
 {
     gstate.store(g_finished);
@@ -714,7 +714,7 @@ void Table::endGame()
     
     if (ch != NULL)
     {
-        ch->print("Agora vocÃª pode iniciar uma nova partida digitando \"startgame\"");
+        ch->print("Agora você pode iniciar uma nova partida digitando \"startgame\"");
     }
 }
 
@@ -817,7 +817,7 @@ void Table::interact_bot(shared_player &ch)
 void Table::commands(shared_player &ch, const std::string &args)
 {
     std::stringstream ss;
-    ss << "Comandos disponÃ­veis:" << std::endl;
+    ss << "Comandos disponíveis:" << std::endl;
     for (auto it = cmdtable.begin(); it != cmdtable.end(); ++it)
     {
         ss << it->first << std::endl;
@@ -843,13 +843,13 @@ void Table::startGame(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("Digite startgame para iniciar o jogo. Apenas o criador da sala pode iniciar o jogo. Caso o criador saia, o controle passarÃ¡ para o prÃ³ximo da lista, se possÃ­vel.");
+        ch->print("Digite startgame para iniciar o jogo. Apenas o criador da sala pode iniciar o jogo. Caso o criador saia, o controle passará para o próximo da lista, se possível.");
         return;
     }
 
     if (this->get_gstate() == g_playing)
     {
-        ch->print("O jogo jÃ¡ comeÃ§ou!");
+        ch->print("O jogo já começou!");
         return;
     }
 
@@ -861,7 +861,7 @@ void Table::startGame(shared_player &ch, const std::string &args)
 
     if (players.size() < 2)
     {
-        ch->print("Ainda nÃ£o existem jogadores o suficiente para dar inÃ­cio a partida.");
+        ch->print("Ainda não existem jogadores o suficiente para dar início a partida.");
         return;
     }
 
@@ -889,7 +889,7 @@ void Table::startGame(shared_player &ch, const std::string &args)
 
     if ((first_player == NULL) || (count < 2))
     {
-        ch->print("Existem expectadores de mais. O jogo precisa de pelo menos 2 jogadores que nÃ£o sÃ£o expectadores para comeÃ§ar.");
+        ch->print("Existem expectadores de mais. O jogo precisa de pelo menos 2 jogadores que não são expectadores para começar.");
         this->gstate.store(g_starting);
         return;
     }
@@ -903,7 +903,7 @@ void Table::startGame(shared_player &ch, const std::string &args)
     std::shuffle(deck.begin(), deck.end(), g);
     for (auto &ch : players)
     {
-        // Expectadores nï¿½o recebem cartas!
+        // Expectadores néo recebem cartas!
         if (ch->flag_contains(player_expectator))
         {
             continue;
@@ -933,7 +933,7 @@ void Table::startGame(shared_player &ch, const std::string &args)
     current_player->setflag(player_turn);
     pindex.store(0);
     _echo(players, 0, "A carta virada foi: {}", current_card->toString());
-    _echo(players, 0, "{} comeï¿½a o jogo.", current_player->getName());
+    _echo(players, 0, "{} começa o jogo.", current_player->getName());
 }
 
 // Faz verificacoes (bot ou jogador) para ver se a jogada e valida
@@ -941,18 +941,18 @@ void Table::playCard(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("Use o comando jogar para jogar uma carta se possÃ­vel.");
-        ch->print("Uso: jogar >Ã­ndice> <cor>");
-        ch->print("Onde <Ã­ndice> Ã© o Ã­ndice da carta em sua mÃ£o. Para saber o Ã­ndice da carta, verifique o nÃºmero que aparece entre () antes do nome.");
-        ch->print("<Cor> Ã© utilizado apenas com cartas especiais como +4 e coringa. As cores aceitas sÃ£o Verde, Vermelho, Amarelo e Azul.");
-        ch->print("Exemplos:\n\"jogar 1\" IrÃ¡ jogar a primeira carta.");
-        ch->print("\"jogar 2 azul\" IrÃ¡ jogar a segunda carta, e selecionarÃ¡ a cor azul caso ela seja um +4 ou coringa.");
+        ch->print("Use o comando jogar para jogar uma carta se possível.");
+        ch->print("Uso: jogar >índice> <cor>");
+        ch->print("Onde <índice> é o índice da carta em sua mão. Para saber o índice da carta, verifique o número que aparece entre () antes do nome.");
+        ch->print("<Cor> é utilizado apenas com cartas especiais como +4 e coringa. As cores aceitas são Verde, Vermelho, Amarelo e Azul.");
+        ch->print("Exemplos:\n\"jogar 1\" Irá jogar a primeira carta.");
+        ch->print("\"jogar 2 azul\" Irá jogar a segunda carta, e selecionará a cor azul caso ela seja um +4 ou coringa.");
         return;
     }
 
     if (this->get_gstate() != g_playing)
     {
-        ch->print("O jogo ainda nÃ£o comeÃ§ou!!");
+        ch->print("O jogo ainda não começou!!");
         return;
     }
 
@@ -969,14 +969,14 @@ void Table::playCard(shared_player &ch, const std::string &args)
     uint32 color_id = color_to_int(color_str);
     if (index == 0)
     {
-        ch->print("OpÃ§Ã£o invÃ¡lida!");
+        ch->print("Opção inválida!");
         return;
     }
 
     shared_card c = ch->get_card(index - 1);
     if (c == NULL)
     {
-        ch->print("Esta carta nÃ£o existe em seu baralho.");
+        ch->print("Esta carta não existe em seu baralho.");
         return;
     }
 
@@ -985,7 +985,7 @@ void Table::playCard(shared_player &ch, const std::string &args)
         CardFinder sf;
         if ((c->getType() != plus_two) && (c->getType() != plus_four) && (sf.find_card_type(ch->getDeck(), {plus_two, plus_four}) > -1))
         {
-            ch->print(fmt::format("VocÃª nÃ£o pode jogar esta carta no momento porque um {} estÃ¡ ativo.", current_card->toString()));
+            ch->print(fmt::format("Você não pode jogar esta carta no momento porque um {} está ativo.", current_card->toString()));
             return;
         }
     }
@@ -998,26 +998,26 @@ void Table::playCard(shared_player &ch, const std::string &args)
         }
         else
         {
-            ch->print("Esta jogada Ã© invÃ¡lida!");
+            ch->print("Esta jogada é inválida!");
         }
     }
     else if ((c->getType() == plus_four) || (c->getType() == joker))
     {
         if (color_str.size() == 0)
         {
-            ch->print("A cor nÃ£o foi informada. Repita o comando incluindo uma cor vÃ¡lida como terceiro parÃ¢metro.\nExemplo: \"jogar 1 verde\"");
+            ch->print("A cor não foi informada. Repita o comando incluindo uma cor válida como terceiro parâmetro.\nExemplo: \"jogar 1 verde\"");
             return;
         }
         if ((color_id < red) || (color_id > blue))
         {
-            ch->print("Esta cor nÃ£o Ã© vÃ¡lida.");
+            ch->print("Esta cor não é válida.");
             return;
         }
         if ((current_card->getType() == plus_two) || (current_card->getType() == plus_four))
         {
             if (c->getType() == joker)
             {
-                ch->print("Esta jogada nÃ£o Ã© vÃ¡lida!");
+                ch->print("Esta jogada não é válida!");
                 return;
             }
         }
@@ -1032,7 +1032,7 @@ void Table::playCard(shared_player &ch, const std::string &args)
         }
         else
         {
-            ch->print("Jogada invÃ¡lida!");
+            ch->print("Jogada inválida!");
         }
     }
     else if ((c->getType() == current_card->getType()) || (c->getColor() == current_card->getColor()))
@@ -1041,7 +1041,7 @@ void Table::playCard(shared_player &ch, const std::string &args)
     }
     else
     {
-        ch->print("Carta invÃ¡lida!");
+        ch->print("Carta inválida!");
     }
 }
 
@@ -1050,14 +1050,14 @@ void Table::toFish(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("O comando pescar Ã© utilizado para comprar cartas quando for sua vez de jogar.");
-        ch->print("Use \"jogar -s\" se nÃ£o quiser que toda sua mÃ£o seja mostrada novamente ao pescar a carta.");
+        ch->print("O comando pescar é utilizado para comprar cartas quando for sua vez de jogar.");
+        ch->print("Use \"jogar -s\" se não quiser que toda sua mão seja mostrada novamente ao pescar a carta.");
         return;
     }
 
     if (this->get_gstate() != g_playing)
     {
-        ch->print("O jogo ainda nÃ£o comeÃ§ou...");
+        ch->print("O jogo ainda não começou...");
         return;
     }
 
@@ -1094,13 +1094,13 @@ void Table::toFish(shared_player &ch, const std::string &args)
     ch->setflag(player_fished);
     if (ch->isPlayer())
     {
-        ch->print(fmt::format("VocÃª comprou \"{}\"", deck[0]->toString()));
+        ch->print(fmt::format("Você comprou \"{}\"", deck[0]->toString()));
     }
 
     deck.erase(deck.begin());
     ch->check_uno();
     _echo(players, ch->getSock(), "{} comprou uma carta.", ch->getName());
-    
+
     if (args != "-s")
     {
         ch->showCards(current_card);
@@ -1118,7 +1118,7 @@ void Table::jumpChange(shared_player &ch, const std::string &args)
 
     if (this->get_gstate() != g_playing)
     {
-        ch->print("O jogo ainda nÃ£o comeÃ§ou...");
+        ch->print("O jogo ainda não começou...");
         return;
     }
 
@@ -1130,19 +1130,19 @@ void Table::jumpChange(shared_player &ch, const std::string &args)
 
     if (!ch->flag_contains(player_fished))
     {
-        ch->print("VocÃª precisa comprar pelo menos uma carta antes de passar a vez...");
+        ch->print("Você precisa comprar pelo menos uma carta antes de passar a vez...");
         return;
     }
 
     if (acumulator.size() > 0)
     {
-        ch->print("NÃ£o Ã© possÃ­vel fazer isso agora.");
+        ch->print("Não é possível fazer isso agora.");
         return;
     }
 
     _echo(players, 0, "{} passou a vez!", ch->getName());
     this->next_player();
-    _echo(players, 0, "Ã© a vez de {} jogar.", current_player->getName());
+    _echo(players, 0, "É a vez de {} jogar.", current_player->getName());
     current_player->showCards(current_card);
     this->make_delay(2500);
 }
@@ -1165,7 +1165,7 @@ void Table::cmd_bot(shared_player &ch, const std::string &args)
 
     if (this->get_gstate() == g_playing)
     {
-        ch->print("O jogo jÃ¡ comeÃ§ou, o comando ficou indisponï¿½vel.");
+        ch->print("O jogo já começou, o comando ficou indisponível.");
         return;
     }
 
@@ -1200,12 +1200,12 @@ void Table::do_who(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("Use o comando \"who\" para ver quem estÃ¡ atualmente na mesa.");
+        ch->print("Use o comando \"who\" para ver quem está atualmente na mesa.");
         return;
     }
     std::stringstream ss;
 
-    ss << "Quem estÃ¡ na mesa?" << std::endl;
+    ss << "Quem está na mesa?" << std::endl;
     for (auto &it : players)
     {
         if (it->isBot())
@@ -1241,13 +1241,13 @@ void Table::do_quero(shared_player &ch, const std::string &args)
         ch->print("Este comando lhe permite alternar entre o modo de expectador e de jogador.");
         ch->print("Uso: \"quero assistir\" para ser expectador do jogo.");
         ch->print("\"quero jogar\" para ser um jogador.");
-        ch->print("Note que o comando sÃ³ funcionarÃ¡ antes do jogo ser iniciado.");
+        ch->print("Note que o comando só funcionará antes do jogo ser iniciado.");
         return;
     }
 
     if (this->get_gstate() == g_playing)
     {
-        ch->print("O jogo jÃ¡ foi iniciado. NÃ£o Ã© possÃ­vel trocar de modo agora!");
+        ch->print("O jogo já foi iniciado. Não é possível trocar de modo agora!");
         return;
     }
 
@@ -1255,17 +1255,17 @@ void Table::do_quero(shared_player &ch, const std::string &args)
     {
         ch->setflag(player_expectator);
         ch->removeflag(player_playing);
-        ch->print("Agora vocï¿½ ï¿½ um expectador.");
+        ch->print("Agora você é um expectador.");
     }
     else if (args == "jogar")
     {
         ch->setflag(player_playing);
         ch->removeflag(player_expectator);
-        ch->print("Agora vocï¿½ ï¿½ um jogador.");
+        ch->print("Agora você é um jogador.");
     }
     else
     {
-        ch->print("Argumento invï¿½lido!");
+        ch->print("Argumento inválido!");
         ch->print("Use \"quero ?\" para obter ajuda.");
     }
 }
@@ -1275,14 +1275,14 @@ void Table::do_uno(shared_player &ch, const std::string &args)
 {
     if (args == "?")
     {
-        ch->print("Digite \"uno\" quando estiver com uma carta na mÃ£o.");
-        ch->print("VocÃª terÃ¡ 5 segundos para teclar \"uno\" ou serÃ¡ penalizado com a compra de duas cartas.");
+        ch->print("Digite \"uno\" quando estiver com uma carta na mão.");
+        ch->print("Você terá 5 segundos para teclar \"uno\" ou será penalizado com a compra de duas cartas.");
         return;
     }
 
     if (this->get_gstate() != g_playing)
     {
-        ch->print("O jogo ainda nÃ£o comeï¿½ou!");
+        ch->print("O jogo ainda não começou!");
         return;
     }
 
@@ -1290,11 +1290,11 @@ void Table::do_uno(shared_player &ch, const std::string &args)
     {
         if (this->flag_contains(player_uno))
         {
-            ch->print("VocÃª jÃ¡ disse \"UNO\"");
+            ch->print("Você já disse \"UNO\"");
         }
         else
         {
-            ch->print("VocÃª ainda nÃ£o estÃ¡ pronto para cantar vitÃ³ria!");
+            ch->print("Você ainda não está pronto para cantar vitória!");
         }
         return;
     }
@@ -1314,8 +1314,8 @@ void Table::do_ranking(shared_player &ch, const std::string &args)
 
     if (args == "?")
     {
-        ch->print("Use o comando ranking para ver a classificaÃ§Ã£o geral da partida.");
-        ch->print("O jogo continuarÃ¡ atÃ© que reste apenas um jogador ativo.");
+        ch->print("Use o comando ranking para ver a classificação geral da partida.");
+        ch->print("O jogo continuará atÉ que reste apenas um jogador ativo.");
         return;
     }
 

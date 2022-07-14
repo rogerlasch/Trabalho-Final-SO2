@@ -1,44 +1,28 @@
-Inicializando servidor...
-Total de threads de apoio criados: 2
-Servidor iniciado na porta 4000
-Para interromper, tecle CTRL + C
-Mensagem recebida de 364: "Bruno"
-Mensagem recebida de 364: "comandos"
-Mensagem recebida de 364: "criar_partida"
-Bruno se juntou a mesa.
-Mensagem recebida de 364: "comandos"
-Mensagem recebida de 364: "quero"
-Mensagem recebida de 364: "quero_assistir"
-Mensagem recebida de 364: "quero assistir"
-Mensagem recebida de 364: "bot add bot1"
-Bem-vindo a mesa 1 bot1.
-bot1 se juntou a mesa.
-Mensagem recebida de 364: "bot add bot2"
-Bem-vindo a mesa 1 bot2.
-bot2 se juntou a mesa.
-Mensagem recebida de 364: "startgame"
-Bruno Iniciou o jogo.
+Saudações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
+
+Bem-vindo ao jogo, roger!
+
+Digite comandos para ver uma lista de comandosMensagem recebida de 344: "criar_partiBem-vindo a mesa 1 roger.
+VocMensagem recebida de 344: "bot add ana"
+Mensagem recebida de 344: "bot add ana"
+Mensagem recebida de 344: "who"
+Mensagem recebida de 344: "bot add anah"
+Bem-vindo a mesa 1 anah.
+anah se juntou a mesa.
+Mensagem recebida de 344: "startgame"
+roger Iniciou o jogo.
 Total de jogadores na partida: 2
-A carta virada foi: 7 Vermelho
-bot1 come�a o jogo.
-bot1 jogou 5 Vermelho
-é a vez de bot1 jogar.
-bot1 jogou 3 Vermelho
-é a vez de bot2 jogar.
-bot2 jogou 3 Azul
-é a vez de bot1 jogar.
-bot1 jogou 6 Azul
-é a vez de bot2 jogar.
-bot2 jogou Pular Azul
-A vez de bot1 foi pulada
-é a vez de bot2 jogar.
-bot2 jogou +4 Verde
-Acumulando +4 Verde.
-é a vez de bot1 jogar.
-bot1 não tem nenhum +2 ou +4, por tanto, terá que comprar +4 cartas!
-bot1 comprou uma carta.
-bot1 comprou uma carta.
-bot1 comprou uma carta.
-bot1 comprou uma carta.
-bot1 jogou 6 Verde
-é a vez de bot2 jogar.
+A carta virada foi: 9 Amarelo
+roger come�a o jogo.
+Parando servidor...
+Total de threads parados: 2
+Servidor finalizado!
+ o jogo.
+Total de jogadores na partida: 2
+Sua mão contêm um total de 7 cartas
+(1): 6 Azul , (2): 5 Azul , (3): 3 Amarelo , (4): Coringa , (5): 7 Amarelo , (6): 4 Vermelho , (7): 8 Vermelho 
+
+
+A carta virada foi: 9 Amarelo
+roger come�a o jogo.
+

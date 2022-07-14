@@ -1,6 +1,6 @@
 
 
-#include <unordered_map>
+#include <unordered_map>//Equivalente a HashMap em java...
 #include "../dependencies/so2_includes.h"
 #include "basic_connection.h"
 
@@ -21,7 +21,7 @@ basic_connection::~basic_connection()
 {
 }
 
-// Enfileira uma menasgem para ser enviada para o servidor
+// Enfileira uma mensagem para ser enviada para o servidor
 void basic_connection::print(const string &str)
 {
     // Pega direito de escrita ja que algo vai ser modificado...
@@ -29,7 +29,7 @@ void basic_connection::print(const string &str)
     output_buffer.push_back(str);
 }
 
-// Recupera uma linha para ser enviada quando tiver espaÃ§o disponivel no buffer de envio
+// Recupera uma linha para ser enviada quando tiver espaço disponivel no buffer de envio
 string basic_connection::get_line_to_send()
 {
     unique_lock<shared_mutex> lck(this->mtx_output);
@@ -42,7 +42,9 @@ string basic_connection::get_line_to_send()
     return str;
 }
 
-// Processa os dados recebidos, verificando se Ã© possÃ­vel processar um comando
+// Processa os dados recebidos, verificando se é possível processar um comando
+//Um comando é enviado para o processamento quando um caractere de nova linha (\n) for encontrado.
+//Se não, fique armazenando tudo na mesma linha até as condições serem atendidas.
 void basic_connection::append_string_input(const string &str)
 {
     unique_lock<shared_mutex> lck(this->mtx_input);
@@ -64,6 +66,7 @@ void basic_connection::append_string_input(const string &str)
 }
 
 // Pega todos os comandos enfileirados e despacha para a fila de eventos para ser processado por outros threads
+//Isto no momento é usado apenas no servidor.
 void basic_connection::process_input()
 {
     unique_lock<shared_mutex> lck(this->mtx_input);
@@ -72,13 +75,13 @@ void basic_connection::process_input()
         while (input_buffer.size() > 0)
         {
             // Despacha um evento para os workers darem um jeito...
-            // a_sendevent(getSock(), a_event_received_string, input_buffer[0]);
             input_buffer.erase(input_buffer.begin());
         }
     }
 }
 
-// Atribui o socket que o windows atribuiu para a conexÃ£o
+// Atribui o socket que o windows atribuiu para a conexão
+//O socket é utilizado para se comunicar tanto como cliente,como com o servidor.
 void basic_connection::setSock(int32 sock)
 {
     unique_lock<shared_mutex> lck(mtx_con);
@@ -91,7 +94,7 @@ int32 basic_connection::getSock() const
     return this->sock;
 }
 
-// Define o estado da conexÃ£o no nÃ­vel do cliente (conectado ou desconectado)
+// Define o estado da conexão no nível do cliente (conectado ou desconectado)
 void basic_connection::setConState(uint32 conState)
 {
     unique_lock<shared_mutex> lck(mtx_con);
@@ -104,7 +107,7 @@ uint32 basic_connection::getConState() const
     return this->conState;
 }
 
-// Verifica se estÃ¡ conectado
+// Verifica se está conectado
 bool basic_connection::is_connected() const
 {
     shared_lock<shared_mutex> lck(mtx_con);
