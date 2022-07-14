@@ -1,36 +1,96 @@
-Saldações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
+SaudaÃ§Ãµes... Para comeÃ§ar, digite o seu nome de usuÃ¡rio com no mÃ­nimo 4 caracteres.
 
-Bem-vindo ao jogo, teste!
-Digite comandos para ver uma lista de comandos disponíveis.
+Bem-vindo ao jogo, Bruno!
+Digite comandos para ver uma lista de comandos disponÃ­veis.
 
-teste se conectou!
+Bruno se conectou!
 
-Bem-vindo a mesa 1 teste.
-Digite "comandos" para ver uma lista de comandos disponíveis.
+Lista de comandos disponÃ­veis:
+ajuda
+chat
+comandos
+criar_partida
+mesa
+sair
+who
+7 comandos encontrados.
+Digite o 'comando' seguido de '?' para mais detalhes.
+
+
+Bem-vindo a mesa 1 Bruno.
+VocÃª agora Ã© o administrador da mesa.
+
+Digite: "startgame" quando estiver pronto.
+Digite "comandos" para ver uma lista de comandos disponÃ­veis.
 
 digite: "<comando> ?" para ler a ajuda do comando.
-teste se juntou a mesa.
+Bruno se juntou a mesa.
 
-roger Iniciou o jogo.
+Comandos disponÃ­veis:
+bot
+chat
+comandos
+jogar
+pescar
+pular_vez
+quero
+ranking
+startgame
+uno
+voltar
+who
+12 comandos encontrados.
+Digite "<comando> ?" para mais ajuda sobre um comando.
+
+
+Argumento invï¿½lido!
+Use "quero ?" para obter ajuda.
+
+O que?
+
+Agora vocï¿½ ï¿½ um expectador.
+
+bot1 se juntou a mesa.
+
+bot2 se juntou a mesa.
+
+Bruno Iniciou o jogo.
 Total de jogadores na partida: 2
+A carta virada foi: 7 Vermelho
 
-Sua mão contém um total de 7 cartas
-(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho 
+bot1 comeï¿½a o jogo.
 
-A carta virada foi: 7 Verde
+bot1 jogou 5 Vermelho
 
-roger começa o jogo.
+Ã© a vez de bot1 jogar.
 
-roger jogou 4 Verde
+bot1 jogou 3 Vermelho
 
-É a vez de teste jogar.
-Última carta jogada: 4 Verde
-Sua mão contém um total de 7 cartas
-(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho 
+Ã© a vez de bot2 jogar.
 
+bot2 jogou 3 Azul
 
-Você comprou "Pular Amarelo"
-Sua mão contém um total de 8 cartas
-(1): 5 Amarelo , (2): 9 Verde , (3): 6 Vermelho , (4): Pular Vermelho , (5): +2 Amarelo , (6): 1 Amarelo , (7): 8 Vermelho , (8): Pular Amarelo 
+Ã© a vez de bot1 jogar.
 
+bot1 jogou 6 Azul
+
+Ã© a vez de bot2 jogar.
+
+bot2 jogou Pular Azul
+A vez de bot1 foi pulada
+
+Ã© a vez de bot2 jogar.
+
+bot2 jogou +4 Verde
+
+Acumulando +4 Verde.
+
+Ã© a vez de bot1 jogar.
+bot1 nÃ£o tem nenhum +2 ou +4, por tanto, terÃ¡ que comprar +4 cartas!
+
+bot1 comprou uma carta.
+bot1 comprou uma carta.
+
+bot1 comprou uma carta.
+bot1 comprou uma carta.
 

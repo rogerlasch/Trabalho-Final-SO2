@@ -9,6 +9,7 @@
 #include<string>
 #include<sstream>
 
+// Declaracoes
 bool s_setup_server(uint32 port);
 void s_shutdown_server();
 bool server_is_running();
