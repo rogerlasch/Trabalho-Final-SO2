@@ -11,14 +11,15 @@ Mattel, mas até hoje muitos jogadores têm dúvidas sobre como jogar Uno!
 ###### Fonte: https://www.buscape.com.br/jogos/conteudo/regras-do-uno
 
 ### Funcionamento
-* O jogo estar funcional em rede;
-* O Servidor deverá informar todos os jogadores quando houver um vencedor;
-* O jogo se encerra quando um deles digitar a palavra “sair”.
-* Armazenando informações dos jogadores em uma estrutura de dados local. Essas informações são:
-  * Identificador para o jogador;
-  * Histórico de vitórias/empates/derrotas;
-  * Pontuação;
-  * Ranking.
+* Primeiramente deve-se executar o exec do servidor;
+* Logo, deve-se executar o exec do cliente;
+* Caso o servidor e cliente estejam na mesma máquina, utilizar como IP "localhost";
+* Outrossim, caso o servidor/cliente estejam em máquinas separadas, deve-se informar o IP da máquina servidor (desabilitar o firewall);
+* Os comandos existentes podem ser visualizados digitando "comandos", tanto no saguão principal como na mesa criada;
+* Para mais detalhes de determinado comando, pode-se utilizar "<comando> ?";
+* Há um sistema para jogar com bots;
+* Ao final da partida, quem terminou com as cartas primeiro ganha os pontos;
+
 
 ### Regras do jogo
 ###### Fonte: https://pt.wikihow.com/Jogar-UNO
