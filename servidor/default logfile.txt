@@ -1,28 +1,227 @@
-SaudaÃ§Ãµes... Para comeÃ§ar, digite o seu nome de usuÃ¡rio com no mÃ­nimo 4 caracteres.
+Saudações... Para começar, digite o seu nome de usuário com no mínimo 4 caracteres.
 
 Bem-vindo ao jogo, roger!
 
-Digite comandos para ver uma lista de comandosMensagem recebida de 344: "criar_partiBem-vindo a mesa 1 roger.
-VocMensagem recebida de 344: "bot add ana"
-Mensagem recebida de 344: "bot add ana"
-Mensagem recebida de 344: "who"
-Mensagem recebida de 344: "bot add anah"
-Bem-vindo a mesa 1 anah.
-anah se juntou a mesa.
-Mensagem recebida de 344: "startgame"
+Digite comandos para ver uma lista de comandos dispMensagem recebida de 344: "startO que?
+MeBem-vindo a mesa 1 roger.
+
+Você agora é o administrador da mesa.Mensagem recebida de 344: "bot add sarah"
+Bem-vindo a mesa 1 sarah.
+sarah se juntou a mesa.
+Mensagem recebida de 344: "bot add inna"
+Bem-vindo a mesa 1 inna.
+inna se juntou a mesa.
+Mensagem recebida de 344: "bot add paula"
+Bem-vindo a mespaula se juntou a mesa.
+
+mariah se juntou a mesa.
+
 roger Iniciou o jogo.
-Total de jogadores na partida: 2
-A carta virada foi: 9 Amarelo
-roger comeï¿½a o jogo.
+Total de jogadores na partida: 5
+Sua mão contém um total de 7 cartas
+(1): 9 Verde , (2): 6 Amarelo , (3): Inverter Vermelho , (4): 8 Verde , (5): Coringa , (6): 3 Azul , (7): 7 Vermelho 
+
+
+A carta vMensagem recebida de 344: "jogar 6"
+roger roger jogou 3 Azul
+É a vez de sarah josarah josarah jogou Inverter Azul
+O turno foi invertido para o lado oposto.
+
+É a vez de rogeMensagem recebida de 344: "jogar 3"
+roger jogou Inverter Vermelho
+O turno foi invertido para o lado oposto.
+É a vez de sarah jogar.
+sarah jogou Inverter Amarelo
+O turno foi invertido para o lado oposto.
+É a vez de roger jogar.
+Mensagem recebida de 344: "jogar 2"
+roger jogou 6 Amarelo
+É a vez de mariah jogar.
+mariah jogou 3 Amarelo
+É a vez de paula jogar.
+paula jogou +2 Amarelo
+Acumulando +2 Amarelo.
+É a vez de inna jogar.
+inna jogou +2 Verde
+Acumulando +2 Verde.
+É a vez de sarah jogar.
+sarah jogou +2 Vermelho
+Acumulando +2 Vermelho.
+É a vez de roger jogar.
+roger não tem nenhum +2 ou +4, por tanto, terá que comprar +6 cartas!
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma carta.
+roger comprou uma casarah Mensagem recebida de 344: "jogar 1"
+Mensagem recebida de 344: "jogar 2"
+Mensagem recebida de 344: "jogar 3"
+Mensagem recebida de 344: "jogar 4"
+roger jogou 7 Vermelho
+É a vez de mariah jogar.
+mariah jogou 7 Verde
+É a vez de paula jogar.
+paula jogou 3 Verde
+É a vez de inna jogar.
+inna jogou Inverter Verde
+O turno foi invertido para o lado oposto.
+É a vez de paula jogar.
+paula jogou 7 Verde
+É a vez de mariah jogar.
+mariah jogou Pular Verde
+A vez de roger foi pulada
+É a vez de sarah jogar.
+sarah comprou uma carta.
+sarah passou a vez!
+A vez de inna foi pulada
+É a vez de paula jogar.
+paula comprou uma carta.
+paula passou a vez!
+A vez de mariah foi pulada
+É a vez de roger jogar.
+Mensagem recebida de 344: "jogar 1"
+roger jogou 9 Verde
+É a vez de sarah jogar.
+sarah jogou 9 Vermelho
+É a vez de inna jogar.
+inna jogou 1 Vermelho
+É a vez de paula jogar.
+paula jogou 1 Vermelho
+É a vez de mariah jogar.
+mariah jogou +4 Azul
+Acumulando +4 Azul.
+É a vez de roger jogar.
+Mensagem recebida de 344: "jogar 4 vermelho"
+roger jogou +4 Vermelho
+Acumulando +4 Vermelho.
+É a vez de sarah jogar.
+sarah jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de inna jogar.
+inna não tem nenhum +2 ou +4, por tanto, terá que comprar +10 cartas!
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna comprou uma carta.
+inna jogou 4 Azul
+É a vez de paula jogar.
+paula jogou +2 Azul
+Acumulando +2 Azul.
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+mariah comprou uma carta.
+mariah comprou uma carta.
+mariah jogou 6 Azul
+É a vez de roger jogar.
+Mensagem recebida de 344: "jogar 5"
+roger jogou 6 Vermelho
+É a vez de sarah jogar.
+sarah jogou 5 Vermelho
+É a vez de inna jogar.
+inna jogou Pular Vermelho
+A vez de paula foi pulada
+É a vez de mariah jogar.
+mariah jogou Pular Azul
+A vez de roger foi pulada
+É a vez de sarah jogar.
+sarah jogou 4 Azul
+sarah anunciou "UNO!!!"
+É a vez de inna jogar.
+inna jogou 9 Azul
+É a vez de paula jogar.
+paula jogou 9 Amarelo
+É a vez de mariah jogar.
+mariah jogou 1 Amarelo
+É a vez de roger jogar.
+Mensagem recebida de 344: "jogar 2 vermelho"
+roger jogou Coringa Vermelho
+É a vez de sarah jogar.
+sarah jogou 8 Vermelho
+sarah terminou o jogo!
+sarah agora é um expectador.
+O jogo terminou!
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
+Agora você é um jogador.
 Parando servidor...
 Total de threads parados: 2
 Servidor finalizado!
- o jogo.
-Total de jogadores na partida: 2
-Sua mÃ£o contÃªm um total de 7 cartas
-(1): 6 Azul , (2): 5 Azul , (3): 3 Amarelo , (4): Coringa , (5): 7 Amarelo , (6): 4 Vermelho , (7): 8 Vermelho 
+É a vez de mariah jogar.
+mariah não tem nenhum +2 ou +4, por tanto, terá que comprar +2 cartas!
+
+mariah comprou uma carta.
+mariah comprou uma carta.
+
+mariah jogou 6 Azul
+
+É a vez de roger jogar.
+Última carta jogada: 6 Azul
+Sua mão contém um total de 7 cartas
+(1): 8 Verde , (2): Coringa , (3): 3 Vermelho , (4): 2 Vermelho , (5): 6 Vermelho , (6): 9 Verde , (7): 8 Verde 
 
 
-A carta virada foi: 9 Amarelo
-roger comeï¿½a o jogo.
+roger jogou 6 Vermelho
+É a vez de sarah jogar.
+
+sarah jogou 5 Vermelho
+
+É a vez de inna jogar.
+
+inna jogou Pular Vermelho
+
+A vez de paula foi pulada
+É a vez de mariah jogar.
+
+mariah jogou Pular Azul
+A vez de roger foi pulada
+
+É a vez de sarah jogar.
+
+sarah jogou 4 Azul
+
+sarah anunciou "UNO!!!"
+É a vez de inna jogar.
+
+inna jogou 9 Azul
+
+É a vez de paula jogar.
+
+paula jogou 9 Amarelo
+É a vez de mariah jogar.
+
+mariah jogou 1 Amarelo
+
+É a vez de roger jogar.
+Última carta jogada: 1 Amarelo
+Sua mão contém um total de 6 cartas
+(1): 8 Verde , (2): Coringa , (3): 3 Vermelho , (4): 2 Vermelho , (5): 9 Verde , (6): 8 Verde 
+
+
+roger jogou Coringa Vermelho
+É a vez de sarah jogar.
+
+sarah jogou 8 Vermelho
+sarah terminou o jogo!
+
+sarah agora é um expectador.
+O jogo terminou!
+
+Mostrando ranking dos jogadores...
+sarah	219 pontos
+mariah	0 pontos
+paula	0 pontos
+inna	0 pontos
+roger	0 pontos
+
+Agora você é um jogador.
+
+Agora você pode iniciar uma nova partida digitando "startgame"
 
